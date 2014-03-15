@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Список студентов</title>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../Styles/CommonStyles.css" />
+    <script src="../Scripts/libs/Base.js"></script>
+    <script src="../Scripts/libs/taffy.js"></script>
+    <script src="../Scripts/Database.js"></script>
+    <script src="../Scripts/PageController.js"></script>
+    <script src="../Scripts/StudentsList.js"></script>
+    <script src="../Scripts/StudentDetails.js"></script>
+</head>
+<body>
+    <section>
+        <header>
+            <div class="clearfix">
+                <div class="layout-column-1">
+                    <h2>Cписок студентов</h2>
+                </div>
+                <div class="layout-column-2">
+                    <span>MT-202<span></span></span>
+                </div>
+                <div class="layout-column-3">
+                    <span class="buttons button-print">
+                        <img src="../Content/printer.png" style="vertical-align: middle">Распечатать</span>
+                </div>
+            </div>
+        </header>
+        <div class="content">
+            <header>
+                <span>&larr;</span><a href="#" style="margin-left: 5px">Вернуться к списку групп</a>
+                <h3 id="Title-student"></h3>
+                <!--<span style="background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);-webkit-background-clip: text; -webkit-text-fill-color: transparent;">some text text text</span>-->
+            </header>
+            <div class="clearfix">
+                <aside>
+                    <span id="AddStudent" class="buttons button-addStudent">
+                        <img src="../Content/plus.png" style="vertical-align: middle; margin: 3px">
+                        Добавить студента</span>
+                    <span id="SaveСhanges" class="buttons button-saveСhanges">
+                        <img src="../Content/tick.png" style="vertical-align: top; margin: 3px">Сохранить изменения</span>
+                    <ul class="studentsList main-menu" id="MainMenu"></ul>
+                </aside>
+                <section>
+                    <div class="topgallant clearfix">
+                        <div class="topgallantHeader clearfix">
+                            <h4>Стандартные личные данные</h4>
+                        </div>
+                        <div id="DeleteStudent" class="topgallantOperation clearfix">
+                            <a href="#">Удалить</a>
+                        </div>
+                    </div>
+                    <form>
+                        <div class="personalData clearfix">
+                            <div class="labels clearfix">
+                                <label>Фамилия</label>
+                                <label>Имя</label>
+                                <label>Отчество</label>
+                                <label>Пол</label>
+                                <label>Дата рождения</label>
+                                <label>Дата поступления</label>
+                            </div>
+                            <div class="inputs clearfix">
+                                <input id="SurnameStudent" type="text" />
+                                <input id="NameStudent" type="text" />
+                                <input id="PatronymicStudent" type="text" />
+                                <span>
+                                    <label>
+                                        <input name="gender" id="Male" type="radio" checked />Мужской</label>
+                                    <label>
+                                        <input name="gender" id="Female" type="radio" />Женский</label>
+                                </span>
+                                <input id="DateOfBirth" type="date" />
+                                <input id="DateOfReceipt" type="date" />
+                            </div>
+                        </div>
+                        <hr>
+                        <div style="margin-top: 30px" class="topgallant clearfix">
+                            <div class="topgallantHeader clearfix">
+                                <h4>Список посещаемых предметов</h4>
+                            </div>
+                            <div class="topgallantOperation clearfix">
+                                <a href="#">Добавить предмет</a>
+                            </div>
+                        </div>
+                        <div class="checkboxesSubject clearfix">
+                            <div class="checkboxesSubject1 clearfix">
+                                <label>
+                                    <input id="Subject1" type="checkbox" checked />Первый вариант</label>
+                                <label>
+                                    <input id="Subject2" type="checkbox" checked />Второй вариант</label>
+                                <label>
+                                    <input id="Subject3" type="checkbox" checked />Третий вариант</label>
+                            </div>
+                            <div class="checkboxesSubject2 clearfix">
+                                <label>
+                                    <input id="Subject4" type="checkbox" checked />Первый вариант</label>
+                                <label>
+                                    <input id="Subject5" type="checkbox" checked />Второй вариант</label>
+                                <label>
+                                    <input id="Subject6" type="checkbox" checked />Третий вариант</label>
+                            </div>
+                            <div class="checkboxesSubject3 clearfix">
+                                <label>
+                                    <input id="Subject7" type="checkbox" checked />Первый вариант</label>
+                                <label>
+                                    <input id="Subject8" type="checkbox" checked />Второй вариант</label>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
