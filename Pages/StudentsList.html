@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Список студентов</title>
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="../Styles/CommonStyles.css" />
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic' rel='stylesheet' type="text/css"/>
+    <link media="print" rel="stylesheet" href="../Styles/PrintStyles.css" />
+    <link media="screen" rel="stylesheet" href="../Styles/CommonStyles.css" />
     <script src="../Scripts/libs/Base.js"></script>
     <script src="../Scripts/libs/taffy.js"></script>
     <script src="../Scripts/Database.js"></script>
@@ -13,7 +14,7 @@
 </head>
 <body>
     <section>
-        <header>
+        <header class="header">
             <div class="clearfix">
                 <div class="layout-column-1">
                     <h2>Cписок студентов</h2>
@@ -22,14 +23,14 @@
                     <span>MT-202<span></span></span>
                 </div>
                 <div class="layout-column-3">
-                    <span class="buttons button-print">
+                    <span class="buttons button-print" id="Print">
                         <img src="../Content/printer.png" style="vertical-align: middle">Распечатать</span>
                 </div>
             </div>
         </header>
         <div class="content">
             <header>
-                <span>&larr;</span><a href="#" style="margin-left: 5px">Вернуться к списку групп</a>
+                <span>&larr;</span><span class="link" style="margin-left: 5px">Вернуться к списку групп</span>
                 <h3 id="Title-student"></h3>
                 <!--<span style="background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);-webkit-background-clip: text; -webkit-text-fill-color: transparent;">some text text text</span>-->
             </header>
@@ -48,7 +49,7 @@
                             <h4>Стандартные личные данные</h4>
                         </div>
                         <div id="DeleteStudent" class="topgallantOperation clearfix">
-                            <a href="#">Удалить</a>
+                            <span class="link">Удалить</span>
                         </div>
                     </div>
                     <form>
@@ -81,7 +82,7 @@
                                 <h4>Список посещаемых предметов</h4>
                             </div>
                             <div class="topgallantOperation clearfix">
-                                <a href="#">Добавить предмет</a>
+                                <span class="link">Добавить предмет</span>
                             </div>
                         </div>
                         <div class="checkboxesSubject clearfix">
