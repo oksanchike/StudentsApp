@@ -1,0 +1,182 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+    body > section {
+        width: 793px;
+        margin: 0 auto;
+        font-family: 'PT Sans', sans-serif;
+    }
+
+section header {
+    width: 793px;
+    color: #6f6a6a;
+    padding: 10px 20px;
+}
+
+header span {
+    display:none;
+}
+
+.header {
+    display:none;
+}
+
+.clearfix:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.content {
+    min-height: 300px;
+    padding: 15px;
+    padding-top: 0px;
+    padding-right: 25px;
+    margin-bottom: 50px;
+}
+
+    .content  .link {
+        display:none;
+    }
+
+h3 {
+    padding: 0;
+    margin: 0px;
+    margin-top: 5px;
+    margin-left: -15px;
+    font-family: 'PT Sans',sans-serif;
+    font-size: 1.3em;
+    color: #000;
+    text-align:center;
+}
+
+aside {
+   display:none;
+}
+
+.content section {
+    float: left;
+    padding: 20px;
+    position:relative;
+}
+
+h4 {
+    padding: 0;
+    margin: 0;
+    color: #000;
+    font-weight: normal;
+    font-size: 1.1em;
+}
+
+.personalData, .checkboxesSubject {
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.topgallantHeader {
+    float: left;
+}
+
+.labels {
+    float: left;
+    margin-top: 3px;
+    margin-right: 20px;
+}
+
+    .labels label {
+        display: block;
+        min-height: 26px;
+        margin-bottom: 12px;
+        vertical-align: middle;
+        padding: 0;
+        font-size: 87.9%;
+    }
+
+.inputs {
+    float: left;
+}
+
+    .inputs input[type="text"], input[type="date"] {
+        display: block;
+        margin-bottom: 13.5px;
+        min-height: 20px;
+        vertical-align: middle;
+        width: 200px;
+        border:none;
+        padding: 2px 5px;
+    }
+
+    .inputs span {
+        display: block;
+        margin-bottom: 13.5px;
+        min-height: 20px;
+        vertical-align: middle;
+        width: 200px;
+        padding: 3px 10px;
+        padding-left: 0;
+    }
+
+input[type="radio"] {
+    min-height: 4px;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    margin-right: 3px;
+}
+
+input[type="date"] {
+    width: 200px;
+}
+
+hr {
+    margin-top: 20px;
+    background-color: #f2f2f2;
+    color: #f2f2f2;
+    border: none;
+    height: 1px;
+}
+
+.checkboxesSubject1, .checkboxesSubject2, .checkboxesSubject3 {
+    float: left;
+}
+
+.studentsList {
+    margin-top: 20px;
+}
+
+    .studentsList li {
+        position:relative;
+        width: 155px;
+        padding: 5px;
+        padding-top: 3px;
+        margin: -40px;
+        padding-left: 15px;
+        margin-bottom: 5px;
+        display: inline-block;
+        border-radius: 3px;
+        border-top-right-radius:0;
+        border-bottom-right-radius:0;
+    }
+
+.studentsList-active {
+    background: rgb(255,255,255) !important;
+    border:1px solid #dfdfdf !important;
+    border-right:none !important;
+    z-index:1000 !important;
+}
+
+    .studentsList-active span:last-child {
+        text-decoration: none !important;
+        color: rgb(0, 0, 0) !important;
+    }
+
+.checkboxesSubject label {
+    display: block;
+    margin-right: 70px;
+    margin-bottom: 10px;
+    font-size: 87.9%;
+    vertical-align: top;
+}
+
