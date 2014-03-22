@@ -7,28 +7,33 @@
             this.active.classList.remove('studentsList-active');
         this.active = item;
         this.active.classList.add('studentsList-active');
+        this.studentChanged = new CustomEvent('studentChanged', { detail: { id: this.getActiveId() } });
+        this.list.dispatchEvent(this.studentChanged);
     },
-    addStudent: function (student) {
+    getActiveId: function () {
+        var id = this.active.getAttribute("data-id");
+        if (id !== null)
+            id = parseInt(id);
+        return id;
+    },
+    addStudent: function () {
         var li = document.createElement('li');
-        var a = document.createElement('a');
         var span = document.createElement('span');
-        if (student)
-            a.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
-        else
-            a.innerHTML = 'Новый студент';
-        a.href = '#';
-        //span.setAttribute("data-id", student.id);
-        li.appendChild(a);
-        span.appendChild(li);
+        var spanLink = document.createElement('span');
+        spanLink.innerHTML = 'Новый студент';
+        spanLink.classList.add('link');
+        span.appendChild(spanLink);
+        li.appendChild(span);
         var self = this;
-        span.addEventListener('click', function (sender) {
+        li.addEventListener('click', function (sender) {
             self.setActive(sender.currentTarget);
         });
-        this.list.insertBefore(span, this.list.firstChild);
-        this.setActive(span);
+        this.list.insertBefore(li, this.list.firstChild);
+        this.setActive(li);
     },
-    saveСhanges: function () {
-        this.active.firstChild.firstChild.innerHTML = SurnameStudent.value + '&nbsp;' + NameStudent.value + '&nbsp;' + PatronymicStudent.value;
+    save: function (student) {
+        this.active.setAttribute("data-id", student.id);
+        this.active.firstChild.firstChild.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
         this.__findPlaceForNew();
     },
     deleteStudent: function () {
@@ -36,21 +41,26 @@
         this.setActive(this.list.firstChild);
     },
     __findPlaceForNew: function () {
-        var begin = 1;
+        var active = this.active;
+        this.list.removeChild(active);
+        var begin = 0;
         var end = this.list.childElementCount - 1;
-        if (this.active.firstChild.firstChild.innerHTML < this.list.children[begin].firstChild.firstChild.innerHTML) {
-            return;
+        if (this.list.childElementCount == 0) {
+            this.list.appendChild(active);
         }
-        else if (this.active.firstChild.firstChild.innerHTML > this.list.children[end].firstChild.firstChild.innerHTML) {
-            this.list.appendChild(this.active);
+        else if (active.firstChild.firstChild.innerHTML <= this.list.children[begin].firstChild.firstChild.innerHTML) {
+            this.list.insertBefore(active, this.list.children[begin]);
+        }
+        else if (active.firstChild.firstChild.innerHTML >= this.list.children[end].firstChild.firstChild.innerHTML) {
+            this.list.appendChild(active);
         }
         else {
             while (end - begin != 1) {
                 var middle = Math.floor(end - (end - begin) / 2);
-                if (this.list.children[middle].firstChild.firstChild.innerHTML > this.active.firstChild.firstChild.innerHTML) {
+                if (this.list.children[middle].firstChild.firstChild.innerHTML > active.firstChild.firstChild.innerHTML) {
                     end = middle;
                 }
-                else if (this.list.children[middle].firstChild.firstChild.innerHTML < this.active.firstChild.firstChild.innerHTML) {
+                else if (this.list.children[middle].firstChild.firstChild.innerHTML < active.firstChild.firstChild.innerHTML) {
                     begin = middle;
                 }
                 else {
@@ -58,7 +68,7 @@
                     break;
                 }
             }
-            this.list.insertBefore(this.active, this.list.children[end]);
+            this.list.insertBefore(active, this.list.children[end]);
         }
     }
 });
