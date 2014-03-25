@@ -1,6 +1,6 @@
 ﻿window.onload = function () {
     var pageController = new PageController();
-}
+};
 
 var PageController = Base.extend({
     constructor: function () {
@@ -26,15 +26,16 @@ var PageController = Base.extend({
     },
     saveStudent: function () {
         var student = this.studentDetails.serialize();
-        this.database.save(student);
-        this.studentsList.save(student);
+        var valid = this.studentDetails.save(student);
+        if (valid) {
+            this.database.save(student);
+            this.studentsList.save(student);
+        }
     },
     deleteStudent: function () {
         var student = this.studentDetails.serialize();
         this.database.deleteStudent(student);
         this.studentsList.deleteStudent();
-        var student = this.studentDetails.serialize();
-        this.studentDetails.setStudent(student);
     },
     setStudent: function (id) {
         var student = this.database.getById(id);
@@ -47,15 +48,15 @@ var PageController = Base.extend({
         var pageController = this;
         document.getElementById('AddStudent').onclick = function () {
             pageController.addStudent();
-        }
+        };
         document.getElementById('SaveСhanges').onclick = function () {
             pageController.saveStudent();
-        }
+        };
         document.getElementById('DeleteStudent').onclick = function () {
             pageController.deleteStudent();
-        }
+        };
         document.getElementById('Print').onclick = function () {
             window.print();
-        }
+        };
     }
 });

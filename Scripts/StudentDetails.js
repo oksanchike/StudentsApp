@@ -9,7 +9,7 @@
         this.patronymic = document.getElementById('PatronymicStudent');
         this.patronymic.value = student.patronymic;
         this.gender = document.getElementById('Female');
-        if (student.gender == 'F')
+        if (student.gender === 'F')
             this.gender.checked = true;
         else {
             this.gender.checked = false;
@@ -24,7 +24,7 @@
     },
     resetStudent: function () {
         this.title = document.getElementById('Title-student');
-        this.title.innerHTML = "";
+        this.title.innerHTML = "Новый студент";
         this.title.removeAttribute("data-id");
         this.surname = document.getElementById('SurnameStudent');
         this.surname.value = "";
@@ -37,14 +37,14 @@
         this.dateOfBirth = document.getElementById('DateOfBirth');
         this.dateOfBirth.value = "";
         this.dateOfReceipt = document.getElementById('DateOfReceipt');
-        this.dateOfReceipt.value = "";
+        this.dateOfReceipt.value = "2009-09-01";
     },
     serialize: function () {
         this.gender = document.getElementById('Female');
         var gender;
         var id = this.title.getAttribute("data-id");
         if (id !== null)
-            id = parseInt(id);
+            id = parseInt(id,10);
         if (this.gender.checked)
             gender = "F";
         else
@@ -60,5 +60,30 @@
             group: "МТ-202"
         };
         return student;
+    },
+    save: function (student) {
+        if (student.surname !== "" && student.name !== "" && student.patronymic !== "") {
+            this.title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
+            return true;
+        }
+        else {
+            this.showValidation(student);
+            return false;
+        }
+    },
+    showValidation: function (student) {
+        if (student.surname === "") {
+            this.validationMessageSurname = document.getElementById('validationMessageSurname');
+            this.validationMessageSurname.setAttribute("style", "display: block");
+        }
+        if (student.name === "") {
+            this.validationMessageName = document.getElementById('validationMessageName');
+            this.validationMessageName.setAttribute("style", "display: block");
+        }
+        if (student.patronymic === "") {
+            this.validationMessagePatronymic = document.getElementById('validationMessagePatronymic');
+            this.validationMessagePatronymic.setAttribute("style", "display: block");
+        }
     }
+
 });

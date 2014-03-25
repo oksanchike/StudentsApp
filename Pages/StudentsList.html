@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Список студентов</title>
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic' rel='stylesheet' type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic' rel='stylesheet' type="text/css" />
     <link media="print" rel="stylesheet" href="../Styles/PrintStyles.css" />
     <link media="screen" rel="stylesheet" href="../Styles/CommonStyles.css" />
     <script src="../Scripts/libs/Base.js"></script>
@@ -54,25 +54,38 @@
                     </div>
                     <form>
                         <div class="personalData clearfix">
-                            <div class="labels clearfix">
+                            <div class="surname field">
                                 <label>Фамилия</label>
-                                <label>Имя</label>
-                                <label>Отчество</label>
-                                <label>Пол</label>
-                                <label>Дата рождения</label>
-                                <label>Дата поступления</label>
-                            </div>
-                            <div class="inputs clearfix">
                                 <input id="SurnameStudent" type="text" />
+                                <span class="validation" id="validationMessageSurname">Поле обязательно к заполнению</span>
+                            </div>
+                            <div class="name field">
+                                <label>Имя</label>
                                 <input id="NameStudent" type="text" />
+                                <span class="validation" id="validationMessageName">Поле обязательно к заполнению</span>
+                            </div>
+                            <div class="patronymic field">
+                                <label>Отчество</label>
                                 <input id="PatronymicStudent" type="text" />
+                                <span class="validation" id="validationMessagePatronymic">Поле обязательно к заполнению</span>
+                            </div>
+                        </div>
+                        <div class="personalData clearfix">
+                            <div class="gender field">
+                                <label>Пол</label>
                                 <span>
                                     <label>
                                         <input name="gender" id="Male" type="radio" checked />Мужской</label>
                                     <label>
                                         <input name="gender" id="Female" type="radio" />Женский</label>
                                 </span>
+                            </div>
+                            <div class="dateOfBirth field">
+                                <label>Дата рождения</label>
                                 <input id="DateOfBirth" type="date" />
+                            </div>
+                            <div class="dateOfReceipt field">
+                                <label>Дата поступления</label>
                                 <input id="DateOfReceipt" type="date" />
                             </div>
                         </div>
