@@ -5,15 +5,16 @@
 var PageController = Base.extend({
     constructor: function () {
         this.studentDetails = new StudentDetails();
-        this.database = new Database();
+        this.students = new StudentsRepository();
         this.studentsList = new StudentsList(document.getElementById("MainMenu"));
         var self = this;
-        this.database.data().each(function (currentStudent, recordnumber) {
+        var students = this.students.getAll();
+        students.each(function (currentStudent, recordnumber) {
             self.studentsList.addStudent();
             self.studentsList.save(currentStudent);
         });
         this.studentsList.setActive(this.studentsList.list.firstChild);
-        var student = this.database.data().order("surname asec").first();
+        var student = students.order("surname asec").first();
         this.studentDetails.setStudent(student);
         this.__initEventHandlers();
         this.studentsList.list.addEventListener('studentChanged', function (e) {
@@ -28,17 +29,17 @@ var PageController = Base.extend({
         var student = this.studentDetails.serialize();
         var valid = this.studentDetails.save(student);
         if (valid) {
-            this.database.save(student);
+            this.students.save(student);
             this.studentsList.save(student);
         }
     },
     deleteStudent: function () {
         var student = this.studentDetails.serialize();
-        this.database.deleteStudent(student);
+        this.students.deleteStudent(student);
         this.studentsList.deleteStudent();
     },
     setStudent: function (id) {
-        var student = this.database.getById(id);
+        var student = this.students.getById(id);
         if (student !== null)
             this.studentDetails.setStudent(student);
         else
