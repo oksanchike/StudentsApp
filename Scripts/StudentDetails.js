@@ -21,22 +21,19 @@
         this.dateOfReceipt = document.getElementById('DateOfReceipt');
         this.dateOfReceipt.value = student.dateOfReceipt;
         this.title.setAttribute("data-id", student.id);
+        this.validationMessagePatronymic = document.getElementById('validationMessagePatronymic');
+        this.validationMessageName = document.getElementById('validationMessageName');
+        this.validationMessageSurname = document.getElementById('validationMessageSurname');
+        this.__initEventHandlers();
     },
     resetStudent: function () {
-        this.title = document.getElementById('Title-student');
         this.title.innerHTML = "Новый студент";
         this.title.removeAttribute("data-id");
-        this.surname = document.getElementById('SurnameStudent');
         this.surname.value = "";
-        this.name = document.getElementById('NameStudent');
         this.name.value = "";
-        this.patronymic = document.getElementById('PatronymicStudent');
         this.patronymic.value = "";
-        this.gender = document.getElementById('Female');
         this.gender.checked = true;
-        this.dateOfBirth = document.getElementById('DateOfBirth');
         this.dateOfBirth.value = "";
-        this.dateOfReceipt = document.getElementById('DateOfReceipt');
         this.dateOfReceipt.value = "2009-09-01";
     },
     serialize: function () {
@@ -44,7 +41,7 @@
         var gender;
         var id = this.title.getAttribute("data-id");
         if (id !== null)
-            id = parseInt(id,10);
+            id = parseInt(id, 10);
         if (this.gender.checked)
             gender = "F";
         else
@@ -72,18 +69,50 @@
         }
     },
     showValidation: function (student) {
-        if (student.surname === "") {
-            this.validationMessageSurname = document.getElementById('validationMessageSurname');
-            this.validationMessageSurname.setAttribute("style", "display: block");
+        if (student.patronymic === "") {
+            this.validationMessagePatronymic.setAttribute("style", "visibility: visible");
+            this.patronymic.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
+            this.patronymic.classList.add('validationFocus');
+            this.patronymic.focus();
         }
         if (student.name === "") {
-            this.validationMessageName = document.getElementById('validationMessageName');
-            this.validationMessageName.setAttribute("style", "display: block");
+            this.validationMessageName.setAttribute("style", "visibility: visible");
+            this.name.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
+            this.name.classList.add('validationFocus');
+            this.name.focus();
         }
-        if (student.patronymic === "") {
-            this.validationMessagePatronymic = document.getElementById('validationMessagePatronymic');
-            this.validationMessagePatronymic.setAttribute("style", "display: block");
+        if (student.surname === "") {
+            this.validationMessageSurname.setAttribute("style", "visibility: visible");
+            this.surname.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
+            this.surname.classList.add('validationFocus');
+            this.surname.focus();
         }
-    }
+    },
+    resetValidation: function () {
+        this.hideValidation(this.validationMessagePatronymic, this.patronymic);
+        this.hideValidation(this.validationMessageName, this.name);
+        this.hideValidation(this.validationMessageSurname, this.surname);
+    },
+    hideValidation: function (message, field) {
+        if (field.classList.contains('validationFocus')) {
+            field.classList.remove('validationFocus');
+            field.removeAttribute("style");
+            message.setAttribute("style", "visibility: hidden");
+        }
+    },
+    initalizeSubjects: function (students) {
 
+    },
+    __initEventHandlers: function () { // Как назвать?
+        var studentDetails = this;
+        document.getElementById('PatronymicStudent').onkeypress = function (e) {
+            studentDetails.hideValidation(studentDetails.validationMessagePatronymic, studentDetails.patronymic);
+        };
+        document.getElementById('NameStudent').onkeypress = function (e) {
+            studentDetails.hideValidation(studentDetails.validationMessageName, studentDetails.name);
+        };
+        document.getElementById('SurnameStudent').onkeypress = function (e) {
+            studentDetails.hideValidation(studentDetails.validationMessageSurname, studentDetails.surname);
+        };
+    }
 });

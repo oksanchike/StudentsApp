@@ -35,6 +35,6 @@
             return null;
     },
     getAll: function () {
-        return this.students();
+        return this.students().order("surname asec").get();
     }
 });

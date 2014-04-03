@@ -30,6 +30,7 @@ header span {
 }
 
 .content {
+    border-top: 10px solid #2d89d5;
     min-height: 300px;
     padding: 15px;
     padding-top: 0;
@@ -79,44 +80,45 @@ h4 {
     float: left;
 }
 
-.labels {
-    float: left;
-    margin-top: 3px;
-    margin-right: 20px;
+.topgallantOperation {
+    float: right;
 }
 
-    .labels label {
-        display: block;
-        min-height: 26px;
-        margin-bottom: 12px;
-        padding: 0;
-        font-size: 87.9%;
-    }
-
-.inputs {
-    float: left;
+.personalData {
+    margin-top: 0;
 }
 
-    .inputs input[type="text"], input[type="date"] {
-        display: block;
-        margin-bottom: 13.5px;
+form {
+    padding-top: 20px;
+}
+    .personalData input[type="text"], input[type="date"] {
         min-height: 20px;
         width: 200px;
-        border:none;
-        padding: 2px 5px;
+        border:white;
+        padding: 1px 5px;
+        background: white;
     }
 
-    .inputs span {
-        display: block;
-        margin-bottom: 13.5px;
-        min-height: 20px;
-        width: 200px;
-        padding: 3px 10px;
-        padding-left: 0;
+    .personalData .validation {
+        visibility:hidden;
     }
+
+.gender {
+    min-height: 22px;
+}
+
+.gender span {
+    float: right;
+}
+
+span label {
+    display: inline;
+    font-size: 83%;
+    background: white;
+    margin-left: 16px;
+}
 
 input[type="radio"] {
-    min-height: 4px;
     vertical-align: middle;
     padding: 0;
     margin: 0;
@@ -124,50 +126,35 @@ input[type="radio"] {
 }
 
 input[type="date"] {
-    width: 200px;
+    width: 130px;
+    margin-right: 23px;
+    padding: 3px 0 0 0;
 }
 
-hr {
-    margin-top: 20px;
-    background-color: #f2f2f2;
-    color: #f2f2f2;
-    border: none;
-    height: 1px;
+.field {
+    clear: both;
+    text-align: right;
+    margin-bottom: 13.5px;
+    vertical-align: middle;
 }
+
+.personalData {
+    width: 575px;
+}
+
+    .personalData:nth-child(2) {
+        width: 294px;
+    }
+
+    .personalData label {
+        float: left;
+        margin-top: 5px;
+        font-size: 87.9%;
+    }
 
 .checkboxesSubject1, .checkboxesSubject2, .checkboxesSubject3 {
     float: left;
 }
-
-.studentsList {
-    margin-top: 20px;
-}
-
-    .studentsList li {
-        position:relative;
-        width: 155px;
-        padding: 5px;
-        padding-top: 3px;
-        margin: -40px;
-        padding-left: 15px;
-        margin-bottom: 5px;
-        display: inline-block;
-        border-radius: 3px;
-        border-top-right-radius:0;
-        border-bottom-right-radius:0;
-    }
-
-.studentsList-active {
-    background: rgb(255,255,255) !important;
-    border:1px solid #dfdfdf !important;
-    border-right:none !important;
-    z-index:1000 !important;
-}
-
-    .studentsList-active span:last-child {
-        text-decoration: none !important;
-        color: rgb(0, 0, 0) !important;
-    }
 
 .checkboxesSubject label {
     display: block;

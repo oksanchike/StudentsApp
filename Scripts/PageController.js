@@ -6,20 +6,26 @@ var PageController = Base.extend({
     constructor: function () {
         this.studentDetails = new StudentDetails();
         this.students = new StudentsRepository();
+        this.subjects = new SubjectsRepository();
+        this.studentsPresence = new StudentsPresenceRepository();
         this.studentsList = new StudentsList(document.getElementById("MainMenu"));
         var self = this;
         var students = this.students.getAll();
-        students.each(function (currentStudent, recordnumber) {
+        var subjects = this.subjects.getAll();
+        var studentsPresence = this.studentsPresence.getAll();
+        this.chart = new Chart("draw", studentsPresence);
+        students.forEach(function (currentStudent) {
             self.studentsList.addStudent();
             self.studentsList.save(currentStudent);
         });
         this.studentsList.setActive(this.studentsList.list.firstChild);
-        var student = students.order("surname asec").first();
+        var student = students[0];
         this.studentDetails.setStudent(student);
         this.__initEventHandlers();
         this.studentsList.list.addEventListener('studentChanged', function (e) {
             self.setStudent(e.detail.id);
         });
+        this.studentDetails.initalizeSubjects(students);
     },
     addStudent: function () {
         this.studentsList.addStudent();
@@ -40,6 +46,7 @@ var PageController = Base.extend({
     },
     setStudent: function (id) {
         var student = this.students.getById(id);
+        this.studentDetails.resetValidation();
         if (student !== null)
             this.studentDetails.setStudent(student);
         else

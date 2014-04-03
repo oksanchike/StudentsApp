@@ -11,18 +11,21 @@
     <script src="../Scripts/PageController.js"></script>
     <script src="../Scripts/StudentsList.js"></script>
     <script src="../Scripts/StudentDetails.js"></script>
+    <script src="../Scripts/Repositories/SubjectsRepository.js"></script>
+    <script src="../Scripts/Repositories/StudentsPresenceRepository.js"></script>
+    <script src="../Scripts/Сhart.js"></script>
 </head>
 <body>
     <section>
         <header class="header">
             <div class="clearfix">
-                <div class="layout-column-1">
+                <div class="layout-column-1 sizeH2 floatLeft">
                     <h2>Cписок студентов</h2>
                 </div>
-                <div class="layout-column-2">
+                <div class="layout-column-2 sizeMain floatLeft">
                     <span>MT-202<span></span></span>
                 </div>
-                <div class="layout-column-3">
+                <div class="layout-column-3 floatRight sizeMain">
                     <span class="buttons button-print" id="Print">
                         <img src="../Content/printer.png" style="vertical-align: middle">Распечатать</span>
                 </div>
@@ -30,30 +33,30 @@
         </header>
         <div class="content">
             <header>
-                <span>&larr;</span><span class="link" style="margin-left: 5px">Вернуться к списку групп</span>
-                <h3 id="Title-student"></h3>
+                <span>&larr;</span><span class="link sizeMain" style="margin-left: 5px">Вернуться к списку групп</span>
+                <h3 class="sizeH3" id="Title-student"></h3>
                 <!--<span style="background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);-webkit-background-clip: text; -webkit-text-fill-color: transparent;">some text text text</span>-->
             </header>
             <div class="clearfix">
-                <aside>
-                    <span id="AddStudent" class="buttons button-addStudent">
+                <aside class="floatLeft">
+                    <span id="AddStudent" class="buttons button-addStudent sizeMain">
                         <img src="../Content/plus.png" style="vertical-align: middle; margin: 3px">
                         Добавить студента</span>
-                    <span id="SaveСhanges" class="buttons button-saveСhanges">
+                    <span id="SaveСhanges" class="buttons button-saveСhanges sizeMain">
                         <img src="../Content/tick.png" style="vertical-align: top; margin: 3px">Сохранить изменения</span>
-                    <ul class="studentsList main-menu" id="MainMenu"></ul>
+                    <ul class="studentsList main-menu sizeMain" id="MainMenu"></ul>
                 </aside>
-                <section>
+                <section class="floatRight">
                     <div class="topgallant clearfix">
-                        <div class="topgallantHeader clearfix">
+                        <div class="topgallantHeader clearfix sizeH4 floatLeft">
                             <h4>Стандартные личные данные</h4>
                         </div>
-                        <div id="DeleteStudent" class="topgallantOperation clearfix">
-                            <span class="link">Удалить</span>
+                        <div id="DeleteStudent" class="topgallantOperation clearfix floatRight">
+                            <span class="link sizeMain">Удалить</span>
                         </div>
                     </div>
                     <form>
-                        <div class="personalData clearfix">
+                        <div class="personalData clearfix sizeMain">
                             <div class="surname field">
                                 <label>Фамилия</label>
                                 <input id="SurnameStudent" type="text" />
@@ -70,14 +73,14 @@
                                 <span class="validation" id="validationMessagePatronymic">Поле обязательно к заполнению</span>
                             </div>
                         </div>
-                        <div class="personalData clearfix">
+                        <div class="personalData clearfix sizeMain">
                             <div class="gender field">
                                 <label>Пол</label>
-                                <span>
-                                    <label>
-                                        <input name="gender" id="Male" type="radio" checked />Мужской</label>
+                                <span class="floatRight">
                                     <label>
                                         <input name="gender" id="Female" type="radio" />Женский</label>
+                                    <label>
+                                        <input name="gender" id="Male" type="radio" checked />Мужской</label>
                                 </span>
                             </div>
                             <div class="dateOfBirth field">
@@ -90,37 +93,26 @@
                             </div>
                         </div>
                         <hr>
-                        <div style="margin-top: 30px" class="topgallant clearfix">
-                            <div class="topgallantHeader clearfix">
+                        <div style="margin-top: 15px" class="topgallant clearfix">
+                            <div class="topgallantHeader clearfix sizeH4 floatLeft">
                                 <h4>Список посещаемых предметов</h4>
                             </div>
-                            <div class="topgallantOperation clearfix">
-                                <span class="link">Добавить предмет</span>
+                            <div class="topgallantOperation clearfix floatRight">
+                                <span class="link sizeMain">Добавить предмет</span>
                             </div>
                         </div>
-                        <div class="checkboxesSubject clearfix">
-                            <div class="checkboxesSubject1 clearfix">
+                        <div class="checkboxesSubject clearfix sizeMain">
+                            <div class="checkboxesSubject1 clearfix floatLeft">
                                 <label>
-                                    <input id="Subject1" type="checkbox" checked />Первый вариант</label>
-                                <label>
-                                    <input id="Subject2" type="checkbox" checked />Второй вариант</label>
-                                <label>
-                                    <input id="Subject3" type="checkbox" checked />Третий вариант</label>
+                                    <input type="checkbox" checked />Математика</label>
                             </div>
-                            <div class="checkboxesSubject2 clearfix">
-                                <label>
-                                    <input id="Subject4" type="checkbox" checked />Первый вариант</label>
-                                <label>
-                                    <input id="Subject5" type="checkbox" checked />Второй вариант</label>
-                                <label>
-                                    <input id="Subject6" type="checkbox" checked />Третий вариант</label>
+                            <div class="checkboxesSubject2 clearfix floatLeft">
                             </div>
-                            <div class="checkboxesSubject3 clearfix">
-                                <label>
-                                    <input id="Subject7" type="checkbox" checked />Первый вариант</label>
-                                <label>
-                                    <input id="Subject8" type="checkbox" checked />Второй вариант</label>
+                            <div class="checkboxesSubject3 clearfix floatLeft">
                             </div>
+                        </div>
+                        <div class="canvasDraw clearfix">
+                            <canvas id="draw" width="685" height="300"></canvas>
                         </div>
                     </form>
                 </section>

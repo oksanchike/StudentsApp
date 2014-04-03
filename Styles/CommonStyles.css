@@ -2,16 +2,28 @@
     background-image: url('../Content/fond.png');
     margin: 0;
     padding: 0;
+    font-family: 'PT Sans',sans-serif;
 }
 
     body > section {
-        width: 870px;
+        width: 900px;
         margin: 0 auto;
-        font-family: 'PT Sans', sans-serif;
     }
 
+.sizeMain {
+    font-size: 0.879em;
+}
+
+.floatRight {
+    float: right;
+}
+
+.floatLeft {
+    float: left;
+}
+
 section header {
-    width: 870px;
+    width: 900px;
     color: #6f6a6a;
     padding: 10px 20px;
 }
@@ -26,52 +38,46 @@ section header {
     clear: both;
     text-align: right;
     margin-bottom: 13.5px;
-}
-
-.personalData {
-    width: 605px;
+    vertical-align: middle;
 }
 
     .personalData:nth-child(2) {
-        width: 300px;
+        width: 294px;
     }
 
     .personalData label {
         float: left;
+        margin-top: 5px;
     }
+
     .personalData .validation {
         margin-left: 20px;
+        color: rgba(204, 0, 0, 0.8);
+        visibility: hidden;
+        vertical-align: text-bottom;
     }
 
 .layout-column-1 {
-    float: left;
     margin-right: 25px;
 }
 
     .layout-column-1 h2 {
+        font-size: 1.5em;
         display: inline;
-        font-size: 1.4em;
         font-weight: normal;
         vertical-align: middle;
     }
 
 .layout-column-2 {
-    float: left;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
     .layout-column-2 span {
         display: inline;
-        font-size: 0.9em;
     }
-
-.layout-column-3 {
-    float: right;
-}
 
 .button-print {
     display: inline-block;
-    font-family: 'PT Sans',sans-serif;
     background: #dfdfdf; /* for non-css3 browsers */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdfdfd', endColorstr='#dfdfdf'); /* для IE6-9 */
     background: -webkit-linear-gradient(top, #fdfdfd, #dfdfdf); /* для webkit-браузеров */
@@ -82,11 +88,7 @@ section header {
     border-radius: 3px;
     padding: 2px 15px 0 0;
     box-shadow: 0 1px 1px #bdbdbd;
-    font-size: 87.5%;
     text-shadow: 0 1px rgba(255,255,255,0.8);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
 }
 
     .button-print:hover {
@@ -107,10 +109,13 @@ section header {
 .buttons {
     display: block;
     cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
 
 .content {
-    width: 870px;
+    width: 900px;
     min-height: 300px;
     background: #f1f1f1; /* for non-css3 browsers */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff 0%, #fff 7%, #f1f1f1 20%', endColorstr='#f1f1f1 80%, #fff 93%, #fff 100%'); /* для IE6-9 */
@@ -130,8 +135,6 @@ section header {
         text-decoration: underline;
         margin-left: 0;
         color: #2d89d5;
-        font-family: 'PT Sans',sans-serif;
-        font-size: 13px;
     }
 
         .content .link:hover {
@@ -143,40 +146,40 @@ header > span {
     margin-top: 0;
     margin-left: -15px;
     color: #2d89d5;
-    font-family: 'PT Sans',sans-serif;
-    font-size: 13px;
 }
 
 h3 {
+    font-size: 1.2em;
     padding: 0;
     margin: 0;
     margin-top: 5px;
     margin-left: -15px;
-    font-family: 'PT Sans',sans-serif;
-    font-size: 1.3em;
     color: #000;
+    font-weight: 600;
 }
 
 aside {
-    float: left;
-    width: 130px;
+    width: 160px;
     margin-top: 20px;
     z-index: 0;
 }
 
     aside .buttons {
-        font-family: 'PT Sans',sans-serif;
         border-radius: 3px;
-        padding: 7px 5px;
+        padding: 6px 5px;
         box-shadow: 0 1px 5px #bdbdbd;
-        font-size: 13px;
         text-align: left;
         min-width: 155px;
     }
 
-.personalData input[type="text"]:focus {
-    border: 1px solid #66b3f3;
-    box-shadow: 0 0 5px #66b3f3;
+.personalData input[type="text"]:focus, .personalData input[type="date"]:focus {
+    outline: 2px solid #66b3f3;
+    box-shadow: 0 0 3px #66b3f3;
+}
+
+.personalData input[type="text"].validationFocus:focus {
+    outline: 2px solid rgba(204, 0, 0, 0.8);
+    box-shadow: 0 0 1px rgba(204, 0, 0, 0.8);
 }
 
 .button-addStudent {
@@ -245,9 +248,8 @@ aside {
 }
 
 .content section {
-    float: right;
     min-height: 550px;
-    width: 655px;
+    width: 685px;
     background: rgb(255,255,255);
     box-shadow: 0 0 5px #d4d0d0;
     padding: 20px;
@@ -256,11 +258,11 @@ aside {
 }
 
 h4 {
+    font-size: 1.1em;
     padding: 0;
     margin: 0;
     color: #000;
     font-weight: normal;
-    font-size: 1.1em;
 }
 
 .personalData, .checkboxesSubject {
@@ -268,51 +270,35 @@ h4 {
     display: inline-block;
 }
 
-.topgallantHeader {
-    float: left;
-}
-
-.topgallantOperation {
-    float: right;
-}
-
 .personalData {
+    width: 605px;
     margin-top: 0;
 }
-
-    .personalData label {
-        min-height: 26px;
-        margin-bottom: 12px;
-        vertical-align: middle;
-    }
 
 form {
     padding-top: 20px;
 }
-    .personalData input[type="text"], input[type="date"] {
-        min-height: 20px;
-        vertical-align: middle;
-        width: 200px;
-        border: 1px solid #ccc;
-        padding: 1px 5px;
-        background: white;
-        border-radius: 3px;
-    }
 
-.gender span {
-    float: right;
-    vertical-align: middle;
+.personalData input[type="text"], input[type="date"] {
+    min-height: 20px;
+    width: 230px;
+    border: 1px solid #ccc;
+    padding: 1px 5px;
+    background: white;
+    border-radius: 3px;
+}
+
+.gender {
+    min-height: 22px;
 }
 
 span label {
     display: inline;
-    font-size: 83%;
     background: white;
-    margin-left: 15px;
+    margin-left: 16px;
 }
 
 input[type="radio"] {
-    min-height: 4px;
     vertical-align: middle;
     padding: 0;
     margin: 0;
@@ -321,7 +307,11 @@ input[type="radio"] {
 
 input[type="date"] {
     width: 100px;
-    margin-right: 44px;
+    margin-right: 45px;
+}
+
+input[type="checkbox"] {
+    vertical-align: bottom;
 }
 
 hr {
@@ -332,10 +322,6 @@ hr {
     height: 1px;
 }
 
-.checkboxesSubject1, .checkboxesSubject2, .checkboxesSubject3 {
-    float: left;
-}
-
 .studentsList {
     margin-top: 20px;
 }
@@ -344,7 +330,6 @@ hr {
         position: relative;
         width: 155px;
         padding: 5px;
-        padding-top: 3px;
         margin: -40px;
         padding-left: 15px;
         margin-bottom: 5px;
@@ -370,5 +355,10 @@ hr {
     display: block;
     margin-right: 70px;
     margin-bottom: 10px;
-    font-size: 87.9%;
 }
+
+.canvasDraw {
+    border: 1px solid #2d89d5;
+    margin-top: 15px;
+}
+
