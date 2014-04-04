@@ -138,6 +138,10 @@ input[type="date"] {
     vertical-align: middle;
 }
 
+hr {
+    display: none;
+}
+
 .personalData {
     width: 575px;
 }
@@ -163,3 +167,6 @@ input[type="date"] {
     font-size: 87.9%;
 }
 
+.canvasDraw {
+    margin-left: 30px;
+}

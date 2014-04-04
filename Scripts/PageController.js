@@ -13,7 +13,7 @@ var PageController = Base.extend({
         var students = this.students.getAll();
         var subjects = this.subjects.getAll();
         var studentsPresence = this.studentsPresence.getAll();
-        this.chart = new Chart("draw", studentsPresence);
+        this.chart = new Chart("draw", studentsPresence, subjects);
         students.forEach(function (currentStudent) {
             self.studentsList.addStudent();
             self.studentsList.save(currentStudent);

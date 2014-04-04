@@ -1,55 +1,78 @@
 ﻿var Chart = Base.extend({
-    constructor: function (canvasId, data) {
+    constructor: function (canvasId, dataStudentsPresence, dataSubjects) {
         this.canvas = document.getElementById(canvasId);
         this.context = this.canvas.getContext("2d");
-        this.data = data;
+        this.dataStudentsPresence = dataStudentsPresence;
+        this.dataSubjects = dataSubjects;
         this.pieX = (this.canvas.width) / 2;
-        this.pieY = (this.canvas.height) / 2 + 30;
-        this.pieRadius = Math.min(this.canvas.width, this.canvas.height)/2 - 30;
-
-        //this.drawPieBorder();
+        this.pieY = (this.canvas.height) / 2 + 50;
+        this.pieRadius = Math.min(this.canvas.width, this.canvas.height) / 2 - 70;
+        this.drawRectangle();
         this.drawSlices(true);
         this.drawSlices(false);
-        //this.drawPieBorderSmall();
+        this.drawText();
         this.drawLegend();
     },
-    drawPieBorder: function () {
+    drawRectangle: function () {
         var context = this.context;
         context.save();
-        context.fillStyle = "white";
-        context.shadowColor = "#777";
-        context.shadowBlur = 10;
-        context.shadowOffsetX = 2;
-        context.shadowOffsetY = 2;
+        var color = "#000";
+        var totalLength = this.getTotalLength();
+        var index = totalLength / (this.canvas.width - 40);
+        var x1 = 20;
+        var y1 = 20;
+        var width = 25;
+        for (var i = 0; i< this.dataSubjects.length; i++){
+            var lengthRectangle = this.dataSubjects[i].totalTime/index;
+            color = this.dataSubjects[i].color;
+            context.beginPath();
+            context.rect(x1, y1, lengthRectangle, width);
+            context.fillStyle = color;
+            context.fill();
+            x1 = lengthRectangle + x1;
+        }
+        context.restore();
+    },
+    drawRectangleSmall: function (color, x, y) {
+        var context = this.context;
+        context.save();
         context.beginPath();
-        context.arc(this.pieX, this.pieY, this.pieRadius-30, 0, Math.PI*2, false);
+        context.rect(x, y, 10, 10);
+        context.fillStyle = color;
         context.fill();
         context.closePath();
         context.restore();
     },
-    drawPieBorderSmall: function () {
+    drawText: function () {
         var context = this.context;
         context.save();
-        context.fillStyle = "white";
+        context.fillStyle = "black";
         context.beginPath();
-        context.arc(this.pieX, this.pieY, this.pieRadius - 38, 0, Math.PI * 2, false);
-        context.fill();
+        context.font = 'normal 13pt PT Sans';
+        context.fillText(this.dataSubjects[0].title + " ( " + this.dataSubjects[0].totalTime + " часов )", 20, 80);
+
+        context.font = 'normal 11pt PT Sans';
+        context.fillText("Всего пройдено", this.pieX - 50, this.pieY - 50);
+        context.font = 'bold 11pt PT Sans';
+        context.fillText(this.dataSubjects[0].elapsedTime, this.pieX - 7, this.pieY - 30);
+        this.drawRectangleSmall("#FFCC00", this.pieX - 20, this.pieY - 40);
+
+        context.fillStyle = "black";
+        context.font = 'normal 10pt PT Sans';
+        context.fillText("Всего прогуляно", this.pieX - 44, this.pieY - 10);
+        context.font = 'bold 11pt PT Sans';
+        context.fillText(this.dataStudentsPresence[0].totalAbsenseTime, this.pieX - 7, this.pieY + 10);
+        this.drawRectangleSmall("rgb(153, 0, 0)", this.pieX - 20, this.pieY);
+
+        context.fillStyle = "black";
+        context.font = 'normal 9pt PT Sans';
+        context.fillText("Из них", this.pieX-15, this.pieY+30);
+        context.fillText("по уважительной причине", this.pieX - 63, this.pieY + 45);
+        context.font = 'bold 11pt PT Sans';
+        context.fillText(this.dataStudentsPresence[0].withValidReasonTime, this.pieX - 7, this.pieY + 65);
+        this.drawRectangleSmall("#0099CC", this.pieX - 20, this.pieY + 55);
+
         context.closePath();
-
-        context.beginPath();
-        context.arc(this.pieX, this.pieY, this.pieRadius - 38, 0, Math.PI * 2, false);
-        context.clip();
-
-        context.beginPath();
-        context.strokeStyle = '#777';
-        context.lineWidth = 5;
-        context.shadowBlur = 15;
-        context.shadowColor = '#777';
-        context.shadowOffsetX = 0;
-        context.shadowOffsetY = 0;
-        context.arc(this.pieX, this.pieY, this.pieRadius - 34, 0, Math.PI * 2, false);
-        context.stroke();
-
         context.restore();
     },
     drawSlices: function (withShadow) {
@@ -57,7 +80,7 @@
         context.save();
         if (withShadow) {
             context.shadowBlur = 15;
-            context.shadowColor = '#999';
+            context.shadowColor = "#999";
             context.shadowOffsetX = 0;
             context.shadowOffsetY = 3;
         }
@@ -65,7 +88,7 @@
         var startAngle = 1.5*Math.PI;
         var color = "rgb(153, 0, 0)";
         for (var i = 0; i < 4; i++) {
-            var slice = this.data[0];
+            var slice = this.dataStudentsPresence[0];
             if (i == 0) {
                 var sliceAngle = 2 * Math.PI * slice.withValidReasonTime / total;
             }
@@ -84,13 +107,10 @@
             var endAngle = startAngle + sliceAngle;
 
             context.beginPath();
-            //context.moveTo(this.pieX, this.pieY);
             context.arc(this.pieX, this.pieY, this.pieRadius - 30, startAngle, endAngle, false);
-            context.lineWidth = 25;
+            context.lineWidth = 30;
             context.strokeStyle = color;
             context.stroke();
-            //context.fillStyle = color;
-            //context.fill();
             context.closePath();
             startAngle = endAngle;
         }
@@ -100,8 +120,18 @@
 
     },
     getTotalValue: function () {
-        var data = this.data;
+        //var data = this.data;
         var total = 100;
+        return total;
+    },
+    getTotalLength : function () {
+        var dataSubjects = this.dataSubjects;
+        var total = 0;
+
+        for (var i = 0; i< dataSubjects.length; i++) {
+            total += dataSubjects[i].totalTime;
+        }
+
         return total;
     }
 })
