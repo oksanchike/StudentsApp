@@ -1,36 +1,45 @@
 ﻿var Chart = Base.extend({
-    constructor: function (canvasId, dataStudentsPresence, dataSubjects) {
+    constructor: function (canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.context = this.canvas.getContext("2d");
-        this.dataStudentsPresence = dataStudentsPresence;
-        this.dataSubjects = dataSubjects;
+
         this.pieX = (this.canvas.width) / 2;
         this.pieY = (this.canvas.height) / 2 + 50;
         this.pieRadius = Math.min(this.canvas.width, this.canvas.height) / 2 - 60;
-        this.totalLength = this.getTotalLength();
-        this.index = this.totalLength / (this.canvas.width - 40);
-        var x1Last = (this.totalLength / this.index) + 19;
-        var x1MiddleMiddleRight = (x1Last / 2) + (x1Last / 4);
-        var x1MiddleMiddleLeft = (x1Last / 2) - (x1Last / 4);
-        var x1Middle = ((this.totalLength / this.index) + 19) / 2;
-        var px1 = this.context.measureText(this.totalLength).width / 2;
-        var px2 = this.context.measureText(this.totalLength / 2).width / 2;
-        this.drawRectangle(this.totalLength, this.index);
-        this.drawLine(21, 30, 21, 17);
-        this.drawLegend(21 - 4, 13, "0");
-        this.drawLine(x1Last, 30, x1Last, 17);
-        this.drawLegend(x1Last - px1, 13, this.totalLength);
-        this.drawLine(x1Middle, 30, x1Middle, 17);
-        this.drawLegend(x1Middle - px2, 13, this.totalLength / 2);
-        this.drawLine(x1MiddleMiddleRight, 30, x1MiddleMiddleRight, 25);
-        this.drawLine(x1MiddleMiddleLeft, 30, x1MiddleMiddleLeft, 25);
+
+    },
+    drawForStudent: function (dataStudentsPresence, dataSubjects) {
+        this.dataStudentsPresence = dataStudentsPresence;
+        this.dataSubjects = dataSubjects;
+
+        var totalHours = this.getTotalLength();
+        this.drawLineChart(totalHours);
+
         this.drawSlices(true);
         this.drawSlices(false);
         this.drawText();
-        this.drawLegend();
-
+        //this.drawDivisionLabel();
     },
-    drawRectangle: function (totalLength, index) {
+    drawLineChart: function (totalHours) {
+        var lineChartWidth = this.canvas.width - 40;
+        var ratio = totalHours / lineChartWidth;
+        var quarter = lineChartWidth / 4;
+        var x = 19;
+        var y = 30;
+
+        var xFirstQuarter = quarter + x;
+        var xMiddle = quarter * 2 + x;
+        var xThirdQuarter = quarter * 3 + x;
+        var xLast = quarter * 4 + x;
+
+        this.drawRectangles(totalHours, ratio);
+        this.drawDivision(x + 2, y, 13, 0);
+        this.drawDivision(xFirstQuarter, y, 5);
+        this.drawDivision(xMiddle, y, 13, totalHours / 2);
+        this.drawDivision(xThirdQuarter, y, 5);
+        this.drawDivision(xLast, y, 13, totalHours);
+    },
+    drawRectangles: function (totalLength, ratio) {
         var context = this.context;
         context.save();
         var color = "#000";
@@ -38,7 +47,7 @@
         var y1 = 30;
         var width = 25;
         for (var i = 0; i < this.dataSubjects.length; i++) {
-            var lengthRectangle = this.dataSubjects[i].totalTime / index;
+            var lengthRectangle = this.dataSubjects[i].totalTime / ratio;
             color = this.dataSubjects[i].color;
             context.beginPath();
             context.rect(x1, y1, lengthRectangle, width);
@@ -48,16 +57,25 @@
         }
         context.restore();
     },
-    drawLine: function (x1, y1, x2, y2) {
+    drawDivision: function (x, y, l, text) {
         var context = this.context;
+
         context.save();
         context.beginPath();
-        context.moveTo(x1, y1);
-        context.lineTo(x2, y2);
+        context.moveTo(x, y);
+        context.lineTo(x, y-l);
         context.strokeStyle = "#000";
         context.lineWidth = 0.5;
         context.stroke();
         context.closePath();
+        if (text !== undefined) {
+            var dx = x - this.context.measureText(text).width / 2;
+            var dy = y - l - 4;
+
+            context.fillStyle = "#999";
+            context.font = 'normal 10pt PT Sans';
+            context.fillText(text, dx, dy);
+        }
         context.restore();
     },
     drawRectangleSmall: function (color, x, y) {
@@ -112,7 +130,7 @@
 
         context.fillStyle = "black";
         context.font = 'normal 11pt PT Sans';
-        px = this.context.measureText(this.dataSubjects[0].totalTime/2).width / 2;
+        px = this.context.measureText(this.dataSubjects[0].totalTime / 2).width / 2;
         context.fillText(this.dataSubjects[0].totalTime / 2, this.pieX - px, this.pieY + 145);
 
         context.fillStyle = "black";
@@ -136,12 +154,12 @@
             context.shadowOffsetX = 0;
             context.shadowOffsetY = 3;
         }
-        var total = this.getTotalValue();
+        var slice = this.dataStudentsPresence[0];
+        var sliceSubject = this.dataSubjects[0];
+        var total = sliceSubject.totalTime;
         var startAngle = 1.5 * Math.PI;
         var color = "#0099CC";
         for (var i = 0; i < 4; i++) {
-            var slice = this.dataStudentsPresence[0];
-            var sliceSubject = this.dataSubjects[0];
             if (i == 0) {
                 var sliceAngle = 2 * Math.PI * slice.withValidReasonTime / total; //нужно пересчитать
             }
@@ -154,7 +172,7 @@
                 color = "#FFCC00";
             }
             if (i == 3) {
-                var sliceAngle = 2 * Math.PI * (100 - sliceSubject.elapsedTime) / total; //нужно пересчитать
+                var sliceAngle = 2 * Math.PI * (total - sliceSubject.elapsedTime) / total; //нужно пересчитать
                 color = "#E8E8E8";
             }
             var endAngle = startAngle + sliceAngle;
@@ -169,18 +187,15 @@
         }
         context.restore();
     },
-    drawLegend: function (x, y, text) {
+    drawDivisionLabel: function (x, y, text) {
         var context = this.context;
+        var dx = this.context.measureText(text).width / 2;
+
         context.save();
         context.fillStyle = "#999";
         context.beginPath();
         context.font = 'normal 10pt PT Sans';
-        context.fillText(text, x, y);
-    },
-    getTotalValue: function () {
-        //var data = this.data;
-        var total = 100;
-        return total;
+        context.fillText(text, x-dx, y);
     },
     getTotalLength: function () {
         var dataSubjects = this.dataSubjects;

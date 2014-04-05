@@ -7,20 +7,19 @@ var PageController = Base.extend({
         this.studentDetails = new StudentDetails();
         this.students = new StudentsRepository();
         this.subjects = new SubjectsRepository();
-        this.studentsPresence = new StudentsPresenceRepository();
+        this.studentsPresences = new StudentsPresenceRepository();
         this.studentsList = new StudentsList(document.getElementById("MainMenu"));
+        this.chart = new Chart("draw");
         var self = this;
         var students = this.students.getAll();
         var subjects = this.subjects.getAll();
-        var studentsPresence = this.studentsPresence.getAll();
-        this.chart = new Chart("draw", studentsPresence, subjects);
+        //var studentsPresences = this.studentsPresence.getAll();
         students.forEach(function (currentStudent) {
             self.studentsList.addStudent();
             self.studentsList.save(currentStudent);
         });
         this.studentsList.setActive(this.studentsList.list.firstChild);
-        var student = students[0];
-        this.studentDetails.setStudent(student);
+        this.setStudent(students[0].id);
         this.__initEventHandlers();
         this.studentsList.list.addEventListener('studentChanged', function (e) {
             self.setStudent(e.detail.id);
@@ -47,10 +46,22 @@ var PageController = Base.extend({
     setStudent: function (id) {
         var student = this.students.getById(id);
         this.studentDetails.resetValidation();
-        if (student !== null)
+        if (student !== null) {
             this.studentDetails.setStudent(student);
+            this.drawChartForStudent(id);
+        }
         else
             this.studentDetails.resetStudent();
+    },
+    drawChartForStudent: function (id) {
+        var studentPresences = this.studentsPresences.getByStudentId(id);
+        var subjects = [];
+        for (var i = 0; i < studentPresences.length; i++) {
+            var subjectId = studentPresences[i].subjectId;
+            var subject = this.subjects.getById(subjectId);
+            subjects.push(subject);
+        }
+        this.chart.drawForStudent(studentPresences, subjects);
     },
     __initEventHandlers: function () {
         var pageController = this;

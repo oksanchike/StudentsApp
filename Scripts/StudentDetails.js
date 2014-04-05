@@ -1,29 +1,32 @@
 ﻿var StudentDetails = Base.extend({
-    setStudent: function (student) {
+    constructor: function () {
         this.title = document.getElementById('Title-student');
-        this.title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
         this.surname = document.getElementById('SurnameStudent');
-        this.surname.value = student.surname;
         this.name = document.getElementById('NameStudent');
-        this.name.value = student.name;
         this.patronymic = document.getElementById('PatronymicStudent');
-        this.patronymic.value = student.patronymic;
-        this.gender = document.getElementById('Female');
-        if (student.gender === 'F')
-            this.gender.checked = true;
-        else {
-            this.gender.checked = false;
-            this.gender = document.getElementById('Male');
-            this.gender.checked = true;
-        }
+        this.currentGender = document.getElementById('Female');
+        this.male = document.getElementById('Male');
         this.dateOfBirth = document.getElementById('DateOfBirth');
-        this.dateOfBirth.value = student.dateOfBirth;
         this.dateOfReceipt = document.getElementById('DateOfReceipt');
-        this.dateOfReceipt.value = student.dateOfReceipt;
-        this.title.setAttribute("data-id", student.id);
         this.validationMessagePatronymic = document.getElementById('validationMessagePatronymic');
         this.validationMessageName = document.getElementById('validationMessageName');
         this.validationMessageSurname = document.getElementById('validationMessageSurname');
+    },
+    setStudent: function (student) {    
+        this.title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
+        this.surname.value = student.surname;
+        this.name.value = student.name;
+        this.patronymic.value = student.patronymic;
+        if (student.gender === 'F')
+            this.currentGender.checked = true;
+        else {
+            this.currentGender.checked = false;
+            this.currentGender = this.male;
+            this.currentGender.checked = true;
+        }
+        this.dateOfBirth.value = student.dateOfBirth;
+        this.dateOfReceipt.value = student.dateOfReceipt;
+        this.title.setAttribute("data-id", student.id);
         this.__initEventHandlers();
     },
     resetStudent: function () {
@@ -32,17 +35,16 @@
         this.surname.value = "";
         this.name.value = "";
         this.patronymic.value = "";
-        this.gender.checked = true;
+        this.currentGender.checked = true;
         this.dateOfBirth.value = "";
         this.dateOfReceipt.value = "2009-09-01";
     },
     serialize: function () {
-        this.gender = document.getElementById('Female');
         var gender;
         var id = this.title.getAttribute("data-id");
         if (id !== null)
             id = parseInt(id, 10);
-        if (this.gender.checked)
+        if (this.currentGender.checked)
             gender = "F";
         else
             gender = "M";
@@ -105,13 +107,13 @@
     },
     __initEventHandlers: function () { // Как назвать?
         var studentDetails = this;
-        document.getElementById('PatronymicStudent').onkeypress = function (e) {
+        this.patronymic.onkeypress = function (e) {
             studentDetails.hideValidation(studentDetails.validationMessagePatronymic, studentDetails.patronymic);
         };
-        document.getElementById('NameStudent').onkeypress = function (e) {
+        this.name.onkeypress = function (e) {
             studentDetails.hideValidation(studentDetails.validationMessageName, studentDetails.name);
         };
-        document.getElementById('SurnameStudent').onkeypress = function (e) {
+        this.surname.onkeypress = function (e) {
             studentDetails.hideValidation(studentDetails.validationMessageSurname, studentDetails.surname);
         };
     }
