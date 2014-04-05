@@ -32,28 +32,25 @@
         var xThirdQuarter = quarter * 3 + x;
         var xLast = quarter * 4 + x;
 
-        this.drawRectangles(totalHours, ratio);
+        this.drawRectangles(totalHours, ratio, x+1, y);
         this.drawDivision(x + 2, y, 13, 0);
         this.drawDivision(xFirstQuarter, y, 5);
         this.drawDivision(xMiddle, y, 13, totalHours / 2);
         this.drawDivision(xThirdQuarter, y, 5);
         this.drawDivision(xLast, y, 13, totalHours);
     },
-    drawRectangles: function (totalLength, ratio) {
+    drawRectangles: function (totalLength, ratio, x, y) {
         var context = this.context;
         context.save();
-        var color = "#000";
-        var x1 = 20;
-        var y1 = 30;
-        var width = 25;
+        var height = 25;
+        var colors = ["#9999FF", "#CC6699", "#3366FF", "#33CC99", "#CC6633", "#FFCCFF", "#FFFF99", "#CCFFFF"];
         for (var i = 0; i < this.dataSubjects.length; i++) {
-            var lengthRectangle = this.dataSubjects[i].totalTime / ratio;
-            color = this.dataSubjects[i].color;
+            var rectangleWidth = this.dataSubjects[i].totalTime / ratio;
             context.beginPath();
-            context.rect(x1, y1, lengthRectangle, width);
-            context.fillStyle = color;
+            context.rect(x, y, rectangleWidth, height);
+            context.fillStyle = colors[i];
             context.fill();
-            x1 = lengthRectangle + x1;
+            x += rectangleWidth;
         }
         context.restore();
     },
@@ -186,16 +183,6 @@
             startAngle = endAngle;
         }
         context.restore();
-    },
-    drawDivisionLabel: function (x, y, text) {
-        var context = this.context;
-        var dx = this.context.measureText(text).width / 2;
-
-        context.save();
-        context.fillStyle = "#999";
-        context.beginPath();
-        context.font = 'normal 10pt PT Sans';
-        context.fillText(text, x-dx, y);
     },
     getTotalLength: function () {
         var dataSubjects = this.dataSubjects;
