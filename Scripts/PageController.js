@@ -31,10 +31,13 @@ var PageController = Base.extend({
         this.studentDetails.resetStudent();
     },
     saveStudent: function () {
-        var student = this.studentDetails.serialize();
+        var details = this.studentDetails.serialize();
+        var student = details.student;
+        var presences = details.presences;
         var valid = this.studentDetails.save(student);
         if (valid) {
             this.students.save(student);
+            this.studentsPresences.save(presences, student.id);
             this.studentsList.save(student);
         }
     },

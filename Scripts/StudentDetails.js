@@ -54,6 +54,9 @@
         this.dateOfReceipt.value = "2009-09-01";
     },
     serialize: function () {
+        return { student: this.serializeStudent(), presences: this.serializePresences() };
+    },
+    serializeStudent: function () {
         var gender;
         var id = this.title.getAttribute("data-id");
         if (id !== null)
@@ -73,6 +76,14 @@
             group: "МТ-202"
         };
         return student;
+    },
+    serializePresences: function () {
+        var presences = [];
+        var checkboxes = document.getElementById("subjectsPanel").getElementsByTagName("input");
+        for (var i = 0; i < checkboxes.length; i++) {
+                presences.push({ id: parseInt(checkboxes[i].getAttribute("data-id"), 10), studying: checkboxes[i].checked });
+        }
+        return presences;
     },
     save: function (student) {
         if (student.surname !== "" && student.name !== "" && student.patronymic !== "") {

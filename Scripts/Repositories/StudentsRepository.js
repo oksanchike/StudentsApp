@@ -10,7 +10,6 @@
         ]);
     },
     save: function (student) {
-
         if (student.id !== null) {
             this.students({ id: student.id }).update(student);
         }
