@@ -4,7 +4,7 @@
         this.surname = document.getElementById('SurnameStudent');
         this.name = document.getElementById('NameStudent');
         this.patronymic = document.getElementById('PatronymicStudent');
-        this.currentGender = document.getElementById('Female');
+        this.femail = document.getElementById('Female');
         this.male = document.getElementById('Male');
         this.dateOfBirth = document.getElementById('DateOfBirth');
         this.dateOfReceipt = document.getElementById('DateOfReceipt');
@@ -18,11 +18,10 @@
         this.name.value = student.name;
         this.patronymic.value = student.patronymic;
         if (student.gender === 'F')
-            this.currentGender.checked = true;
+            this.femail.checked = true;
         else {
-            this.currentGender.checked = false;
-            this.currentGender = this.male;
-            this.currentGender.checked = true;
+            this.femail.checked = false;
+            this.male.checked = true;
         }
         this.dateOfBirth.value = student.dateOfBirth;
         this.dateOfReceipt.value = student.dateOfReceipt;
@@ -35,7 +34,7 @@
         this.surname.value = "";
         this.name.value = "";
         this.patronymic.value = "";
-        this.currentGender.checked = true;
+        this.femail.checked = true;
         this.dateOfBirth.value = "";
         this.dateOfReceipt.value = "2009-09-01";
     },
@@ -44,7 +43,7 @@
         var id = this.title.getAttribute("data-id");
         if (id !== null)
             id = parseInt(id, 10);
-        if (this.currentGender.checked)
+        if (this.femail.checked)
             gender = "F";
         else
             gender = "M";
