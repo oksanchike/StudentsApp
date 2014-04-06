@@ -68,7 +68,7 @@
         }
         context.restore();
     },
-    drawText: function () {
+    drawSubjectsText: function () {
         var context = this.context;
         context.save();
 
@@ -108,7 +108,7 @@
         startAngle = endAngle;
         sliceAngle = 2 * Math.PI * (slice.totalAbsenseTime - slice.withValidReasonTime) / total;
         endAngle = startAngle + sliceAngle;
-        this.drawArc(startAngle, endAngle, "rgb(153, 0, 0)");
+        this.drawArc(startAngle, endAngle, "#990000");
         startAngle = endAngle;
         sliceAngle = 2 * Math.PI * (sliceSubject.elapsedTime - slice.totalAbsenseTime) / total;
         endAngle = startAngle + sliceAngle;
@@ -127,25 +127,15 @@
     drawDoughnutDivision: function () {
         var context = this.context;
         context.save();
-
         context.fillStyle = "black";
         context.font = 'normal 11pt PT Sans';
-        context.fillText("0", this.pieX - 3, this.pieY - 135);
-
-        context.fillStyle = "black";
-        context.font = 'normal 11pt PT Sans';
-        px = this.context.measureText(this.__dataSubjects[0].totalTime / 2).width / 2;
-        context.fillText(this.__dataSubjects[0].totalTime / 2, this.pieX - px, this.pieY + 145);
-
-        context.fillStyle = "black";
-        context.font = 'normal 11pt PT Sans';
+        var dx = this.context.measureText("0").width / 2;
+        context.fillText("0", this.pieX - dx, this.pieY - 135);
+        dx = this.context.measureText(this.__dataSubjects[0].totalTime / 2).width / 2;
+        context.fillText(this.__dataSubjects[0].totalTime / 2, this.pieX - dx, this.pieY + 145);
         context.fillText(this.__dataSubjects[0].totalTime / 4, this.pieX + 135, this.pieY);
-
-        context.fillStyle = "black";
-        context.font = 'normal 11pt PT Sans';
-        px = this.context.measureText(this.__dataSubjects[0].totalTime / 4 + this.__dataSubjects[0].totalTime / 2).width;
-        context.fillText(this.__dataSubjects[0].totalTime / 4 + this.__dataSubjects[0].totalTime / 2, this.pieX - 135 - px, this.pieY);
-
+        dx = this.context.measureText(this.__dataSubjects[0].totalTime / 4 + this.__dataSubjects[0].totalTime / 2).width;
+        context.fillText(this.__dataSubjects[0].totalTime / 4 + this.__dataSubjects[0].totalTime / 2, this.pieX - 135 - dx, this.pieY);
         context.closePath();
         context.restore();
     },
