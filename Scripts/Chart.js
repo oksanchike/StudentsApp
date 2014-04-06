@@ -7,6 +7,7 @@
         this.pieRadius = Math.min(this.canvas.width, this.canvas.height) / 2 - 60;
     },
     drawForStudent: function (dataStudentsPresence, dataSubjects) {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.__dataStudentsPresence = dataStudentsPresence;
         this.__dataSubjects = dataSubjects;
         var totalHours = this.getTotalHours();
