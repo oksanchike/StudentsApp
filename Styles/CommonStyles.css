@@ -288,11 +288,11 @@ form {
     border-radius: 3px;
 }
 
-.gender {
+.gender{
     min-height: 22px;
 }
 
-span label {
+.genderLabel {
     display: inline;
     background: white;
     margin-left: 16px;
@@ -351,9 +351,16 @@ hr {
         color: rgb(0, 0, 0) !important;
     }
 
-.checkboxesSubject label {
+.subjects {
+    margin-top: 20px;
+}
+
+.subjectsColumn {
+    width: 215px;
+}
+
+.subjects span {
     display: block;
-    margin-right: 70px;
     margin-bottom: 10px;
 }
 

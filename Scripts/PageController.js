@@ -9,7 +9,7 @@ var PageController = Base.extend({
         this.subjects = new SubjectsRepository();
         this.studentsPresences = new StudentsPresenceRepository();
         this.studentsList = new StudentsList(document.getElementById("MainMenu"));
-        this.chart = new Chart("draw");
+        
         var self = this;
         var students = this.students.getAll();
         var subjects = this.subjects.getAll();
@@ -18,13 +18,13 @@ var PageController = Base.extend({
             self.studentsList.addStudent();
             self.studentsList.save(currentStudent);
         });
+        this.studentDetails.initalizeSubjects(subjects);
         this.studentsList.setActive(this.studentsList.list.firstChild);
         this.setStudent(students[0].id);
         this.__initEventHandlers();
         this.studentsList.list.addEventListener('studentChanged', function (e) {
             self.setStudent(e.detail.id);
         });
-        this.studentDetails.initalizeSubjects(students);
     },
     addStudent: function () {
         this.studentsList.addStudent();
@@ -45,15 +45,6 @@ var PageController = Base.extend({
     },
     setStudent: function (id) {
         var student = this.students.getById(id);
-        this.studentDetails.resetValidation();
-        if (student !== null) {
-            this.studentDetails.setStudent(student);
-            this.drawChartForStudent(id);
-        }
-        else
-            this.studentDetails.resetStudent();
-    },
-    drawChartForStudent: function (id) {
         var studentPresences = this.studentsPresences.getByStudentId(id);
         var subjects = [];
         for (var i = 0; i < studentPresences.length; i++) {
@@ -61,8 +52,13 @@ var PageController = Base.extend({
             var subject = this.subjects.getById(subjectId);
             subjects.push(subject);
         }
-        this.chart.drawForStudent(studentPresences, subjects);
+        this.studentDetails.resetValidation();
+        if (student !== null)
+            this.studentDetails.setStudent(student, studentPresences, subjects);
+        else
+            this.studentDetails.resetStudent();
     },
+    
     __initEventHandlers: function () {
         var pageController = this;
         document.getElementById('AddStudent').onclick = function () {

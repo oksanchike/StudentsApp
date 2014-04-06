@@ -77,9 +77,9 @@
                             <div class="gender field">
                                 <label>Пол</label>
                                 <span class="floatRight">
-                                    <label>
+                                    <label class ="genderLabel">
                                         <input name="gender" id="Female" type="radio" />Женский</label>
-                                    <label>
+                                    <label class="genderLabel">
                                         <input name="gender" id="Male" type="radio" checked />Мужской</label>
                                 </span>
                             </div>
@@ -101,15 +101,10 @@
                                 <span class="link sizeMain">Добавить предмет</span>
                             </div>
                         </div>
-                        <div class="checkboxesSubject clearfix sizeMain">
-                            <div class="checkboxesSubject1 clearfix floatLeft">
-                                <label>
-                                    <input type="checkbox" checked />Математика</label>
-                            </div>
-                            <div class="checkboxesSubject2 clearfix floatLeft">
-                            </div>
-                            <div class="checkboxesSubject3 clearfix floatLeft">
-                            </div>
+                        <div id ="subjectsPanel" class="subjects clearfix sizeMain">
+                            <div class="subjectsColumn clearfix floatLeft"></div>
+                            <div class="subjectsColumn clearfix floatLeft"></div>
+                            <div class="subjectsColumn clearfix floatLeft"></div>
                         </div>
                         <div class="canvasDraw clearfix">
                             <canvas id="draw" width="685" height="400"></canvas>

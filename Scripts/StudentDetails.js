@@ -1,5 +1,6 @@
 ﻿var StudentDetails = Base.extend({
     constructor: function () {
+        this.chart = new Chart("draw");
         this.title = document.getElementById('Title-student');
         this.surname = document.getElementById('SurnameStudent');
         this.name = document.getElementById('NameStudent');
@@ -12,7 +13,7 @@
         this.validationMessageName = document.getElementById('validationMessageName');
         this.validationMessageSurname = document.getElementById('validationMessageSurname');
     },
-    setStudent: function (student) {    
+    setStudent: function (student, studentPresences, subjects) {
         this.title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
         this.surname.value = student.surname;
         this.name.value = student.name;
@@ -27,6 +28,20 @@
         this.dateOfReceipt.value = student.dateOfReceipt;
         this.title.setAttribute("data-id", student.id);
         this.__initEventHandlers();
+        this.setSubjects(studentPresences);
+        this.drawChartForStudent(studentPresences, subjects);
+    },
+    setSubjects: function (studentPresences) {
+        var checkboxes = document.getElementById("subjectsPanel").getElementsByTagName("input");
+        for (var i = 0; i < checkboxes.length; i++)
+            checkboxes[i].checked = false;
+        for (var i = 0; i < studentPresences.length; i++) {
+                var checkbox = document.getElementById("subject" + studentPresences[i].subjectId);
+                checkbox.checked = studentPresences[i].studying;
+        }
+    },
+    drawChartForStudent: function (studentPresences, subjects) {
+        this.chart.drawForStudent(studentPresences, subjects);
     },
     resetStudent: function () {
         this.title.innerHTML = "Новый студент";
@@ -101,10 +116,25 @@
             message.setAttribute("style", "visibility: hidden");
         }
     },
-    initalizeSubjects: function (students) {
-
+    initalizeSubjects: function (subjects) {
+        var columns = document.getElementsByClassName("subjectsColumn");
+        var j = 0;
+        for (var i = 0; i < subjects.length; i++) {        
+            var span = document.createElement('span');
+            var input = document.createElement('input');
+            var label = document.createElement('label');
+            label.innerHTML = subjects[i].title;
+            label.setAttribute("for", "subject" + i);
+            input.type = "checkbox";
+            input.setAttribute("id", "subject" + subjects[i].id);
+            input.setAttribute("data-id", subjects[i].id);
+            span.appendChild(input);
+            span.appendChild(label);
+            columns[j].appendChild(span);
+            j = j < 2 ? j + 1 : 0;
+        }
     },
-    __initEventHandlers: function () { // Как назвать?
+    __initEventHandlers: function () {
         var studentDetails = this;
         this.patronymic.onkeypress = function (e) {
             studentDetails.hideValidation(studentDetails.validationMessagePatronymic, studentDetails.patronymic);

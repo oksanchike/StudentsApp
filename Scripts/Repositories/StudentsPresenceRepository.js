@@ -19,7 +19,7 @@
 
     },
     getByStudentId: function (id) {
-        return this.studentsPresence({ studentId: id, studying: true }).get();
+        return this.studentsPresence({ studentId: id}).get();
     },
     getAll: function () {
         return this.studentsPresence().get();

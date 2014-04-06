@@ -12,7 +12,7 @@
         this.__dataSubjects = dataSubjects;
         var totalHours = this.getTotalHours();
         this.drawLineChart(totalHours);
-        this.drawDoughnutChart();
+        //this.drawDoughnutChart();
     },
     drawLineChart: function (totalHours) {
         var lineChartWidth = this.canvas.width - 40;
