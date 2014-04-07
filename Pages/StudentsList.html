@@ -13,6 +13,7 @@
     <script src="../Scripts/StudentDetails.js"></script>
     <script src="../Scripts/Repositories/SubjectsRepository.js"></script>
     <script src="../Scripts/Repositories/StudentsPresenceRepository.js"></script>
+    <script src="../Scripts/Groups.js"></script>
     <script src="../Scripts/Chart.js"></script>
 </head>
 <body>
@@ -22,8 +23,11 @@
                 <div class="layout-column-1 sizeH2 floatLeft">
                     <h2>Cписок студентов</h2>
                 </div>
-                <div class="layout-column-2 sizeMain floatLeft">
-                    <span>MT-202<span></span></span>
+                <div class="layout-column-2 sizeMain floatLeft" id="ButtonGroups">
+                    <div class="groups" id="Groups">
+                        <span class="group">MT-202
+                            <img src="../Content/pointer.png" style="margin-left: 10px"></span>
+                    </div>
                 </div>
                 <div class="layout-column-3 floatRight sizeMain">
                     <span class="buttons button-print" id="Print">
@@ -77,7 +81,7 @@
                             <div class="gender field">
                                 <label>Пол</label>
                                 <span class="floatRight">
-                                    <label class ="genderLabel">
+                                    <label class="genderLabel">
                                         <input name="gender" id="Female" type="radio" />Женский</label>
                                     <label class="genderLabel">
                                         <input name="gender" id="Male" type="radio" checked />Мужской</label>
@@ -101,7 +105,7 @@
                                 <span class="link sizeMain">Добавить предмет</span>
                             </div>
                         </div>
-                        <div id ="subjectsPanel" class="subjects clearfix sizeMain">
+                        <div id="subjectsPanel" class="subjects clearfix sizeMain">
                             <div class="subjectsColumn clearfix floatLeft"></div>
                             <div class="subjectsColumn clearfix floatLeft"></div>
                             <div class="subjectsColumn clearfix floatLeft"></div>

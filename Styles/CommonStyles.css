@@ -41,21 +41,21 @@ section header {
     vertical-align: middle;
 }
 
-    .personalData:nth-child(2) {
-        width: 294px;
-    }
+.personalData:nth-child(2) {
+    width: 294px;
+}
 
-    .personalData label {
-        float: left;
-        margin-top: 5px;
-    }
+.personalData label {
+    float: left;
+    margin-top: 5px;
+}
 
-    .personalData .validation {
-        margin-left: 20px;
-        color: rgba(204, 0, 0, 0.8);
-        visibility: hidden;
-        vertical-align: text-bottom;
-    }
+.personalData .validation {
+    margin-left: 20px;
+    color: rgba(204, 0, 0, 0.8);
+    visibility: hidden;
+    vertical-align: text-bottom;
+}
 
 .layout-column-1 {
     margin-right: 25px;
@@ -68,13 +68,50 @@ section header {
         vertical-align: middle;
     }
 
-.layout-column-2 {
-    margin-top: 10px;
+.layout-column-2 .groups {
+    margin-top: 5px;
+    padding: 5px 10px 5px 10px;
 }
 
-    .layout-column-2 span {
-        display: inline;
+    .layout-column-2 .groups:hover {
+        background: rgba(111, 106, 106, 0.1);
+        border-radius: 3px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
     }
+.groupsList-active {
+     background: rgba(111, 106, 106, 0.1);
+     border-radius: 3px;
+}
+
+.layout-column-2 .group {
+    display: inline;
+}
+
+.layout-column-2 .groupList {
+    position: absolute;
+    z-index: 100;
+    padding:0;
+    background: rgb(255,255,255);
+    box-shadow: 0 2px 2px #bdbdbd;
+}
+
+.groupList ul {
+    margin: 0;
+    padding:0;
+}
+
+.groupList .styleLi {
+    list-style: none;
+    padding: 3px 25px 3px 20px;
+}
+
+.groupList .styleLi:hover {
+    cursor: pointer;
+  background: rgba(45, 137, 213, 0.6);
+}
 
 .button-print {
     display: inline-block;
@@ -288,7 +325,7 @@ form {
     border-radius: 3px;
 }
 
-.gender{
+.gender {
     min-height: 22px;
 }
 
@@ -367,4 +404,3 @@ hr {
 .canvasDraw {
     margin-top: 15px;
 }
-

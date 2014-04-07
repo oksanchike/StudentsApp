@@ -13,6 +13,7 @@ var PageController = Base.extend({
         var self = this;
         var students = this.students.getAll();
         var subjects = this.subjects.getAll();
+        this.groups = new Groups(students);
         //var studentsPresences = this.studentsPresence.getAll();
         students.forEach(function (currentStudent) {
             self.studentsList.addStudent();
@@ -61,20 +62,25 @@ var PageController = Base.extend({
         else
             this.studentDetails.resetStudent();
     },
-    
     __initEventHandlers: function () {
-        var pageController = this;
+        var self = this;
         document.getElementById('AddStudent').onclick = function () {
-            pageController.addStudent();
+            self.addStudent();
         };
         document.getElementById('SaveСhanges').onclick = function () {
-            pageController.saveStudent();
+            self.saveStudent();
         };
         document.getElementById('DeleteStudent').onclick = function () {
-            pageController.deleteStudent();
+            self.deleteStudent();
         };
         document.getElementById('Print').onclick = function () {
             window.print();
         };
+        document.getElementById('Groups').onclick = function () {
+            self.groups.addGroups();
+        };
+        document.onclick = function () {
+            self.groups.close();
+        }
     }
 });
