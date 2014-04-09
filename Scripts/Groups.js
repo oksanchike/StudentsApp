@@ -1,14 +1,13 @@
 ﻿var Groups = Base.extend({
     constructor: function (groups) {
-        this.groups = groups;
         this.active = false;
         this.div2 = document.getElementById('Groups');
         this.div = document.getElementById('ButtonGroups');
-        this.addGroups();
-        this.activeGroup = "МТ-202";
+        this.addGroups(groups);
+        this.activeGroup = groups[0];
+        document.getElementById("HeadinGgroup").innerText = this.activeGroup;
     },
-    addGroups: function () {
-        var groups = this.groups;
+    addGroups: function (groups) {
         this.div1 = document.createElement('div');
         var li = document.createElement('li');
         var ul = document.createElement('ul');
@@ -20,20 +19,19 @@
             li.classList.add('styleLi');
             var self = this;
             li.addEventListener('click', function (sender) {
-                this.activeGroup = sender.currentTarget.innerText;
-                document.getElementById("HeadinGgroup").innerText = this.activeGroup;
+                self.activeGroup = sender.currentTarget.innerText;
+                document.getElementById("HeadinGgroup").innerText = self.activeGroup;
+                self.groupChanged = new CustomEvent('groupChanged', { detail: { group: self.activeGroup } });
+                self.div1.dispatchEvent(self.groupChanged);
             });
-            ul.insertBefore(li, ul.firstChild);
+            ul.appendChild(li, ul.firstChild);
         }
     },
     clickGroups: function () {
-
-        if (!this.active) {
+        if (!this.active)
             this.open();
-        }
-        else {
+        else
             this.close();
-        }
     },
     open: function () {
         this.active = !this.active;

@@ -40,6 +40,12 @@
         this.list.removeChild(this.active);
         this.setActive(this.list.firstChild);
     },
+    deleteAllStudents: function () {
+        var list = this.list;
+        while (list.firstChild) {
+            list.removeChild(list.firstChild);
+        }
+    },
     __findPlaceForNew: function () {
         var active = this.active;
         this.list.removeChild(active);

@@ -9,23 +9,25 @@ var PageController = Base.extend({
         this.subjects = new SubjectsRepository();
         this.studentsPresences = new StudentsPresenceRepository();
         this.studentsList = new StudentsList(document.getElementById("MainMenu"));
-        var groups = this.students.getGroups();
-        this.groups = new Groups(groups);       
-        var self = this;
-        var students = this.students.getByGroup(this.groups.activeGroup);
-        var subjects = this.subjects.getAll();
         //var studentsPresences = this.studentsPresence.getAll();
+        var groups = this.students.getGroups();
+        this.groups = new Groups(groups);
+        var subjects = this.subjects.getAll();
+        this.studentDetails.initalizeSubjects(subjects);
+        this.setList(this.groups.activeGroup);
+        this.__initEventHandlers();
+    },
+    setList: function (group) {
+        this.studentsList.deleteAllStudents();
+        var self = this;
+        var students = this.students.getByGroup(group);       
         students.forEach(function (currentStudent) {
             self.studentsList.addStudent();
             self.studentsList.save(currentStudent);
         });
-        this.studentDetails.initalizeSubjects(subjects);
+
         this.studentsList.setActive(this.studentsList.list.firstChild);
         this.setStudent(students[0].id);
-        this.__initEventHandlers();
-        this.studentsList.list.addEventListener('studentChanged', function (e) {
-            self.setStudent(e.detail.id);
-        });
     },
     addStudent: function () {
         this.studentsList.addStudent();
@@ -64,6 +66,12 @@ var PageController = Base.extend({
     },
     __initEventHandlers: function () {
         var self = this;
+        this.groups.div1.addEventListener('groupChanged', function (e) {
+            self.setList(e.detail.group);
+        })
+        this.studentsList.list.addEventListener('studentChanged', function (e) {
+            self.setStudent(e.detail.id);
+        });
         document.getElementById('AddStudent').onclick = function () {
             self.addStudent();
         };
@@ -83,9 +91,6 @@ var PageController = Base.extend({
         document.onclick = function () {
             self.groups.close();
         };
-        document.getElementById('Groups').onclick = function (event) {
-            event.stopPropagation();
-            self.groups.clickGroups();
-        };
+        
     }
 });
