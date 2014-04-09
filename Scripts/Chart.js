@@ -37,12 +37,12 @@
         var context = this.context;
         context.save();
         var height = 25;
-        var colors = ["#9999FF", "#CC6699", "#3366FF", "#33CC99", "#CC6633", "#FFCCFF", "#FFFF99", "#CCFFFF"];
+        var colors = ["#44456F", "#DA9C65", "#A24112", "#D58202", "3C301F", "#3FAE85", "#3BC3E1", "#374548", "#B87371", "#E13B7B"];
         for (var i = 0; i < this.__dataSubjects.length; i++) {
             var rectangleWidth = this.__dataSubjects[i].totalTime / ratio;
             context.beginPath();
             context.rect(x, y, rectangleWidth, height);
-            context.fillStyle = colors[i];
+            context.fillStyle = colors[this.__dataSubjects[i].id-1];
             context.fill();
             x += rectangleWidth;
         }

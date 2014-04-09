@@ -9,6 +9,18 @@
         font-family: 'PT Sans', sans-serif;
     }
 
+.sizeMain {
+    font-size: 0.879em;
+}
+
+.floatRight {
+    float: right;
+}
+
+.floatLeft {
+    float: left;
+}
+
 section header {
     width: 793px;
     color: #6f6a6a;
@@ -58,7 +70,6 @@ aside {
 }
 
 .content section {
-    float: left;
     padding: 20px;
     position:relative;
 }
@@ -76,13 +87,6 @@ h4 {
     display: inline-block;
 }
 
-.topgallantHeader {
-    float: left;
-}
-
-.topgallantOperation {
-    float: right;
-}
 
 .personalData {
     margin-top: 0;
@@ -93,8 +97,8 @@ form {
 }
     .personalData input[type="text"], input[type="date"] {
         min-height: 20px;
-        width: 200px;
-        border:white;
+        width: 230px;
+        border:1px solid white;
         padding: 1px 5px;
         background: white;
     }
@@ -107,16 +111,21 @@ form {
     min-height: 22px;
 }
 
-.gender span {
-    float: right;
-}
-
-span label {
+.genderLabel {
     display: inline;
-    font-size: 83%;
-    background: white;
+    visibility:hidden;
     margin-left: 16px;
 }
+
+.genderForPrint {
+    display: inline;
+    position: absolute;
+    top: 190px;
+    left: 155px;
+    margin: 0;
+    padding:0;
+}
+
 
 input[type="radio"] {
     vertical-align: middle;
@@ -127,7 +136,7 @@ input[type="radio"] {
 
 input[type="date"] {
     width: 130px;
-    margin-right: 23px;
+    margin-right: 28px;
     padding: 3px 0 0 0;
 }
 
@@ -156,17 +165,18 @@ hr {
         font-size: 87.9%;
     }
 
-.checkboxesSubject1, .checkboxesSubject2, .checkboxesSubject3 {
-    float: left;
+.subjects {
+    margin-top: 20px;
 }
 
-.checkboxesSubject label {
+.subjectsColumn {
+    width: 200px;
+}
+
+.subjects span {
     display: block;
-    margin-right: 70px;
     margin-bottom: 10px;
-    font-size: 87.9%;
 }
-
 .canvasDraw {
     margin-left: 30px;
 }

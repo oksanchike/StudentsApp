@@ -335,6 +335,10 @@ form {
     margin-left: 16px;
 }
 
+.genderForPrint {
+    display: none;
+}
+
 input[type="radio"] {
     vertical-align: middle;
     padding: 0;

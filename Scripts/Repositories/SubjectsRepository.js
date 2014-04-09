@@ -11,12 +11,6 @@
             { id: 8, title: "География", totalTime: 21, elapsedTime: 9 }
         ])
     },
-    save: function () {
-
-    },
-    deleteSubjects: function () {
-
-    },
     getById: function (id) {
         return this.subjects({ id: id }).first();
     },

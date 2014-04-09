@@ -9,11 +9,11 @@ var PageController = Base.extend({
         this.subjects = new SubjectsRepository();
         this.studentsPresences = new StudentsPresenceRepository();
         this.studentsList = new StudentsList(document.getElementById("MainMenu"));
-        
+        var groups = this.students.getGroups();
+        this.groups = new Groups(groups);       
         var self = this;
-        var students = this.students.getAll();
+        var students = this.students.getByGroup(this.groups.activeGroup);
         var subjects = this.subjects.getAll();
-        this.groups = new Groups(students);
         //var studentsPresences = this.studentsPresence.getAll();
         students.forEach(function (currentStudent) {
             self.studentsList.addStudent();
@@ -76,11 +76,16 @@ var PageController = Base.extend({
         document.getElementById('Print').onclick = function () {
             window.print();
         };
-        document.getElementById('Groups').onclick = function () {
-            self.groups.addGroups();
+        document.getElementById('Groups').onclick = function (event) {
+            event.stopPropagation();
+            self.groups.clickGroups();
         };
         document.onclick = function () {
             self.groups.close();
-        }
+        };
+        document.getElementById('Groups').onclick = function (event) {
+            event.stopPropagation();
+            self.groups.clickGroups();
+        };
     }
 });

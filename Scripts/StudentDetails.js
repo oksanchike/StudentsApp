@@ -12,15 +12,19 @@
         this.validationMessagePatronymic = document.getElementById('validationMessagePatronymic');
         this.validationMessageName = document.getElementById('validationMessageName');
         this.validationMessageSurname = document.getElementById('validationMessageSurname');
+        this.gender = document.getElementById("Gender");
     },
     setStudent: function (student, studentPresences, subjects) {
         this.title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
         this.surname.value = student.surname;
         this.name.value = student.name;
         this.patronymic.value = student.patronymic;
-        if (student.gender === 'F')
+        if (student.gender === 'F') {
+            this.gender.innerHTML = "Женский"
             this.femail.checked = true;
+        }
         else {
+            this.gender.innerHTML = "Мужской"
             this.femail.checked = false;
             this.male.checked = true;
         }
@@ -48,9 +52,10 @@
         this.title.removeAttribute("data-id");
         this.surname.value = "";
         this.name.value = "";
+        this.gender.innerHTML = "Женский"
         this.patronymic.value = "";
         this.femail.checked = true;
-        this.dateOfBirth.value = "";
+        this.dateOfBirth.value = "1991-01-29";
         this.dateOfReceipt.value = "2009-09-01";
     },
     serialize: function () {
@@ -135,7 +140,7 @@
             var input = document.createElement('input');
             var label = document.createElement('label');
             label.innerHTML = subjects[i].title;
-            label.setAttribute("for", "subject" + i);
+            label.setAttribute("for", "subject" + (i+1));
             input.type = "checkbox";
             input.setAttribute("id", "subject" + subjects[i].id);
             input.setAttribute("data-id", subjects[i].id);
