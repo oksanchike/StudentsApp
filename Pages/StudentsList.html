@@ -63,26 +63,26 @@
                         <div class="personalData clearfix sizeMain">
                             <div class="surname field">
                                 <label>Фамилия</label>
-                                <input id="SurnameStudent" type="text" />
+                                <input id="SurnameStudent" type="text" spellcheck="false"/>
                                 <span class="validation" id="validationMessageSurname">Поле обязательно к заполнению</span>
                             </div>
                             <div class="name field">
                                 <label>Имя</label>
-                                <input id="NameStudent" type="text" />
+                                <input id="NameStudent" type="text"  spellcheck="false"/>
                                 <span class="validation" id="validationMessageName">Поле обязательно к заполнению</span>
                             </div>
                             <div class="patronymic field">
                                 <label>Отчество</label>
-                                <input id="PatronymicStudent" type="text" />
+                                <input id="PatronymicStudent" type="text"  spellcheck="false"/>
                                 <span class="validation" id="validationMessagePatronymic">Поле обязательно к заполнению</span>
                             </div>
                         </div>
                         <div class="personalData clearfix sizeMain">
                             <div class="gender field">
                                 <label>Пол</label>
-                                <span class="floatRight">
+                                <span class="genderRadio floatRight">
                                     <label class="genderLabel">
-                                        <input name="gender" id="Female" type="radio" />Женский</label>
+                                        <input name="gender" id="Female" type="radio"  spellcheck="false"/>Женский</label>
                                     <span class ="genderForPrint" id="Gender"></span>
                                     <label class="genderLabel">
                                         <input name="gender" id="Male" type="radio" checked />Мужской</label>
@@ -90,11 +90,13 @@
                             </div>
                             <div class="dateOfBirth field">
                                 <label>Дата рождения</label>
-                                <input id="DateOfBirth" type="date" />
+                                <input id="DateOfBirth" type="date"/>
+                                <span class="validation" id="validationMessageDateOfBirth">Поле обязательно к заполнению</span>
                             </div>
                             <div class="dateOfReceipt field">
                                 <label>Дата поступления</label>
-                                <input id="DateOfReceipt" type="date" />
+                                <input id="DateOfReceipt" type="date"/>
+                                <span class="validation" id="validationMessageDateOfReceipt">Поле обязательно к заполнению</span>
                             </div>
                         </div>
                         <hr>

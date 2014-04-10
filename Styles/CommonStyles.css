@@ -42,7 +42,7 @@ section header {
 }
 
 .personalData:nth-child(2) {
-    width: 294px;
+    width: 496px;
 }
 
 .personalData label {
@@ -51,7 +51,9 @@ section header {
 }
 
 .personalData .validation {
+    display: inline-block;
     margin-left: 20px;
+    min-width: 202px;
     color: rgba(204, 0, 0, 0.8);
     visibility: hidden;
     vertical-align: text-bottom;
@@ -110,7 +112,7 @@ section header {
 
 .groupList .styleLi:hover {
     cursor: pointer;
-  background: rgba(45, 137, 213, 0.6);
+    background: rgba(45, 137, 213, 0.6);
 }
 
 .button-print {
@@ -308,7 +310,7 @@ h4 {
 }
 
 .personalData {
-    width: 605px;
+    width: 606px;
     margin-top: 0;
 }
 
@@ -346,9 +348,12 @@ input[type="radio"] {
     margin-right: 3px;
 }
 
+.genderRadio {
+    margin-right: 202px;
+}
+
 input[type="date"] {
-    width: 100px;
-    margin-right: 45px;
+    width: 120px;
 }
 
 input[type="checkbox"] {
