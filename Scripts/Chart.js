@@ -13,7 +13,14 @@
         var totalHours = this.getTotalHours();
         this.drawLineChart(totalHours);
         this.drawButton();
-        this.drawDoughnutChart();
+        this.drawTotalDoughnutChart();
+    },
+    drawTotalDoughnutChart: function () {
+        var total = this.getTotalHours();
+        var elapsed = this.getElapsedHours();
+        var totalAbsenseTime = this.getTotalAbsenseTime();
+        var withValidReasonTime = this.getWithValidReasonTime();
+        this.drawDoughnutChart(total, elapsed, totalAbsenseTime, withValidReasonTime);
     },
     drawLineChart: function (totalHours) {
         var lineChartWidth = this.canvas.width - 40;
@@ -39,13 +46,21 @@
         context.save();
         var height = 25;
         var colors = ["#44456F", "#DA9C65", "#A24112", "#D58202", "3C301F", "#3FAE85", "#3BC3E1", "#374548", "#B87371", "#E13B7B"];
-        for (var i = 0; i < this.__dataSubjects.length; i++) {
-            var rectangleWidth = this.__dataSubjects[i].totalTime / ratio;
-            context.beginPath();
-            context.rect(x, y, rectangleWidth, height);
-            context.fillStyle = colors[this.__dataSubjects[i].id - 1];
-            context.fill();
-            x += rectangleWidth;
+        var self = this;
+        for (var i = 0; i < self.__dataSubjects.length; i++) {
+            for (var j = 0; j < self.__dataStudentsPresence.length; j++) {
+                if (self.__dataStudentsPresence[j].subjectId == self.__dataSubjects[i].id) {
+                    if (self.__dataStudentsPresence[j].studying) {
+                        var rectangleWidth = self.__dataSubjects[i].totalTime / ratio;
+                        context.beginPath();
+                        context.rect(x, y, rectangleWidth, height);
+                        context.fillStyle = colors[self.__dataSubjects[i].id - 1];
+                        context.fill();
+                        x += rectangleWidth;
+                        break;
+                    }
+                }
+            }
         }
         context.restore();
     },
@@ -114,47 +129,47 @@
         context.closePath();
         context.restore();
     },
-    drawDoughnutChart: function () {
+    drawDoughnutChart: function (total, elapsed, totalAbsense, withValidReason) {
         var context = this.context;
         this.drawEmptyDoughnut();
-        var slice = this.__dataStudentsPresence[0];
-        var sliceSubject = this.__dataSubjects[0];
-        var total = sliceSubject.totalTime;
         var startAngle = 1.5 * Math.PI;
-        var sliceAngle = 2 * Math.PI * slice.withValidReasonTime / total;
+
+        var sliceAngle = 2 * Math.PI * withValidReason / total;
         var endAngle = startAngle + sliceAngle;
         this.drawArc(startAngle, endAngle, "#0099CC");
         startAngle = endAngle;
-        sliceAngle = 2 * Math.PI * (slice.totalAbsenseTime - slice.withValidReasonTime) / total;
+        sliceAngle = 2 * Math.PI * (totalAbsense - withValidReason) / total;
         endAngle = startAngle + sliceAngle;
         this.drawArc(startAngle, endAngle, "#990000");
         startAngle = endAngle;
-        sliceAngle = 2 * Math.PI * (sliceSubject.elapsedTime - slice.totalAbsenseTime) / total;
+        sliceAngle = 2 * Math.PI * (elapsed - totalAbsense) / total;
         endAngle = startAngle + sliceAngle;
         this.drawArc(startAngle, endAngle, "#FFCC00");
-        this.drawDoughnutDivision();
+        this.drawDoughnutDivision(total);
         context.save();
         this.drawTextAboutPresence(this.pieY - 50, "Всего пройдено", "normal 11pt PT Sans");
-        this.drawNumberAboutPresence(this.pieY - 30, this.__dataSubjects[0].elapsedTime, "#FFCC00");
+        this.drawNumberAboutPresence(this.pieY - 30, elapsed, "#FFCC00");
         this.drawTextAboutPresence(this.pieY - 10, "Всего прогуляно", "normal 10pt PT Sans");
-        this.drawNumberAboutPresence(this.pieY + 10, this.__dataStudentsPresence[0].totalAbsenseTime, "rgb(153, 0, 0)");
+        this.drawNumberAboutPresence(this.pieY + 10, totalAbsense, "rgb(153, 0, 0)");
         this.drawTextAboutPresence(this.pieY + 30, "Из них", "normal 9pt PT Sans");
         this.drawTextAboutPresence(this.pieY + 45, "по уважительной причине", "normal 9pt PT Sans");
-        this.drawNumberAboutPresence(this.pieY + 65, this.__dataStudentsPresence[0].withValidReasonTime, "#0099CC");
+        this.drawNumberAboutPresence(this.pieY + 65, withValidReason, "#0099CC");
         context.restore();
     },
-    drawDoughnutDivision: function () {
+    drawDoughnutDivision: function (total) {
         var context = this.context;
         context.save();
         context.fillStyle = "black";
         context.font = "normal 11pt PT Sans";
         var dx = this.context.measureText("0").width / 2;
         context.fillText("0", this.pieX - dx, this.pieY - 135);
-        dx = this.context.measureText(this.__dataSubjects[0].totalTime / 2).width / 2;
-        context.fillText(this.__dataSubjects[0].totalTime / 2, this.pieX - dx, this.pieY + 145);
-        context.fillText(this.__dataSubjects[0].totalTime / 4, this.pieX + 135, this.pieY);
-        dx = this.context.measureText(this.__dataSubjects[0].totalTime / 4 + this.__dataSubjects[0].totalTime / 2).width;
-        context.fillText(this.__dataSubjects[0].totalTime / 4 + this.__dataSubjects[0].totalTime / 2, this.pieX - 135 - dx, this.pieY);
+        var half = total / 2;
+        var quarter = total / 4;
+        dx = this.context.measureText(half).width / 2;
+        context.fillText(half, this.pieX - dx, this.pieY + 145);
+        context.fillText(quarter, this.pieX + 135, this.pieY);
+        dx = this.context.measureText(quarter + half).width;
+        context.fillText(quarter + half, this.pieX - 135 - dx, this.pieY);
         context.closePath();
         context.restore();
     },
@@ -188,8 +203,45 @@
     getTotalHours: function () {
         var dataSubjects = this.__dataSubjects;
         var total = 0;
-        for (var i = 0; i < dataSubjects.length; i++)
-            total += dataSubjects[i].totalTime;
+        var self = this;
+        for (var i = 0; i < dataSubjects.length; i++) {
+            for (var j = 0; j < self.__dataStudentsPresence.length; j++) {
+                if (self.__dataStudentsPresence[j].subjectId == self.__dataSubjects[i].id)
+                    if (self.__dataStudentsPresence[j].studying)
+                        total += dataSubjects[i].totalTime;
+            }
+        }
         return total;
+    },
+    getElapsedHours: function () {
+        var dataSubjects = this.__dataSubjects;
+        var elapsed = 0;
+        var self = this;
+        for (var i = 0; i < dataSubjects.length; i++) {
+            for (var j = 0; j < self.__dataStudentsPresence.length; j++) {
+                if (self.__dataStudentsPresence[j].subjectId == self.__dataSubjects[i].id)
+                    if (self.__dataStudentsPresence[j].studying)
+                        elapsed += dataSubjects[i].elapsedTime;
+            }
+        }
+        return elapsed;
+    },
+    getTotalAbsenseTime: function () {
+        var totalAbsenseTime = 0;
+        var self = this;
+        for (var i = 0; i < self.__dataStudentsPresence.length; i++) {
+            if (self.__dataStudentsPresence[i].studying)
+                totalAbsenseTime += self.__dataStudentsPresence[i].totalAbsenseTime;
+            }
+        return totalAbsenseTime;
+    },
+    getWithValidReasonTime: function () {
+        var withValidReasonTime = 0;
+        var self = this;
+        for (var i = 0; i < self.__dataStudentsPresence.length; i++) {
+            if (self.__dataStudentsPresence[i].studying)
+                withValidReasonTime += self.__dataStudentsPresence[i].withValidReasonTime;
+        }
+        return withValidReasonTime;
     }
 })
