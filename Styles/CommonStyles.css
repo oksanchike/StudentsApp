@@ -473,11 +473,17 @@ hr {
 }
 
 .canvasDraw {
+    position: relative;
     margin-top: 15px;
 }
 
 .totalChartLink {
     position: absolute;
-    right: 20px;
-    bottom: 335px;
+    right: 0;
+    top: 70px;
+}
+
+.toolTip {
+    position: absolute;
+    background: rgba(204, 0, 0, 0.8);
 }
