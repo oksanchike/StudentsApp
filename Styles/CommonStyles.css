@@ -475,3 +475,9 @@ hr {
 .canvasDraw {
     margin-top: 15px;
 }
+
+.totalChartLink {
+    position: absolute;
+    right: 20px;
+    bottom: 335px;
+}

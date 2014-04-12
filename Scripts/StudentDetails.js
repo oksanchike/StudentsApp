@@ -202,21 +202,24 @@
         }
     },
     __initEventHandlers: function () {
-        var studentDetails = this;
+        var self = this;
         this.patronymic.oninput = function () {
-            studentDetails.hideValidation(studentDetails.validationMessagePatronymic, studentDetails.patronymic);
+            self.hideValidation(self.validationMessagePatronymic, self.patronymic);
         };
         this.name.oninput = function () {
-            studentDetails.hideValidation(studentDetails.validationMessageName, studentDetails.name);
+            self.hideValidation(self.validationMessageName, self.name);
         };
         this.surname.oninput = function () {
-            studentDetails.hideValidation(studentDetails.validationMessageSurname, studentDetails.surname);
+            self.hideValidation(self.validationMessageSurname, self.surname);
         };
         this.dateOfBirth.oninput = function () {
-            studentDetails.hideValidation(studentDetails.validationMessageDateOfBirth, studentDetails.dateOfBirth);
+            self.hideValidation(self.validationMessageDateOfBirth, self.dateOfBirth);
         };
         this.dateOfReceipt.oninput = function () {
-            studentDetails.hideValidation(studentDetails.validationMessageDateOfReceipt, studentDetails.dateOfReceipt);
+            self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceipt);
+        };
+        document.getElementById("TotalStatistics").onclick = function () {
+            self.chart.drawTotalDoughnutChart();
         };
     }
 });

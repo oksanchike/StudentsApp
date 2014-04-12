@@ -12,10 +12,12 @@
         this.__dataSubjects = dataSubjects;
         var totalHours = this.getTotalHours();
         this.drawLineChart(totalHours);
-        this.drawButton();
         this.drawTotalDoughnutChart();
     },
     drawTotalDoughnutChart: function () {
+        var y = this.pieY - this.pieRadius - 20;
+        var height = this.pieRadius * 2 + 40;
+        this.context.clearRect(0, y, this.canvas.width, height);
         var total = this.getTotalHours();
         var elapsed = this.getElapsedHours();
         var totalAbsenseTime = this.getTotalAbsenseTime();
@@ -85,23 +87,6 @@
         }
         context.restore();
     },
-    drawButton: function () {
-        var context = this.context;
-        var x1 = this.canvas.width - this.context.measureText("Все предметы").width;
-        var x2 = x1 + this.context.measureText("Все предметы").width;
-        context.save();
-        context.fillStyle = "#2d89d5";
-        context.beginPath();
-        context.font = "normal 10.5pt PT Sans";
-        context.fillText("Все предметы", x1, 85)
-        context.moveTo(x1, 87);
-        context.lineTo(x2, 87);
-        context.strokeStyle = "#2d89d5";
-        context.lineWidth = 1;
-        context.stroke();
-        context.closePath();
-        context.restore();
-    },
     drawSubjectsText: function () {
         var context = this.context;
         context.save();
@@ -133,7 +118,6 @@
         var context = this.context;
         this.drawEmptyDoughnut();
         var startAngle = 1.5 * Math.PI;
-
         var sliceAngle = 2 * Math.PI * withValidReason / total;
         var endAngle = startAngle + sliceAngle;
         this.drawArc(startAngle, endAngle, "#0099CC");
