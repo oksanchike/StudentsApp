@@ -219,6 +219,7 @@
             self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceipt);
         };
         document.getElementById("TotalStatistics").onclick = function () {
+            self.chart.drawSubjectsText();
             self.chart.drawTotalDoughnutChart();
         };
     }

@@ -8,7 +8,7 @@
             { id: 5, title: "Биология", totalTime: 15, elapsedTime: 8},
             { id: 6, title: "Химия", totalTime: 20, elapsedTime: 15 },
             { id: 7, title: "Физика", totalTime: 35, elapsedTime: 21 },
-            { id: 8, title: "География", totalTime: 21, elapsedTime: 9 }
+            { id: 8, title: "География", totalTime: 21, elapsedTime: 21 }
         ])
     },
     getById: function (id) {

@@ -482,8 +482,21 @@ hr {
     right: 0;
     top: 70px;
 }
+.subjectTitle {
+    position: absolute;
+    left: 20px;
+    top: 70px;
+    font-size: 1.2em;
+}
 
 .toolTip {
     position: absolute;
-    background: rgba(204, 0, 0, 0.8);
+    color: #bdbdbd;
+    background: transparent;
+    background-image: -moz-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
+    background-image: -o-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
+    background-image: -webkit-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
+    border: 1px solid #bdbdbd;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px #d4d0d0;
 }

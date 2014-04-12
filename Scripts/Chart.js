@@ -99,17 +99,12 @@
         }
         context.restore();
     },
-    drawSubjectsText: function () {
-        var context = this.context;
-        context.save();
-
-        context.fillStyle = "black";
-        context.beginPath();
-        context.font = "normal 13pt PT Sans";
-        context.fillText(this.__dataSubjects[0].title + " ( " + this.__dataSubjects[0].totalTime + " часов )", 20, 80);
-        context.closePath();
-
-        context.restore();
+    drawSubjectsText: function (total, titel) {
+        var subjectTitle = document.getElementById("SelectedSubjectTitle");
+        if (total)
+            subjectTitle.innerHTML = titel + " ( " + total + " часов )";
+        else
+            subjectTitle.innerHTML = "";
     },
     drawEmptyDoughnut: function () {
         var context = this.context;
@@ -257,21 +252,22 @@
         this.toolTip = document.createElement("canvas");
         var context = this.toolTip.getContext("2d");
         var div = document.getElementById("Canvas");
-        context.fillStyle = "black";
+        context.fillStyle = "#bdbdbd";
         context.beginPath();
-        context.font = "normal 13pt PT Sans";
+        context.font = "normal 11pt PT Sans";
         var width = context.measureText(title).width + 10;
         this.toolTip.classList.add("toolTip");
         this.toolTip.width = width;
-        this.toolTip.height = 25;
+        this.toolTip.height = 20;
         this.toolTip.setAttribute("style", "left:"+mouseX+"px; "+"top:"+mouseY+"px");
-        context.font = "normal 13pt PT Sans";
-        context.fillText(title, 5, 20);
+        context.font = "normal 11pt PT Sans";
+        context.fillText(title, 5, 15);
         context.closePath();
         div.appendChild(this.toolTip);
     },
     hideToolTip: function () {
-        this.toolTip.remove();
+        if (this.toolTip != undefined)
+            this.toolTip.remove();
     },
     __initEventHandlers: function () {
         var self = this;
@@ -280,6 +276,7 @@
             var mouseY = e.offsetY;
             if (self.isMouseOnLine(mouseX, mouseY)) {
                 var subject = self.getSubjectByCoordinates(mouseX);
+                self.drawSubjectsText(subject.total, subject.title);
                 self.drawDoughnutChart(subject.total, subject.elapsed, subject.totalAbsense, subject.withValidReason);
             }
         }
@@ -288,18 +285,17 @@
             var mouseY = e.offsetY;
             if (self.isMouseOnLine(mouseX, mouseY)) {
                 var subject = self.getSubjectByCoordinates(mouseX);
-                if (self.toolTip != undefined)
-                    self.hideToolTip();
-                mouseX = e.offsetX;
-                mouseY = e.offsetY;
+                self.hideToolTip();
                 self.showToolTip(subject.title, mouseX, mouseY + 30);
                 self.canvas.setAttribute("style", "cursor: pointer");
             }
             else {
-                if (self.toolTip != undefined)
-                    self.hideToolTip();
+                self.hideToolTip();
                 self.canvas.setAttribute("style", "cursor: default");
             }
+        }
+        this.canvas.onmouseleave = function () {
+            self.hideToolTip();
         }
     }
 })
