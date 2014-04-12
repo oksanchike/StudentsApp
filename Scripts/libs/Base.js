@@ -16,7 +16,7 @@ Base.extend = function(_instance, _static) { // subclass
 	var proto = new this;
 	extend.call(proto, _instance);
   proto.base = function() {
-    // call this method from any other method to invoke that method's ancestor
+    // call this method from any other method to invoke that method"s ancestor
   };
 	delete Base._prototyping;
 	
@@ -94,7 +94,7 @@ Base.prototype = {
 
 				}
 			}
-			// copy each of the source object's properties to this object
+			// copy each of the source object"s properties to this object
 			for (var key in source) {
 				if (!proto[key]) extend.call(this, key, source[key]);
 			}
@@ -123,7 +123,7 @@ Base = Base.extend({
 	implement: function() {
 		for (var i = 0; i < arguments.length; i++) {
 			if (typeof arguments[i] == "function") {
-				// if it's a function, call it
+				// if it"s a function, call it
 				arguments[i](this.prototype);
 			} else {
 				// add the interface using the extend method

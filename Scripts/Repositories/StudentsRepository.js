@@ -1,28 +1,28 @@
 ﻿var StudentsRepository = Base.extend({
     constructor: function () {
-        this.lastId = 5;
         this.students = TAFFY([
-            { id: 1, gender: "M", surname: "Мостовой", name: "Вячеслав", patronymic: "Игоревич", dateOfBirth: "1992-10-07", dateOfReceipt: "2009-09-01", group: "МТ-202" },
-            { id: 2, gender: "F", surname: "Запорожец", name: "Оксана", patronymic: "Викторовна", dateOfBirth: "1991-11-29", dateOfReceipt: "2009-09-01", group: "МТ-202" },
-            { id: 3, gender: "F", surname: "Глухова", name: "Анастасия", patronymic: "Андреевна", dateOfBirth: "1992-01-03", dateOfReceipt: "2009-09-01", group: "МТ-202" },
-            { id: 4, gender: "F", surname: "Хабибулина", name: "Татьяна", patronymic: "Васильевна", dateOfBirth: "1989-11-01", dateOfReceipt: "2009-09-01", group: "МТ-202" },
-            { id: 5, gender: "М", surname: "Баранов", name: "Валентин", patronymic: "Владимирович", dateOfBirth: "1990-04-22", dateOfReceipt: "2009-09-01", group: "МТ-502" },
-            { id: 6, gender: "M", surname: "Бондаренко", name: "Роман", patronymic: "Игоревич", dateOfBirth: "1992-10-07", dateOfReceipt: "2009-09-01", group: "МТ-502" },
-            { id: 7, gender: "M", surname: "Брагин", name: "Владислав", patronymic: "Викторовна", dateOfBirth: "1991-11-29", dateOfReceipt: "2009-09-01", group: "МТ-502" },
-            { id: 8, gender: "F", surname: "Лодочникова", name: "Алена", patronymic: "Александровна", dateOfBirth: "1992-01-03", dateOfReceipt: "2009-09-01", group: "МТ-502" },
-            { id: 9, gender: "F", surname: "Наборщикова", name: "Елена", patronymic: "Васильевна", dateOfBirth: "1989-11-01", dateOfReceipt: "2009-09-01", group: "МТ-402" },
-            { id: 10, gender: "М", surname: "Бухов", name: "Владимир", patronymic: "Александрович", dateOfBirth: "1990-04-22", dateOfReceipt: "2009-09-01", group: "МТ-502" },
-            { id: 11, gender: "M", surname: "Веселков", name: "Александр", patronymic: "Игоревич", dateOfBirth: "1992-10-07", dateOfReceipt: "2009-09-01", group: "МТ-602" },
-            { id: 12, gender: "F", surname: "Болотникова", name: "Марина", patronymic: "Сергеевна", dateOfBirth: "1991-11-29", dateOfReceipt: "2009-09-01", group: "МТ-202" },
-            { id: 13, gender: "F", surname: "Казанцева", name: "Кристина", patronymic: "Андреевна", dateOfBirth: "1992-01-03", dateOfReceipt: "2009-09-01", group: "МТ-302" },
-            { id: 14, gender: "F", surname: "Казанцева", name: "Татьяна", patronymic: "Андреевна", dateOfBirth: "1989-11-01", dateOfReceipt: "2009-09-01", group: "МТ-402" },
-            { id: 15, gender: "М", surname: "Калачев", name: "Максим", patronymic: "Владимирович", dateOfBirth: "1990-04-22", dateOfReceipt: "2009-09-01", group: "МТ-502" },
-            { id: 16, gender: "М", surname: "Пантелеев", name: "Георгий", patronymic: "Васельевич", dateOfBirth: "1992-10-07", dateOfReceipt: "2009-09-01", group: "МТ-102" },
-            { id: 17, gender: "М", surname: "Ращектаев", name: "Юрий", patronymic: "Николаевич", dateOfBirth: "1991-11-29", dateOfReceipt: "2009-09-01", group: "МТ-202" },
-            { id: 18, gender: "М", surname: "Сунагатов", name: "Эдуард", patronymic: "Петрович", dateOfBirth: "1992-01-03", dateOfReceipt: "2009-09-01", group: "МТ-502" },
-            { id: 19, gender: "М", surname: "Столбов", name: "Николай", patronymic: "Ильич", dateOfBirth: "1989-11-01", dateOfReceipt: "2009-09-01", group: "МТ-402" },
-            { id: 20, gender: "М", surname: "Макаренко", name: "Петр", patronymic: "Максимович", dateOfBirth: "1990-04-22", dateOfReceipt: "2009-09-01", group: "МТ-502" }
+            { id: 1, gender: "M", surname: "Мостовой", name: "Вячеслав", patronymic: "Игоревич", dateOfBirth: "07.10.1992", dateOfReceipt: "01.09.2009", group: "МТ-202" },
+            { id: 2, gender: "F", surname: "Запорожец", name: "Оксана", patronymic: "Викторовна", dateOfBirth: "29.11.1991", dateOfReceipt: "01.09.2009", group: "МТ-202" },
+            { id: 3, gender: "F", surname: "Глухова", name: "Анастасия", patronymic: "Андреевна", dateOfBirth: "03.01.1992", dateOfReceipt: "01.09.2009", group: "МТ-202" },
+            { id: 4, gender: "F", surname: "Хабибулина", name: "Татьяна", patronymic: "Васильевна", dateOfBirth: "01.11.1989", dateOfReceipt: "01.09.2009", group: "МТ-202" },
+            { id: 5, gender: "М", surname: "Баранов", name: "Валентин", patronymic: "Владимирович", dateOfBirth: "22.04.1990", dateOfReceipt: "01.09.2009", group: "МТ-502" },
+            { id: 6, gender: "M", surname: "Бондаренко", name: "Роман", patronymic: "Игоревич", dateOfBirth: "07.10.1992", dateOfReceipt: "01.09.2009", group: "МТ-502" },
+            { id: 7, gender: "M", surname: "Брагин", name: "Владислав", patronymic: "Викторовна", dateOfBirth: "25.05.1993", dateOfReceipt: "01.09.2009", group: "МТ-502" },
+            { id: 8, gender: "F", surname: "Лодочникова", name: "Алена", patronymic: "Александровна", dateOfBirth: "16.08.1993", dateOfReceipt: "01.09.2009", group: "МТ-502" },
+            { id: 9, gender: "F", surname: "Наборщикова", name: "Елена", patronymic: "Васильевна", dateOfBirth: "13.12.1992", dateOfReceipt: "01.09.2009", group: "МТ-402" },
+            { id: 10, gender: "М", surname: "Бухов", name: "Владимир", patronymic: "Александрович", dateOfBirth: "22.11.1992", dateOfReceipt: "01.09.2009", group: "МТ-502" },
+            { id: 11, gender: "M", surname: "Веселков", name: "Александр", patronymic: "Игоревич", dateOfBirth: "12.12.1993", dateOfReceipt: "01.09.2009", group: "МТ-602" },
+            { id: 12, gender: "F", surname: "Болотникова", name: "Марина", patronymic: "Сергеевна", dateOfBirth: "25.02.1991", dateOfReceipt: "01.09.2009", group: "МТ-202" },
+            { id: 13, gender: "F", surname: "Казанцева", name: "Кристина", patronymic: "Андреевна", dateOfBirth: "05.07.1992", dateOfReceipt: "01.09.2009", group: "МТ-302" },
+            { id: 14, gender: "F", surname: "Казанцева", name: "Татьяна", patronymic: "Андреевна", dateOfBirth: "01.12.1993", dateOfReceipt: "01.09.2009", group: "МТ-402" },
+            { id: 15, gender: "М", surname: "Калачев", name: "Максим", patronymic: "Владимирович", dateOfBirth: "26.06.1991", dateOfReceipt: "01.09.2009", group: "МТ-502" },
+            { id: 16, gender: "М", surname: "Пантелеев", name: "Георгий", patronymic: "Васельевич", dateOfBirth: "22.12.1992", dateOfReceipt: "01.09.2009", group: "МТ-102" },
+            { id: 17, gender: "М", surname: "Ращектаев", name: "Юрий", patronymic: "Николаевич", dateOfBirth: "13.04.1993", dateOfReceipt: "01.09.2009", group: "МТ-202" },
+            { id: 18, gender: "М", surname: "Сунагатов", name: "Эдуард", patronymic: "Петрович", dateOfBirth: "31.03.1992", dateOfReceipt: "01.09.2009", group: "МТ-502" },
+            { id: 19, gender: "М", surname: "Столбов", name: "Николай", patronymic: "Ильич", dateOfBirth: "25.11.1992", dateOfReceipt: "01.09.2009", group: "МТ-402" },
+            { id: 20, gender: "М", surname: "Макаренко", name: "Петр", patronymic: "Максимович", dateOfBirth: "24.09.1991", dateOfReceipt: "01.09.2009", group: "МТ-502" }
         ]);
+        this.lastId = 20;
     },
     save: function (student) {
         if (student.id !== null) {

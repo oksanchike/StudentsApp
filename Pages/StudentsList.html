@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Список студентов</title>
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic' rel='stylesheet' type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic" rel="stylesheet" type="text/css" />
     <link media="print" rel="stylesheet" href="../Styles/PrintStyles.css" />
     <link media="screen" rel="stylesheet" href="../Styles/CommonStyles.css" />
     <script src="../Scripts/libs/Base.js"></script>
@@ -15,6 +15,10 @@
     <script src="../Scripts/Repositories/StudentsPresenceRepository.js"></script>
     <script src="../Scripts/Groups.js"></script>
     <script src="../Scripts/Chart.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="../Scripts/libs/query.ui.datepicker-ru.js"></script>
 </head>
 <body>
     <section>
@@ -62,17 +66,17 @@
                     <form>
                         <div class="personalData clearfix sizeMain">
                             <div class="surname field">
-                                <label>Фамилия</label>
+                                <label for ="SurnameStudent">Фамилия</label>
                                 <input id="SurnameStudent" type="text" spellcheck="false"/>
                                 <span class="validation" id="validationMessageSurname">Поле обязательно к заполнению</span>
                             </div>
                             <div class="name field">
-                                <label>Имя</label>
+                                <label for ="NameStudent">Имя</label>
                                 <input id="NameStudent" type="text"  spellcheck="false"/>
                                 <span class="validation" id="validationMessageName">Поле обязательно к заполнению</span>
                             </div>
                             <div class="patronymic field">
-                                <label>Отчество</label>
+                                <label for ="PatronymicStudent">Отчество</label>
                                 <input id="PatronymicStudent" type="text"  spellcheck="false"/>
                                 <span class="validation" id="validationMessagePatronymic">Поле обязательно к заполнению</span>
                             </div>
@@ -81,21 +85,21 @@
                             <div class="gender field">
                                 <label>Пол</label>
                                 <span class="genderRadio floatRight">
-                                    <label class="genderLabel">
+                                    <label class="genderLabel" for ="Female">
                                         <input name="gender" id="Female" type="radio"  spellcheck="false"/>Женский</label>
                                     <span class ="genderForPrint" id="Gender"></span>
-                                    <label class="genderLabel">
+                                    <label class="genderLabel" for ="Male">
                                         <input name="gender" id="Male" type="radio" checked />Мужской</label>
                                 </span>
                             </div>
                             <div class="dateOfBirth field">
-                                <label>Дата рождения</label>
-                                <input id="DateOfBirth" type="date"/>
+                                <label for ="DateOfBirth" >Дата рождения</label>
+                                <input id="DateOfBirth" type="text"/>
                                 <span class="validation" id="validationMessageDateOfBirth">Поле обязательно к заполнению</span>
                             </div>
                             <div class="dateOfReceipt field">
-                                <label>Дата поступления</label>
-                                <input id="DateOfReceipt" type="date"/>
+                                <label for ="DateOfReceipt">Дата поступления</label>
+                                <input id="DateOfReceipt" type="text"/>
                                 <span class="validation" id="validationMessageDateOfReceipt">Поле обязательно к заполнению</span>
                             </div>
                         </div>

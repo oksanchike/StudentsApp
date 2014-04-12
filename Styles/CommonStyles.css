@@ -1,8 +1,8 @@
 ﻿body {
-    background-image: url('../Content/fond.png');
+    background-image: url("../Content/fond.png");
     margin: 0;
     padding: 0;
-    font-family: 'PT Sans',sans-serif;
+    font-family: "PT Sans",sans-serif;
 }
 
     body > section {
@@ -10,8 +10,20 @@
         margin: 0 auto;
     }
 
+#ui-datepicker-div {
+    font-size: 12px;
+}
+
 .sizeMain {
     font-size: 0.879em;
+}
+
+.displayNone {
+    display: none;
+}
+
+.displayListItem {
+    display: list-item;
 }
 
 .floatRight {
@@ -29,7 +41,7 @@ section header {
 }
 
 .clearfix:after {
-    content: '';
+    content: "";
     display: table;
     clear: both;
 }
@@ -42,7 +54,7 @@ section header {
 }
 
 .personalData:nth-child(2) {
-    width: 496px;
+    width: 467px;
 }
 
 .personalData label {
@@ -83,9 +95,10 @@ section header {
         -moz-user-select: none;
         user-select: none;
     }
+
 .groupsList-active {
-     background: rgba(111, 106, 106, 0.1);
-     border-radius: 3px;
+    background: rgba(111, 106, 106, 0.1);
+    border-radius: 3px;
 }
 
 .layout-column-2 .group {
@@ -95,14 +108,14 @@ section header {
 .layout-column-2 .groupList {
     position: absolute;
     z-index: 100;
-    padding:0;
+    padding: 0;
     background: rgb(255,255,255);
     box-shadow: 0 2px 2px #bdbdbd;
 }
 
 .groupList ul {
     margin: 0;
-    padding:0;
+    padding: 0;
 }
 
 .groupList .styleLi {
@@ -110,15 +123,15 @@ section header {
     padding: 3px 25px 3px 20px;
 }
 
-.groupList .styleLi:hover {
-    cursor: pointer;
-    background: rgba(45, 137, 213, 0.6);
-}
+    .groupList .styleLi:hover {
+        cursor: pointer;
+        background: rgba(45, 137, 213, 0.6);
+    }
 
 .button-print {
     display: inline-block;
     background: #dfdfdf; /* for non-css3 browsers */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdfdfd', endColorstr='#dfdfdf'); /* для IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fdfdfd", endColorstr="#dfdfdf"); /* для IE6-9 */
     background: -webkit-linear-gradient(top, #fdfdfd, #dfdfdf); /* для webkit-браузеров */
     background: -moz-linear-gradient(top, #fdfdfd, #dfdfdf); /* для firefox 3.6+ */
     background: -o-linear-gradient(top, #fdfdfd, #dfdfdf); /* для Opera 11.10+ */
@@ -132,7 +145,7 @@ section header {
 
     .button-print:hover {
         background: #dfdfdf; /* for non-css3 browsers */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#c8c8c8'); /* для IE6-9 */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
         background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
         background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
         background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
@@ -157,7 +170,7 @@ section header {
     width: 900px;
     min-height: 300px;
     background: #f1f1f1; /* for non-css3 browsers */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff 0%, #fff 7%, #f1f1f1 20%', endColorstr='#f1f1f1 80%, #fff 93%, #fff 100%'); /* для IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff 0%, #fff 7%, #f1f1f1 20%", endColorstr="#f1f1f1 80%, #fff 93%, #fff 100%"); /* для IE6-9 */
     background: -webkit-linear-gradient(top, #fff 0%, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для webkit-браузеров */
     background: -moz-linear-gradient(top, #fff 0%, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для firefox 3.6+ */
     background: -o-linear-gradient(top, #fff 0%, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для Opera 11.10+ */
@@ -211,7 +224,7 @@ aside {
         min-width: 155px;
     }
 
-.personalData input[type="text"]:focus, .personalData input[type="date"]:focus {
+.personalData input[type="text"]:focus {
     outline: 2px solid #66b3f3;
     box-shadow: 0 0 3px #66b3f3;
 }
@@ -223,7 +236,7 @@ aside {
 
 .button-addStudent {
     background: #dfdfdf; /* for non-css3 browsers */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdfdfd', endColorstr='#dfdfdf'); /* для IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fdfdfd", endColorstr="#dfdfdf"); /* для IE6-9 */
     background: -webkit-linear-gradient(top, #fdfdfd, #dfdfdf); /* для webkit-браузеров */
     background: -moz-linear-gradient(top, #fdfdfd, #dfdfdf); /* для firefox 3.6+ */
     background: -o-linear-gradient(top, #fdfdfd, #dfdfdf); /* для Opera 11.10+ */
@@ -233,7 +246,7 @@ aside {
 
     .button-addStudent:hover {
         background: #dfdfdf; /* for non-css3 browsers */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#c8c8c8'); /* для IE6-9 */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
         background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
         background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
         background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
@@ -248,7 +261,7 @@ aside {
 
 .button-saveСhanges {
     background: #dfdfdf; /* for non-css3 browsers */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2d89d5', endColorstr='#2571b1'); /* для IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2d89d5", endColorstr="#2571b1"); /* для IE6-9 */
     background: -webkit-linear-gradient(top, #2d89d5, #2571b1); /* для webkit-браузеров */
     background: -moz-linear-gradient(top, #2d89d5, #2571b1); /* для firefox 3.6+ */
     background: -o-linear-gradient(top, #2d89d5, #2571b1); /* для Opera 11.10+ */
@@ -260,7 +273,7 @@ aside {
 
     .button-saveСhanges:hover {
         background: #dfdfdf; /* for non-css3 browsers */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2d89d5 0%', endColorstr='#2272b5 35%'); /* для IE6-9 */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2d89d5 0%", endColorstr="#2272b5 35%"); /* для IE6-9 */
         background: -webkit-linear-gradient(top, #2d89d5 0%, #2272b5 35%); /* для webkit-браузеров */
         background: -moz-linear-gradient(top, #2d89d5 0%, #2272b5 35%); /* для firefox 3.6+ */
         background: -o-linear-gradient(top, #2d89d5 0%, #2272b5 35%); /* для Opera 11.10+ */
@@ -279,7 +292,7 @@ aside {
     margin-left: 0;
     margin-bottom: 0;
     width: 170px;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%', endColorstr='rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%'); /* для IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%", endColorstr="rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%"); /* для IE6-9 */
     -webkit-mask-image: -webkit-linear-gradient(left, rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%, rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%); /* для webkit-браузеров */
     -webkit-mask-image: -moz-linear-gradient(left, rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%, rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%); /* для firefox 3.6+ */
     -webkit-mask-image: -o-linear-gradient(left, rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%, rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%); /* для Opera 11.10+ */
@@ -318,7 +331,7 @@ form {
     padding-top: 20px;
 }
 
-.personalData input[type="text"], input[type="date"] {
+input[type="text"] {
     min-height: 20px;
     width: 230px;
     border: 1px solid #ccc;
@@ -349,11 +362,60 @@ input[type="radio"] {
 }
 
 .genderRadio {
-    margin-right: 202px;
+    margin-right: 172px;
 }
 
-input[type="date"] {
-    width: 120px;
+.personalData input[type="text"].hasDatepicker {
+    width: 90px;
+    min-height: 20px;
+    border: 1px solid #ccc;
+    padding: 1px 5px;
+    background: white;
+    border-radius: 3px;
+    outline: none;
+    box-shadow: none;
+}
+
+    .personalData input[type="text"].hasDatepicker:hover, .personalData input[type="text"].validationFocus:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+.ui-datepicker-trigger {
+    outline: none;
+    margin-left: -20px;
+    border: none;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    width: 21px;
+    height: 23px;
+    padding: 3px;
+    cursor: pointer;
+    border: solid 1px #d9d9d9;
+    /*border-bottom: solid 1px #ababab;*/
+    background: transparent;
+    background-image: -moz-linear-gradient(top,#fdfdfd,#dfdfdf);
+    background-image: -o-linear-gradient(top,#fdfdfd,#dfdfdf);
+    background-image: -webkit-linear-gradient(top,#fdfdfd,#dfdfdf);
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+}
+
+    .ui-datepicker-trigger:hover {
+        background: transparent;
+        background-image: -moz-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
+        background-image: -o-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
+        background-image: -webkit-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
+    }
+
+.icon {
+    margin-left: 0px;
+    display: inline;
+    background-image: url(/studentsapp/content/calendar.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 6px;
+    cursor: pointer;
 }
 
 input[type="checkbox"] {

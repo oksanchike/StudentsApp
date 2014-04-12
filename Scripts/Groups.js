@@ -1,31 +1,56 @@
 ﻿var Groups = Base.extend({
     constructor: function (groups) {
         this.active = false;
-        this.div2 = document.getElementById('Groups');
-        this.div = document.getElementById('ButtonGroups');
-        this.addGroups(groups);
+        this.div2 = document.getElementById("Groups");
+        this.div = document.getElementById("ButtonGroups");
+        this.div1 = document.createElement("div");
+        this.div1.classList.add("groupList");
         this.activeGroup = groups[0];
-        document.getElementById("HeadinGgroup").innerText = this.activeGroup;
+        this.addGroups(groups);
     },
     addGroups: function (groups) {
-        this.div1 = document.createElement('div');
-        var li = document.createElement('li');
-        var ul = document.createElement('ul');
+        var ul = document.createElement("ul");
         this.div1.appendChild(ul);
-        this.div1.classList.add('groupList');
         for (var i = 0; i < groups.length; i++) {
-            var li = document.createElement('li');
-            li.innerHTML = groups[i];
-            li.classList.add('styleLi');
             var self = this;
-            li.addEventListener('click', function (sender) {
-                self.activeGroup = sender.currentTarget.innerText;
-                document.getElementById("HeadinGgroup").innerText = self.activeGroup;
-                self.groupChanged = new CustomEvent('groupChanged', { detail: { group: self.activeGroup } });
-                self.div1.dispatchEvent(self.groupChanged);
-            });
-            ul.appendChild(li, ul.firstChild);
+            if (groups[i] != self.activeGroup) {
+                var li = document.createElement("li");
+                li.innerHTML = groups[i];
+                li.classList.add("styleLi");
+                li.addEventListener("click", function (sender) {
+                    self.setActiveGroup(sender.currentTarget);
+                    self.activeGroup = sender.currentTarget;
+                    document.getElementById("HeadinGgroup").innerHTML = self.activeGroup.innerHTML;
+                    self.groupChanged = new CustomEvent("groupChanged", { detail: { group: self.activeGroup } });
+                    self.div1.dispatchEvent(self.groupChanged);
+                });
+                ul.appendChild(li, ul.firstChild);
+            }
+            else {
+                var li = document.createElement("li");
+                li.innerHTML = groups[i];
+                li.classList.add("styleLi");
+                li.classList.add("displayNone");
+                this.activeGroup = li;
+                document.getElementById("HeadinGgroup").innerHTML = this.activeGroup.innerHTML;
+                li.addEventListener("click", function (sender) {
+                    self.setActiveGroup(sender.currentTarget);
+                    self.activeGroup = sender.currentTarget;
+                    document.getElementById("HeadinGgroup").innerHTML = self.activeGroup.innerHTML;
+                    self.groupChanged = new CustomEvent("groupChanged", { detail: { group: self.activeGroup } });
+                    self.div1.dispatchEvent(self.groupChanged);                   
+                });
+                ul.appendChild(li, ul.firstChild);
+            }
         }
+    },
+    setActiveGroup: function (li) {
+        this.activeGroup.classList.remove("displayNone");
+        this.activeGroup.classList.add("displayListItem");
+        this.activeGroup = li;
+        if (li.classList.contains("displayListItem"))
+            this.activeGroup.classList.remove("displayListItem");
+        this.activeGroup.classList.add("displayNone");
     },
     clickGroups: function () {
         if (!this.active)
@@ -36,13 +61,13 @@
     open: function () {
         this.active = !this.active;
         this.div.appendChild(this.div1);
-        this.div2.classList.add('groupsList-active');
+        this.div2.classList.add("groupsList-active");
     },
     close: function () {
         if (this.active) {
             this.active = !this.active;
             this.div.removeChild(this.div.childNodes[3]);
-            this.div2.classList.remove('groupsList-active');
+            this.div2.classList.remove("groupsList-active");
         }
     }
 })

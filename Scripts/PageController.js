@@ -14,8 +14,32 @@ var PageController = Base.extend({
         this.groups = new Groups(groups);
         var subjects = this.subjects.getAll();
         this.studentDetails.initalizeSubjects(subjects);
-        this.setList(this.groups.activeGroup);
+        this.setList(this.groups.activeGroup.innerText);
         this.__initEventHandlers();
+        this.calendar();
+    },
+    calendar: function () {
+        $("#DateOfBirth").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showOn: "button",
+            dateFormat: "dd.mm.yy"
+        });
+        $("#DateOfReceipt").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showOn: "button",
+            dateFormat: "dd.mm.yy"
+        });
+        var buttons = document.getElementsByClassName("ui-datepicker-trigger");
+        buttons[0].innerHTML = "";
+        buttons[1].innerHTML = "";
+        var div = document.createElement("div");
+        var div1 = document.createElement("div1");
+        div.classList.add("icon");
+        div1.classList.add("icon");
+        buttons[0].appendChild(div);
+        buttons[1].appendChild(div1);
     },
     setList: function (group) {
         this.studentsList.deleteAllStudents();
@@ -66,25 +90,25 @@ var PageController = Base.extend({
     },
     __initEventHandlers: function () {
         var self = this;
-        this.groups.div1.addEventListener('groupChanged', function (e) {
-            self.setList(e.detail.group);
-        })
-        this.studentsList.list.addEventListener('studentChanged', function (e) {
+        this.groups.div1.addEventListener("groupChanged", function (e) {
+            self.setList(e.detail.group.innerText);
+        });
+        this.studentsList.list.addEventListener("studentChanged", function (e) {
             self.setStudent(e.detail.id);
         });
-        document.getElementById('AddStudent').onclick = function () {
+        document.getElementById("AddStudent").onclick = function () {
             self.addStudent();
         };
-        document.getElementById('SaveСhanges').onclick = function () {
+        document.getElementById("SaveСhanges").onclick = function () {
             self.saveStudent();
         };
-        document.getElementById('DeleteStudent').onclick = function () {
+        document.getElementById("DeleteStudent").onclick = function () {
             self.deleteStudent();
         };
-        document.getElementById('Print').onclick = function () {
+        document.getElementById("Print").onclick = function () {
             window.print();
         };
-        document.getElementById('Groups').onclick = function (event) {
+        document.getElementById("Groups").onclick = function (event) {
             event.stopPropagation();
             self.groups.clickGroups();
         };

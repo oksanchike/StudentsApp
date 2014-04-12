@@ -12,7 +12,8 @@
         this.__dataSubjects = dataSubjects;
         var totalHours = this.getTotalHours();
         this.drawLineChart(totalHours);
-        //this.drawDoughnutChart();
+        this.drawButton();
+        this.drawDoughnutChart();
     },
     drawLineChart: function (totalHours) {
         var lineChartWidth = this.canvas.width - 40;
@@ -42,7 +43,7 @@
             var rectangleWidth = this.__dataSubjects[i].totalTime / ratio;
             context.beginPath();
             context.rect(x, y, rectangleWidth, height);
-            context.fillStyle = colors[this.__dataSubjects[i].id-1];
+            context.fillStyle = colors[this.__dataSubjects[i].id - 1];
             context.fill();
             x += rectangleWidth;
         }
@@ -64,9 +65,26 @@
             var dy = y - l - 4;
 
             context.fillStyle = "#999";
-            context.font = 'normal 10pt PT Sans';
+            context.font = "normal 10pt PT Sans";
             context.fillText(text, dx, dy);
         }
+        context.restore();
+    },
+    drawButton: function () {
+        var context = this.context;
+        var x1 = this.canvas.width - this.context.measureText("Все предметы").width;
+        var x2 = x1 + this.context.measureText("Все предметы").width;
+        context.save();
+        context.fillStyle = "#2d89d5";
+        context.beginPath();
+        context.font = "normal 10.5pt PT Sans";
+        context.fillText("Все предметы", x1, 85)
+        context.moveTo(x1, 87);
+        context.lineTo(x2, 87);
+        context.strokeStyle = "#2d89d5";
+        context.lineWidth = 1;
+        context.stroke();
+        context.closePath();
         context.restore();
     },
     drawSubjectsText: function () {
@@ -75,7 +93,7 @@
 
         context.fillStyle = "black";
         context.beginPath();
-        context.font = 'normal 13pt PT Sans';
+        context.font = "normal 13pt PT Sans";
         context.fillText(this.__dataSubjects[0].title + " ( " + this.__dataSubjects[0].totalTime + " часов )", 20, 80)
         context.closePath();
 
@@ -116,12 +134,12 @@
         this.drawArc(startAngle, endAngle, "#FFCC00");
         this.drawDoughnutDivision();
         context.save();
-        this.drawTextAboutPresence(this.pieY - 50, "Всего пройдено", 'normal 11pt PT Sans');
+        this.drawTextAboutPresence(this.pieY - 50, "Всего пройдено", "normal 11pt PT Sans");
         this.drawNumberAboutPresence(this.pieY - 30, this.__dataSubjects[0].elapsedTime, "#FFCC00");
-        this.drawTextAboutPresence(this.pieY - 10, "Всего прогуляно", 'normal 10pt PT Sans');
+        this.drawTextAboutPresence(this.pieY - 10, "Всего прогуляно", "normal 10pt PT Sans");
         this.drawNumberAboutPresence(this.pieY + 10, this.__dataStudentsPresence[0].totalAbsenseTime, "rgb(153, 0, 0)");
-        this.drawTextAboutPresence(this.pieY + 30, "Из них", 'normal 9pt PT Sans');
-        this.drawTextAboutPresence(this.pieY + 45, "по уважительной причине", 'normal 9pt PT Sans');
+        this.drawTextAboutPresence(this.pieY + 30, "Из них", "normal 9pt PT Sans");
+        this.drawTextAboutPresence(this.pieY + 45, "по уважительной причине", "normal 9pt PT Sans");
         this.drawNumberAboutPresence(this.pieY + 65, this.__dataStudentsPresence[0].withValidReasonTime, "#0099CC");
         context.restore();
     },
@@ -129,7 +147,7 @@
         var context = this.context;
         context.save();
         context.fillStyle = "black";
-        context.font = 'normal 11pt PT Sans';
+        context.font = "normal 11pt PT Sans";
         var dx = this.context.measureText("0").width / 2;
         context.fillText("0", this.pieX - dx, this.pieY - 135);
         dx = this.context.measureText(this.__dataSubjects[0].totalTime / 2).width / 2;
@@ -150,7 +168,7 @@
     },
     drawNumberAboutPresence: function (yNumber, number, color) {
         var context = this.context;
-        context.font = 'bold 11pt PT Sans';
+        context.font = "bold 11pt PT Sans";
         context.fillStyle = color;
         var dx = this.context.measureText(number).width / 2;
         context.fillText(number, this.pieX - dx, yNumber);

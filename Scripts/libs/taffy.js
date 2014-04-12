@@ -27,7 +27,7 @@
 // Setup TAFFY name space to return an object with methods
 var TAFFY, exports, T;
 (function () {
-  'use strict';
+  "use strict";
   var
     typeList,     makeTest,     idx,    typeKey,
     version,      TC,           idpad,  cmax,
@@ -43,9 +43,9 @@ var TAFFY, exports, T;
     // TC = Counter for Taffy DBs on page, used for unique IDs
     // cmax = size of charnumarray conversion cache
     // idpad = zeros to pad record IDs with
-    version = '2.7';
+    version = "2.7";
     TC      = 1;
-    idpad   = '000000';
+    idpad   = "000000";
     cmax    = 1000;
     API     = {};
 
@@ -83,7 +83,7 @@ var TAFFY, exports, T;
     };
     
     isRegexp = function(aObj) {
-        return Object.prototype.toString.call(aObj)==='[object RegExp]';
+        return Object.prototype.toString.call(aObj)==="[object RegExp]";
     }
     
     safeForJson = function(aObj) {
@@ -205,14 +205,14 @@ var TAFFY, exports, T;
 
       each( filter, function ( mf ) {
         switch ( T.typeOf( mf ) ){
-          case 'function':
+          case "function":
             // run function
             if ( !mf.apply( r ) ){
               match = false;
               return TAFFY.EXIT;
             }
             break;
-          case 'array':
+          case "array":
             // loop array and treat like a SQL or
             match = (mf.length === 1) ? (runFilters( r, mf[0] )) :
               (mf.length === 2) ? (runFilters( r, mf[0] ) ||
@@ -281,7 +281,7 @@ var TAFFY, exports, T;
           // default match type to IS/Equals
           if ( !T.isObject( v ) ){
             v = {
-              'is' : v
+              "is" : v
             };
           }
           // loop over each value on the value object  - if any
@@ -290,7 +290,7 @@ var TAFFY, exports, T;
             var c = [], looper;
 
             // function to loop and apply filter
-            looper = (s === 'hasAll') ?
+            looper = (s === "hasAll") ?
               function ( mtest, func ) {
                 func( mtest );
               } : each;
@@ -309,58 +309,58 @@ var TAFFY, exports, T;
                 // get the value from the record
                 var
                   mvalue   = this[i],
-                  eqeq     = '==',
-                  bangeq   = '!=',
-                  eqeqeq   = '===',
-                  lt   = '<',
-                  gt   = '>',
-                  lteq   = '<=',
-                  gteq   = '>=',
-                  bangeqeq = '!==',
+                  eqeq     = "==",
+                  bangeq   = "!=",
+                  eqeqeq   = "===",
+                  lt   = "<",
+                  gt   = ">",
+                  lteq   = "<=",
+                  gteq   = ">=",
+                  bangeqeq = "!==",
                   r
                   ;
 
-                if (typeof mvalue === 'undefined') {
+                if (typeof mvalue === "undefined") {
                   return false;
                 }
                 
-                if ( (s.indexOf( '!' ) === 0) && s !== bangeq &&
+                if ( (s.indexOf( "!" ) === 0) && s !== bangeq &&
                   s !== bangeqeq )
                 {
-                  // if the filter name starts with ! as in '!is' then reverse the match logic and remove the !
+                  // if the filter name starts with ! as in "!is" then reverse the match logic and remove the !
                   su = false;
                   s = s.substring( 1, s.length );
                 }
                 // get the match results based on the s/match type
                 /*jslint eqeq : true */
                 r = (
-                  (s === 'regex') ? (mtest.test( mvalue )) : (s === 'lt' || s === lt)
-                  ? (mvalue < mtest)  : (s === 'gt' || s === gt)
-                  ? (mvalue > mtest)  : (s === 'lte' || s === lteq)
-                  ? (mvalue <= mtest) : (s === 'gte' || s === gteq)
-                  ? (mvalue >= mtest) : (s === 'left')
-                  ? (mvalue.indexOf( mtest ) === 0) : (s === 'leftnocase')
+                  (s === "regex") ? (mtest.test( mvalue )) : (s === "lt" || s === lt)
+                  ? (mvalue < mtest)  : (s === "gt" || s === gt)
+                  ? (mvalue > mtest)  : (s === "lte" || s === lteq)
+                  ? (mvalue <= mtest) : (s === "gte" || s === gteq)
+                  ? (mvalue >= mtest) : (s === "left")
+                  ? (mvalue.indexOf( mtest ) === 0) : (s === "leftnocase")
                   ? (mvalue.toLowerCase().indexOf( mtest.toLowerCase() )
-                    === 0) : (s === 'right')
+                    === 0) : (s === "right")
                   ? (mvalue.substring( (mvalue.length - mtest.length) )
-                    === mtest) : (s === 'rightnocase')
+                    === mtest) : (s === "rightnocase")
                   ? (mvalue.toLowerCase().substring(
                     (mvalue.length - mtest.length) ) === mtest.toLowerCase())
-                    : (s === 'like')
-                  ? (mvalue.indexOf( mtest ) >= 0) : (s === 'likenocase')
+                    : (s === "like")
+                  ? (mvalue.indexOf( mtest ) >= 0) : (s === "likenocase")
                   ? (mvalue.toLowerCase().indexOf(mtest.toLowerCase()) >= 0)
-                    : (s === eqeqeq || s === 'is')
+                    : (s === eqeqeq || s === "is")
                   ? (mvalue ===  mtest) : (s === eqeq)
                   ? (mvalue == mtest) : (s === bangeqeq)
                   ? (mvalue !==  mtest) : (s === bangeq)
-                  ? (mvalue != mtest) : (s === 'isnocase')
+                  ? (mvalue != mtest) : (s === "isnocase")
                   ? (mvalue.toLowerCase
                     ? mvalue.toLowerCase() === mtest.toLowerCase()
-                      : mvalue === mtest) : (s === 'has')
-                  ? (T.has( mvalue, mtest )) : (s === 'hasall')
-                  ? (T.hasAll( mvalue, mtest )) : (s === 'contains')
+                      : mvalue === mtest) : (s === "has")
+                  ? (T.has( mvalue, mtest )) : (s === "hasall")
+                  ? (T.hasAll( mvalue, mtest )) : (s === "contains")
                   ? (TAFFY.isArray(mvalue) && mvalue.indexOf(mtest) > -1) : (
-                    s.indexOf( 'is' ) === -1
+                    s.indexOf( "is" ) === -1
                       && !TAFFY.isNull( mvalue )
                       && !TAFFY.isUndefined( mvalue )
                       && !TAFFY.isObject( mtest )
@@ -368,7 +368,7 @@ var TAFFY, exports, T;
                     )
                   ? (mtest === mvalue[s])
                     : (T[s] && T.isFunction( T[s] )
-                    && s.indexOf( 'is' ) === 0)
+                    && s.indexOf( "is" ) === 0)
                   ? T[s]( mvalue ) === mtest
                     : (T[s] && T.isFunction( T[s] ))
                   ? T[s]( mvalue, mtest ) : (false)
@@ -451,14 +451,14 @@ var TAFFY, exports, T;
           // loop over the sort instructions
           // get the column name
           var o, col, dir, c, d;
-          o = sd.split( ' ' );
+          o = sd.split( " " );
           col = o[0];
 
           // get the direction
           dir = (o.length === 1) ? "logical" : o[1];
 
 
-          if ( dir === 'logical' ){
+          if ( dir === "logical" ){
             // if dir is logical than grab the charnum arrays for the two values we are looking at
             c = numcharsplit( a[col] );
             d = numcharsplit( b[col] );
@@ -474,7 +474,7 @@ var TAFFY, exports, T;
               }
             } );
           }
-          else if ( dir === 'logicaldesc' ){
+          else if ( dir === "logicaldesc" ){
             // if logicaldesc than grab the charnum arrays for the two values we are looking at
             c = numcharsplit( a[col] );
             d = numcharsplit( b[col] );
@@ -490,39 +490,39 @@ var TAFFY, exports, T;
               }
             } );
           }
-          else if ( dir === 'asec' && a[col] < b[col] ){
+          else if ( dir === "asec" && a[col] < b[col] ){
             // if asec - default - check to see which is higher
             r = -1;
             return T.EXIT;
           }
-          else if ( dir === 'asec' && a[col] > b[col] ){
+          else if ( dir === "asec" && a[col] > b[col] ){
             // if asec - default - check to see which is higher
             r = 1;
             return T.EXIT;
           }
-          else if ( dir === 'desc' && a[col] > b[col] ){
+          else if ( dir === "desc" && a[col] > b[col] ){
             // if desc check to see which is lower
             r = -1;
             return T.EXIT;
 
           }
-          else if ( dir === 'desc' && a[col] < b[col] ){
+          else if ( dir === "desc" && a[col] < b[col] ){
             // if desc check to see which is lower
             r = 1;
             return T.EXIT;
 
           }
           // if r is still 0 and we are doing a logical sort than look to see if one array is longer than the other
-          if ( r === 0 && dir === 'logical' && c.length < d.length ){
+          if ( r === 0 && dir === "logical" && c.length < d.length ){
             r = -1;
           }
-          else if ( r === 0 && dir === 'logical' && c.length > d.length ){
+          else if ( r === 0 && dir === "logical" && c.length > d.length ){
             r = 1;
           }
-          else if ( r === 0 && dir === 'logicaldesc' && c.length > d.length ){
+          else if ( r === 0 && dir === "logicaldesc" && c.length > d.length ){
             r = -1;
           }
-          else if ( r === 0 && dir === 'logicaldesc' && c.length < d.length ){
+          else if ( r === 0 && dir === "logicaldesc" && c.length < d.length ){
             r = 1;
           }
 
@@ -544,7 +544,7 @@ var TAFFY, exports, T;
     // *
     // * Takes: a string containing numbers and letters and turn it into an array
     // * Returns: return an array of numbers and letters
-    // * Purpose: Used for logical sorting. String Example: 12ABC results: [12,'ABC']
+    // * Purpose: Used for logical sorting. String Example: 12ABC results: [12,"ABC"]
     // **************************************** 
     (function () {
       // creates a cache for numchar conversions
@@ -558,13 +558,13 @@ var TAFFY, exports, T;
         }
 
         // if a cache can be found for a numchar then return its array value
-        return cache['_' + thing] || (function () {
+        return cache["_" + thing] || (function () {
           // otherwise do the conversion
           // make sure it is a string and setup so other variables
           var nthing = String( thing ),
             na = [],
-            rv = '_',
-            rt = '',
+            rv = "_",
+            rt = "",
             x, xx, c;
 
           // loop over the string char by char
@@ -574,29 +574,29 @@ var TAFFY, exports, T;
             // check to see if it is a valid number char and append it to the array.
             // if last char was a string push the string to the charnum array
             if ( ( c >= 48 && c <= 57 ) || c === 46 ){
-              if ( rt !== 'n' ){
-                rt = 'n';
+              if ( rt !== "n" ){
+                rt = "n";
                 na.push( rv.toLowerCase() );
-                rv = '';
+                rv = "";
               }
               rv = rv + nthing.charAt( x );
             }
             else {
               // check to see if it is a valid string char and append to string
               // if last char was a number push the whole number to the charnum array
-              if ( rt !== 's' ){
-                rt = 's';
+              if ( rt !== "s" ){
+                rt = "s";
                 na.push( parseFloat( rv ) );
-                rv = '';
+                rv = "";
               }
               rv = rv + nthing.charAt( x );
             }
           }
           // once done, push the last value to the charnum array and remove the first uneeded item
-          na.push( (rt === 'n') ? parseFloat( rv ) : rv.toLowerCase() );
+          na.push( (rt === "n") ? parseFloat( rv ) : rv.toLowerCase() );
           na.shift();
           // add to cache
-          cache['_' + thing] = na;
+          cache["_" + thing] = na;
           cachcounter++;
           // return charnum array
           return na;
@@ -617,7 +617,7 @@ var TAFFY, exports, T;
 
     };
 
-    API.extend( 'filter', function () {
+    API.extend( "filter", function () {
       // ****************************************
       // *
       // * Takes: takes unlimited filter objects as arguments
@@ -641,17 +641,17 @@ var TAFFY, exports, T;
       return this.getroot( nc );
     });
 
-    API.extend( 'order', function ( o ) {
+    API.extend( "order", function ( o ) {
       // ****************************************
       // *
       // * Purpose: takes a string and creates an array of order instructions to be used with a query
       // ****************************************
 
-      o = o.split( ',' );
+      o = o.split( "," );
       var x = [], nc;
 
       each( o, function ( r ) {
-        x.push( r.replace( /^\s*/, '' ).replace( /\s*$/, '' ) );
+        x.push( r.replace( /^\s*/, "" ).replace( /\s*$/, "" ) );
       });
 
       nc = TAFFY.mergeObj( this.context(), {sort : null} );
@@ -660,7 +660,7 @@ var TAFFY, exports, T;
       return this.getroot( nc );
     });
 
-    API.extend( 'limit', function ( n ) {
+    API.extend( "limit", function ( n ) {
       // ****************************************
       // *
       // * Purpose: takes a limit number to limit the number of rows returned by a query. Will update the results
@@ -686,7 +686,7 @@ var TAFFY, exports, T;
       return this.getroot( nc );
     });
 
-    API.extend( 'start', function ( n ) {
+    API.extend( "start", function ( n ) {
       // ****************************************
       // *
       // * Purpose: takes a limit number to limit the number of rows returned by a query. Will update the results
@@ -714,7 +714,7 @@ var TAFFY, exports, T;
       return this.getroot( nc );
     });
 
-    API.extend( 'update', function ( arg0, arg1, arg2 ) {
+    API.extend( "update", function ( arg0, arg1, arg2 ) {
       // ****************************************
       // *
       // * Takes: a object and passes it off DBI update method for all matched records
@@ -756,7 +756,7 @@ var TAFFY, exports, T;
       }
       return this;
     });
-    API.extend( 'remove', function ( runEvent ) {
+    API.extend( "remove", function ( runEvent ) {
       // ****************************************
       // *
       // * Purpose: removes records from the DB via the remove and removeCommit DBI methods
@@ -778,7 +778,7 @@ var TAFFY, exports, T;
     });
 
 
-    API.extend( 'count', function () {
+    API.extend( "count", function () {
       // ****************************************
       // *
       // * Returns: The length of a query result
@@ -787,7 +787,7 @@ var TAFFY, exports, T;
       return this.context().results.length;
     });
 
-    API.extend( 'callback', function ( f, delay ) {
+    API.extend( "callback", function ( f, delay ) {
       // ****************************************
       // *
       // * Returns null;
@@ -805,7 +805,7 @@ var TAFFY, exports, T;
       return null;
     });
 
-    API.extend( 'get', function () {
+    API.extend( "get", function () {
       // ****************************************
       // *
       // * Returns: An array of all matching records
@@ -814,14 +814,14 @@ var TAFFY, exports, T;
       return this.context().results;
     });
 
-    API.extend( 'stringify', function () {
+    API.extend( "stringify", function () {
       // ****************************************
       // *
       // * Returns: An JSON string of all matching records
       // **************************************** 
       return JSON.stringify( this.get() );
     });
-    API.extend( 'first', function () {
+    API.extend( "first", function () {
       // ****************************************
       // *
       // * Returns: The first matching record
@@ -829,7 +829,7 @@ var TAFFY, exports, T;
       run.call( this );
       return this.context().results[0] || false;
     });
-    API.extend( 'last', function () {
+    API.extend( "last", function () {
       // ****************************************
       // *
       // * Returns: The last matching record
@@ -840,7 +840,7 @@ var TAFFY, exports, T;
     });
 
 
-    API.extend( 'sum', function () {
+    API.extend( "sum", function () {
       // ****************************************
       // *
       // * Takes: column to sum up
@@ -856,7 +856,7 @@ var TAFFY, exports, T;
       return total;
     });
 
-    API.extend( 'min', function ( c ) {
+    API.extend( "min", function ( c ) {
       // ****************************************
       // *
       // * Takes: column to find min
@@ -885,8 +885,8 @@ var TAFFY, exports, T;
     //    1. An ARRAY with 2 or 3 values:
     //    A column name from the left table, an optional comparison string,
     //    and column name from the right table.  The condition passes if the test
-    //    indicated is true.   If the condition string is omitted, '===' is assumed.
-    //    EXAMPLES: [ 'last_used_time', '>=', 'current_use_time' ], [ 'user_id','id' ]
+    //    indicated is true.   If the condition string is omitted, "===" is assumed.
+    //    EXAMPLES: [ "last_used_time", ">=", "current_use_time" ], [ "user_id","id" ]
     //
     //    2. A FUNCTION:
     //    The function receives a left table row and right table row during the
@@ -903,7 +903,7 @@ var TAFFY, exports, T;
     //  ***********
     //
     //  This code passes jslint with the exception of 2 warnings about
-    //  the '==' and '!=' lines.  We can't do anything about that short of
+    //  the "==" and "!=" lines.  We can"t do anything about that short of
     //  deleting the lines.
     //
     //  Credits
@@ -921,7 +921,7 @@ var TAFFY, exports, T;
 
           if ( arg_list.length === 2 ){
             data_lt = left_row[arg_list[0]];
-            op_code = '===';
+            op_code = "===";
             data_rt = right_row[arg_list[1]];
           }
           else {
@@ -932,28 +932,28 @@ var TAFFY, exports, T;
 
           /*jslint eqeq : true */
           switch ( op_code ){
-            case '===' :
+            case "===" :
               return data_lt === data_rt;
-            case '!==' :
+            case "!==" :
               return data_lt !== data_rt;
-            case '<'   :
+            case "<"   :
               return data_lt < data_rt;
-            case '>'   :
+            case ">"   :
               return data_lt > data_rt;
-            case '<='  :
+            case "<="  :
               return data_lt <= data_rt;
-            case '>='  :
+            case ">="  :
               return data_lt >= data_rt;
-            case '=='  :
+            case "=="  :
               return data_lt == data_rt;
-            case '!='  :
+            case "!="  :
               return data_lt != data_rt;
             default :
-              throw String( op_code ) + ' is not supported';
+              throw String( op_code ) + " is not supported";
           }
-          // 'jslint eqeq : false'  here results in
-          // "Unreachable '/*jslint' after 'return'".
-          // We don't need it though, as the rule exception
+          // "jslint eqeq : false"  here results in
+          // "Unreachable "/*jslint" after "return"".
+          // We don"t need it though, as the rule exception
           // is discarded at the end of this functional scope
         };
 
@@ -966,10 +966,10 @@ var TAFFY, exports, T;
             }
           }
           for ( i in right_row ){
-            if ( right_row.hasOwnProperty( i ) && i !== '___id' &&
-              i !== '___s' )
+            if ( right_row.hasOwnProperty( i ) && i !== "___id" &&
+              i !== "___s" )
             {
-              prefix = !TAFFY.isUndefined( out_map[i] ) ? 'right_' : '';
+              prefix = !TAFFY.isUndefined( out_map[i] ) ? "right_" : "";
               out_map[prefix + String( i ) ] = right_row[i];
             }
           }
@@ -984,10 +984,10 @@ var TAFFY, exports, T;
             result_list = []
             ;
 
-          if ( typeof table.filter !== 'function' ){
+          if ( typeof table.filter !== "function" ){
             if ( table.TAFFY ){ right_table = table(); }
             else {
-              throw 'TAFFY DB or result not supplied';
+              throw "TAFFY DB or result not supplied";
             }
           }
           else { right_table = table; }
@@ -1002,10 +1002,10 @@ var TAFFY, exports, T;
               CONDITION:
                 for ( i = 1; i < arg_length; i++ ){
                   arg_data = arg_list[i];
-                  if ( typeof arg_data === 'function' ){
+                  if ( typeof arg_data === "function" ){
                     is_ok = arg_data( left_row, right_row );
                   }
-                  else if ( typeof arg_data === 'object' && arg_data.length ){
+                  else if ( typeof arg_data === "object" && arg_data.length ){
                     is_ok = fnCompareList( left_row, right_row, arg_data );
                   }
                   else {
@@ -1026,10 +1026,10 @@ var TAFFY, exports, T;
         return fnMain;
       }());
 
-      API.extend( 'join', innerJoinFunction );
+      API.extend( "join", innerJoinFunction );
     }());
 
-    API.extend( 'max', function ( c ) {
+    API.extend( "max", function ( c ) {
       // ****************************************
       // *
       // * Takes: column to find max
@@ -1045,7 +1045,7 @@ var TAFFY, exports, T;
       return highest;
     });
 
-    API.extend( 'select', function () {
+    API.extend( "select", function () {
       // ****************************************
       // *
       // * Takes: columns to select values into an array
@@ -1073,7 +1073,7 @@ var TAFFY, exports, T;
       }
       return ra;
     });
-    API.extend( 'distinct', function () {
+    API.extend( "distinct", function () {
       // ****************************************
       // *
       // * Takes: columns to select unique alues into an array
@@ -1123,7 +1123,7 @@ var TAFFY, exports, T;
       }
       return ra;
     });
-    API.extend( 'supplant', function ( template, returnarray ) {
+    API.extend( "supplant", function ( template, returnarray ) {
       // ****************************************
       // *
       // * Takes: a string template formated with key to be replaced with values from the rows, flag to determine if we want array of strings
@@ -1135,14 +1135,14 @@ var TAFFY, exports, T;
         // TODO: The curly braces used to be unescaped
         ra.push( template.replace( /\{([^\{\}]*)\}/g, function ( a, b ) {
           var v = r[b];
-          return typeof v === 'string' || typeof v === 'number' ? v : a;
+          return typeof v === "string" || typeof v === "number" ? v : a;
         } ) );
       });
       return (!returnarray) ? ra.join( "" ) : ra;
     });
 
 
-    API.extend( 'each', function ( m ) {
+    API.extend( "each", function ( m ) {
       // ****************************************
       // *
       // * Takes: a function
@@ -1152,7 +1152,7 @@ var TAFFY, exports, T;
       each( this.context().results, m );
       return this;
     });
-    API.extend( 'map', function ( m ) {
+    API.extend( "map", function ( m ) {
       // ****************************************
       // *
       // * Takes: a function
@@ -1187,7 +1187,7 @@ var TAFFY, exports, T;
           storageName       : false,
           forcePropertyCase : null,
           cacheSize         : 100,
-          name              : ''
+          name              : ""
         },
         dm = new Date(),
         CacheCount = 0,
@@ -1278,7 +1278,7 @@ var TAFFY, exports, T;
           }
           if ( settings.storageName ){
             setTimeout( function () {
-              localStorage.setItem( 'taffy_' + settings.storageName,
+              localStorage.setItem( "taffy_" + settings.storageName,
                 JSON.stringify( TOb ) );
             });
           }
@@ -1299,9 +1299,9 @@ var TAFFY, exports, T;
             if ( T.isArray( v ) && i === 0 ){
               each( v, function ( av ) {
 
-                columns.push( (settings.forcePropertyCase === 'lower')
+                columns.push( (settings.forcePropertyCase === "lower")
                   ? av.toLowerCase()
-                    : (settings.forcePropertyCase === 'upper')
+                    : (settings.forcePropertyCase === "upper")
                   ? av.toUpperCase() : av );
               });
               return true;
@@ -1318,15 +1318,15 @@ var TAFFY, exports, T;
               o = {};
 
               eachin( v, function ( av, ai ) {
-                o[(settings.forcePropertyCase === 'lower') ? ai.toLowerCase()
-                  : (settings.forcePropertyCase === 'upper')
+                o[(settings.forcePropertyCase === "lower") ? ai.toLowerCase()
+                  : (settings.forcePropertyCase === "upper")
                   ? ai.toUpperCase() : ai] = v[ai];
               });
               v = o;
             }
 
             RC++;
-            v.___id = 'T' + String( idpad + TC ).slice( -6 ) + 'R' +
+            v.___id = "T" + String( idpad + TC ).slice( -6 ) + "R" +
               String( idpad + RC ).slice( -6 );
             v.___s = true;
             records.push( v.___id );
@@ -1350,7 +1350,7 @@ var TAFFY, exports, T;
           // *
           // * Purpose: Change the sort order of the DB itself and reset the ID bucket
           // **************************************** 
-          TOb = orderByCol( TOb, o.split( ',' ) );
+          TOb = orderByCol( TOb, o.split( "," ) );
           ID = {};
           each( TOb, function ( r, i ) {
             ID[r.___id] = i;
@@ -1368,8 +1368,8 @@ var TAFFY, exports, T;
           var nc = {}, or, nr, tc, hasChange;
           if ( settings.forcePropertyCase ){
             eachin( changes, function ( v, p ) {
-              nc[(settings.forcePropertyCase === 'lower') ? p.toLowerCase()
-                : (settings.forcePropertyCase === 'upper') ? p.toUpperCase()
+              nc[(settings.forcePropertyCase === "lower") ? p.toLowerCase()
+                : (settings.forcePropertyCase === "upper") ? p.toUpperCase()
                 : p] = v;
             });
             changes = nc;
@@ -1437,14 +1437,14 @@ var TAFFY, exports, T;
           var returnq, cid, results, indexed, limitq, ni;
 
           if ( settings.cacheSize ) {
-            cid = '';
+            cid = "";
             each( context.filterRaw, function ( r ) {
               if ( T.isFunction( r ) ){
-                cid = 'nocache';
+                cid = "nocache";
                 return TAFFY.EXIT;
               }
             });
-            if ( cid === '' ){
+            if ( cid === "" ){
               cid = makeCid( T.mergeObj( context,
                 {q : false, run : false, sort : false} ) );
             }
@@ -1527,7 +1527,7 @@ var TAFFY, exports, T;
           }
 
           // update cache
-          if ( settings.cacheSize && cid !== 'nocache' ){
+          if ( settings.cacheSize && cid !== "nocache" ){
             CacheClear++;
 
             setTimeout( function () {
@@ -1574,7 +1574,7 @@ var TAFFY, exports, T;
             // **************************************** 
             if ( n ){
               context = TAFFY.mergeObj( context,
-                n.hasOwnProperty('results')
+                n.hasOwnProperty("results")
                   ? TAFFY.mergeObj( n, { run : new Date(), sort: new Date() })
                   : n
               );
@@ -1635,7 +1635,7 @@ var TAFFY, exports, T;
           ;
 
         runEvent    = runEvent || false;
-        key         = key      || 'id';
+        key         = key      || "id";
 
         each( i, function ( o ) {
           var existingObject;
@@ -1663,7 +1663,7 @@ var TAFFY, exports, T;
       root.settings = function ( n ) {
         // ****************************************
         // *
-        // * Getting and setting for this DB's settings/events
+        // * Getting and setting for this DB"s settings/events
         // **************************************** 
         if ( n ){
           settings = TAFFY.mergeObj( settings, n );
@@ -1688,14 +1688,14 @@ var TAFFY, exports, T;
         var r = false, i;
         if ( localStorage ){
           if ( n ){
-            i = localStorage.getItem( 'taffy_' + n );
+            i = localStorage.getItem( "taffy_" + n );
             if ( i && i.length > 0 ){
               root.insert( i );
               r = true;
             }
             if ( TOb.length > 0 ){
               setTimeout( function () {
-                localStorage.setItem( 'taffy_' + settings.storageName,
+                localStorage.setItem( "taffy_" + settings.storageName,
                   JSON.stringify( TOb ) );
               });
             }
@@ -1745,7 +1745,7 @@ var TAFFY, exports, T;
     // * Creates TAFFY.EXIT value that can be returned to stop an each loop
     // *
     // ****************************************  
-    TAFFY.EXIT = 'TAFFYEXIT';
+    TAFFY.EXIT = "TAFFYEXIT";
 
     // ****************************************
     // *
@@ -1789,7 +1789,7 @@ var TAFFY, exports, T;
       else {
 
         switch ( T.typeOf( var1 ) ){
-          case 'object':
+          case "object":
             if ( T.isObject( var2 ) ){
               eachin( var2, function ( v, n ) {
                 if ( re === true && !T.isUndefined( var1[n] ) &&
@@ -1820,7 +1820,7 @@ var TAFFY, exports, T;
               }
             }
             return re;
-          case 'array':
+          case "array":
             if ( T.isObject( var2 ) ){
               each( var1, function ( v, i ) {
                 re = T.has( var1[i], var2 );
@@ -1852,7 +1852,7 @@ var TAFFY, exports, T;
               }
             }
             return re;
-          case 'string':
+          case "string":
             if ( T.isString( var2 ) && var2 === var1 ){
               return true;
             }
@@ -1903,16 +1903,16 @@ var TAFFY, exports, T;
     // ****************************************
     TAFFY.typeOf = function ( v ) {
       var s = typeof v;
-      if ( s === 'object' ){
+      if ( s === "object" ){
         if ( v ){
-          if ( typeof v.length === 'number' &&
-            !(v.propertyIsEnumerable( 'length' )) )
+          if ( typeof v.length === "number" &&
+            !(v.propertyIsEnumerable( "length" )) )
           {
-            s = 'array';
+            s = "array";
           }
         }
         else {
-          s = 'null';
+          s = "null";
         }
       }
       return s;
@@ -1943,7 +1943,7 @@ var TAFFY, exports, T;
     // ****************************************   
     TAFFY.isSameArray = function ( ar1, ar2 ) {
       return (TAFFY.isArray( ar1 ) && TAFFY.isArray( ar2 ) &&
-        ar1.join( ',' ) === ar2.join( ',' )) ? true : false;
+        ar1.join( "," ) === ar2.join( "," )) ? true : false;
     };
 
     // ****************************************
@@ -1994,8 +1994,8 @@ var TAFFY, exports, T;
     // ****************************************
 
     typeList = [
-      'String',  'Number', 'Object',   'Array',
-      'Boolean', 'Null',   'Function', 'Undefined'
+      "String",  "Number", "Object",   "Array",
+      "Boolean", "Null",   "Function", "Undefined"
     ];
   
     makeTest = function ( thisKey ) {
@@ -2006,12 +2006,12 @@ var TAFFY, exports, T;
   
     for ( idx = 0; idx < typeList.length; idx++ ){
       typeKey = typeList[idx];
-      TAFFY['is' + typeKey] = makeTest( typeKey );
+      TAFFY["is" + typeKey] = makeTest( typeKey );
     }
   }
 }());
 
-if ( typeof(exports) === 'object' ){
+if ( typeof(exports) === "object" ){
   exports.taffy = TAFFY;
 }
 

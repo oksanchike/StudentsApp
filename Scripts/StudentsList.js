@@ -4,10 +4,10 @@
     },
     setActive: function (item) {
         if (this.active)
-            this.active.classList.remove('studentsList-active');
+            this.active.classList.remove("studentsList-active");
         this.active = item;
-        this.active.classList.add('studentsList-active');
-        this.studentChanged = new CustomEvent('studentChanged', { detail: { id: this.getActiveId() } });
+        this.active.classList.add("studentsList-active");
+        this.studentChanged = new CustomEvent("studentChanged", { detail: { id: this.getActiveId() } });
         this.list.dispatchEvent(this.studentChanged);
     },
     getActiveId: function () {
@@ -17,15 +17,15 @@
         return id;
     },
     addStudent: function () {
-        var li = document.createElement('li');
-        var span = document.createElement('span');
-        var spanLink = document.createElement('span');
-        spanLink.innerHTML = 'Новый студент';
-        spanLink.classList.add('link');
+        var li = document.createElement("li");
+        var span = document.createElement("span");
+        var spanLink = document.createElement("span");
+        spanLink.innerHTML = "Новый студент";
+        spanLink.classList.add("link");
         span.appendChild(spanLink);
         li.appendChild(span);
         var self = this;
-        li.addEventListener('click', function (sender) {
+        li.addEventListener("click", function (sender) {
             self.setActive(sender.currentTarget);
         });
         this.list.insertBefore(li, this.list.firstChild);
