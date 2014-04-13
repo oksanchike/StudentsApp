@@ -28,11 +28,11 @@
         this.__studentDetails.resetStudent();
     },
     __saveStudent: function() {
-        var details = this.__studentDetails.serialize();
-        var student = details.student;
-        var presences = details.presences;
-        var isValid = this.__studentDetails.validate(student);
+        var isValid = this.__studentDetails.validate();
         if (isValid) {
+            var details = this.__studentDetails.serialize();
+            var student = details.student;
+            var presences = details.presences;
             this.__students.save(student);
             this.__studentsPresences.save(presences, student.id);
             this.__studentsList.save(student);

@@ -3,14 +3,14 @@
         this.list = list;
     },
     setActive: function(item) {
-        if (this.active)
-            this.active.classList.remove("studentsList-active");
-        this.active = item;
-        this.active.classList.add("studentsList-active");
+        if (this.__active)
+            this.__active.classList.remove("studentsList-active");
+        this.__active = item;
+        this.__active.classList.add("studentsList-active");
         EventHelpers.triggerEvent(this.list, "studentChanged", { id: this.getActiveId() });
     },
     getActiveId: function() {
-        var id = this.active.getAttribute("data-id");
+        var id = this.__active.getAttribute("data-id");
         if (id !== null)
             id = parseInt(id, 10);
         return id;
@@ -31,12 +31,12 @@
         this.setActive(li);
     },
     save: function(student) {
-        this.active.setAttribute("data-id", student.id);
-        this.active.firstChild.firstChild.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
+        this.__active.setAttribute("data-id", student.id);
+        this.__active.firstChild.firstChild.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
         this.__findPlaceForNew();
     },
     deleteStudent: function() {
-        this.list.removeChild(this.active);
+        this.list.removeChild(this.__active);
         this.setActive(this.list.firstChild);
     },
     deleteAllStudents: function() {
@@ -45,7 +45,7 @@
             list.removeChild(list.firstChild);
     },
     __findPlaceForNew: function() {
-        var active = this.active;
+        var active = this.__active;
         this.list.removeChild(active);
         var begin = 0;
         var end = this.list.childElementCount - 1;

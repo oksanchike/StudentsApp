@@ -1,252 +1,113 @@
 ﻿var StudentDetails = Base.extend({
-    constructor: function () {
-        this.chart = new Chart(document.getElementById("Chart"));
-        this.title = document.getElementById("Title");
-        this.surnameInput = document.getElementById("SurnameStudent");
-        this.nameInput = document.getElementById("NameStudent");
-        this.patronymicInput = document.getElementById("PatronymicStudent");
-        this.femailRadioButton = document.getElementById("Female");
-        this.maleRadioButton = document.getElementById("Male");
-        this.dateOfBirthInput = document.getElementById("DateOfBirth");
-        this.dateOfReceiptInput = document.getElementById("DateOfReceipt");
-        this.validationMessagePatronymic = document.getElementById("ValidationMessagePatronymic");
-        this.validationMessageName = document.getElementById("ValidationMessageName");
-        this.validationMessageSurname = document.getElementById("ValidationMessageSurname");
-        this.validationMessageDateOfBirth = document.getElementById("ValidationMessageDateOfBirth");
-        this.validationMessageDateOfReceipt = document.getElementById("ValidationMessageDateOfReceipt");
-        this.genderPanel = document.getElementById("Gender");
-        this.groupPanel = document.getElementById("HeadingGroup");
-        this.createDatepickers();
-    },
-    createDatepickers: function () {
-        $("#DateOfBirth").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            showOn: "button",
-            dateFormat: "dd.mm.yy"
-        });
-        $("#DateOfReceipt").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            showOn: "button",
-            dateFormat: "dd.mm.yy"
-        });
-        var buttons = document.getElementsByClassName("ui-datepicker-trigger");
-        buttons[0].innerHTML = "";
-        buttons[1].innerHTML = "";
-        var div = document.createElement("div");
-        var div1 = document.createElement("div1");
-        div.classList.add("icon");
-        div1.classList.add("icon");
-        buttons[0].appendChild(div);
-        buttons[1].appendChild(div1);
-    },
-    setStudent: function (student, studentPresences, subjects) {
-        this.studentPresences = studentPresences;
-        this.studentSubjects = subjects;
-        this.title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
-        this.surnameInput.value = student.surname;
-        this.nameInput.value = student.name;
-        this.patronymicInput.value = student.patronymic;
-        if (student.gender === "F") {
-            this.genderPanel.innerHTML = "Женский";
-            this.femailRadioButton.checked = true;
-        }
-        else {
-            this.genderPanel.innerHTML = "Мужской";
-            this.femailRadioButton.checked = false;
-            this.maleRadioButton.checked = true;
-        }
-        this.dateOfBirthInput.value = student.dateOfBirth;
-        this.dateOfReceiptInput.value = student.dateOfReceipt;
-        this.title.setAttribute("data-id", student.id);
+    constructor: function() {
+        this.__chart = new Chart(document.getElementById("Chart"));
+        this.__title = document.getElementById("Title");
+        this.__surnameInput = document.getElementById("SurnameStudent");
+        this.__nameInput = document.getElementById("NameStudent");
+        this.__patronymicInput = document.getElementById("PatronymicStudent");
+        this.__femailRadioButton = document.getElementById("Female");
+        this.__maleRadioButton = document.getElementById("Male");
+        this.__dateOfBirthInput = document.getElementById("DateOfBirth");
+        this.__dateOfReceiptInput = document.getElementById("DateOfReceipt");
+        this.__validationMessagePatronymic = document.getElementById("ValidationMessagePatronymic");
+        this.__validationMessageName = document.getElementById("ValidationMessageName");
+        this.__validationMessageSurname = document.getElementById("ValidationMessageSurname");
+        this.__validationMessageDateOfBirth = document.getElementById("ValidationMessageDateOfBirth");
+        this.__validationMessageDateOfReceipt = document.getElementById("ValidationMessageDateOfReceipt");
+        this.__genderForPrint = document.getElementById("GenderForPrint");
+        this.__groupPanel = document.getElementById("HeadingGroup");
+        this.__createDatepickers();
         this.__initEventHandlers();
-        this.setSubjects(this.studentPresences);
-        this.drawChartForStudent(this.studentPresences, this.studentSubjects);
     },
-    setSubjects: function (studentPresences) {
-        var checkboxes = document.getElementById("subjectsPanel").getElementsByTagName("input");
-        for (var i = 0; i < checkboxes.length; i++)
-            checkboxes[i].checked = false;
-        for (var i = 0; i < studentPresences.length; i++) {
-            var checkbox = document.getElementById("subject" + studentPresences[i].subjectId);
-            checkbox.checked = studentPresences[i].studying;
+    setStudent: function(student, studentPresences, subjects) {
+        this.__studentPresences = studentPresences;
+        this.__studentSubjects = subjects;
+        this.__title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
+        this.__surnameInput.value = student.surname;
+        this.__nameInput.value = student.name;
+        this.__patronymicInput.value = student.patronymic;
+        if (student.gender === "F") {
+            this.__genderForPrint.innerHTML = "Женский";
+            this.__femailRadioButton.checked = true;
+        } else {
+            this.__genderForPrint.innerHTML = "Мужской";
+            this.__femailRadioButton.checked = false;
+            this.__maleRadioButton.checked = true;
         }
+        this.__dateOfBirthInput.value = student.dateOfBirth;
+        this.__dateOfReceiptInput.value = student.dateOfReceipt;
+        this.__title.setAttribute("data-id", student.id);
+        this.__setSubjects(this.__studentPresences);
+        this.__drawChartForStudent(this.__studentPresences, this.__studentSubjects);
     },
-    changeData: function (subjectId, checked) {
+    validate: function() {
+        var regexpName = /^[А-ЯЁ][а-яА-ЯёЁ_\.]{1,20}$/;
+        var regexpDate = /(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d/;
+        this.resetValidation();
+        var isValid = this.__validate(regexpName, this.__nameInput, this.__validationMessageName);
+        isValid &= this.__validate(regexpName, this.__patronymicInput, this.__validationMessagePatronymic);
+        isValid &= this.__validate(regexpName, this.__surnameInput, this.__validationMessageSurname);
+        isValid &= this.__validate(regexpDate, this.__dateOfBirthInput, this.__validationMessageDateOfBirth);
+        isValid &= this.__validate(regexpDate, this.__dateOfReceiptInput, this.__validationMessageDateOfReceipt);
+        if (isValid)
+            this.__title.innerHTML = this.__surnameInput.value + "&nbsp;" + this.__nameInput.value + "&nbsp;" + this.__patronymicInput.value;
+        return isValid;
+    },
+    changeData: function(subjectId, checked) {
         if (checked) {
             for (var i = 0; i < this.__subjects.length; i++)
                 if (this.__subjects[i].id === subjectId) {
-                    this.studentSubjects.push(this.__subjects[i]);
+                    this.__studentSubjects.push(this.__subjects[i]);
                     break;
                 }
-        }
-        else {
-            for (var i = 0; i < this.studentSubjects.length; i++)
-                if (this.studentSubjects[i].id === subjectId) {
-                    this.studentSubjects.splice(i, 1);
+        } else {
+            for (var i = 0; i < this.__studentSubjects.length; i++)
+                if (this.__studentSubjects[i].id === subjectId) {
+                    this.__studentSubjects.splice(i, 1);
                     break;
                 }
         }
         var found = false;
-        for (var i = 0; i < this.studentPresences.length; i++) {
-            if (this.studentPresences[i].subjectId === subjectId) {
-                this.studentPresences[i].studying = checked;
+        for (var i = 0; i < this.__studentPresences.length; i++) {
+            if (this.__studentPresences[i].subjectId === subjectId) {
+                this.__studentPresences[i].studying = checked;
                 found = true;
                 break;
             }
         }
         if (!found) {
             var newStudentPresences = {
-                studentId: this.getCurrentStudentId(),
+                studentId: this.__getCurrentStudentId(),
                 subjectId: subjectId,
                 totalAbsenseTime: 0,
                 withValidReasonTime: 0,
                 studying: true
             };
-            this.studentPresences.push(newStudentPresences);
+            this.__studentPresences.push(newStudentPresences);
         }
     },
-    drawChartForStudent: function (studentPresences, studentSubjects) {
-        this.chart.drawForStudent(studentPresences, studentSubjects);
+    resetStudent: function() {
+        this.__title.innerHTML = "Новый студент";
+        this.__title.removeAttribute("data-id");
+        this.__surnameInput.value = "";
+        this.__nameInput.value = "";
+        this.__genderForPrint.innerHTML = "Женский";
+        this.__patronymicInput.value = "";
+        this.__femailRadioButton.checked = true;
+        this.__dateOfBirthInput.value = "";
+        this.__dateOfReceiptInput.value = "01.09.2009";
     },
-    resetStudent: function () {
-        this.title.innerHTML = "Новый студент";
-        this.title.removeAttribute("data-id");
-        this.surnameInput.value = "";
-        this.nameInput.value = "";
-        this.genderPanel.innerHTML = "Женский";
-        this.patronymicInput.value = "";
-        this.femailRadioButton.checked = true;
-        this.dateOfBirthInput.value = "";
-        this.dateOfReceiptInput.value = "01.09.2009";
+    serialize: function() {
+        return { student: this.__serializeStudent(), presences: this.__serializePresences() };
     },
-    serialize: function () {
-        return { student: this.serializeStudent(), presences: this.serializePresences() };
+    resetValidation: function() {
+        this.__hideValidation(this.__validationMessagePatronymic, this.__patronymicInput);
+        this.__hideValidation(this.__validationMessageName, this.__nameInput);
+        this.__hideValidation(this.__validationMessageSurname, this.__surnameInput);
+        this.__hideValidation(this.__validationMessageDateOfBirth, this.__dateOfBirthInput);
+        this.__hideValidation(this.__validationMessageDateOfReceipt, this.__dateOfReceiptInput);
     },
-    getCurrentStudentId: function () {
-        var id = this.title.getAttribute("data-id");
-        if (id !== null)
-            id = parseInt(id, 10);
-        return id;
-    },
-    serializeStudent: function () {
-        var gender;
-        if (this.femailRadioButton.checked)
-            gender = "F";
-        else
-            gender = "M";
-        var student = {
-            id: this.getCurrentStudentId(),
-            gender: gender,
-            surname: this.surnameInput.value,
-            name: this.nameInput.value,
-            patronymic: this.patronymicInput.value,
-            dateOfBirth: this.dateOfBirthInput.value,
-            dateOfReceipt: this.dateOfReceiptInput.value,
-            group: this.groupPanel.innerHTML
-        };
-        return student;
-    },
-    serializePresences: function () {
-        var presences = [];
-        var checkboxes = document.getElementById("subjectsPanel").getElementsByTagName("input");
-        for (var i = 0; i < checkboxes.length; i++) {
-            presences.push({ id: parseInt(checkboxes[i].getAttribute("data-id"), 10), studying: checkboxes[i].checked });
-        }
-        return presences;
-    },
-    validate: function (student) {
-        var regexpName = /^[а-яА-ЯёЁ][а-яА-ЯёЁ_\.]{1,20}$/;
-        var regexpDate = /(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d/;
-        if (regexpName.test(student.surname) && regexpName.test(student.name) && regexpName.test(student.patronymic) && regexpDate.test(student.dateOfBirth) && regexpDate.test(student.dateOfReceipt)) {
-            this.title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
-            this.resetValidation();
-            return true;
-        }
-        else {
-            this.resetValidation();
-            this.showValidation(student, regexpName, regexpDate);
-            return false;
-        }
-    },
-    showValidation: function (student, regexpName, regexpDate) {
-        if (regexpDate.test(student.dateOfReceipt) !== true) {
-            if (student.dateOfReceipt === "") {
-                this.validationMessageDateOfReceipt.innerHTML = "Поле обязательно к заполнению";
-            }
-            else {
-                this.validationMessageDateOfReceipt.innerHTML = "Введены недопустимые символы";
-            }
-            this.validationMessageDateOfReceipt.setAttribute("style", "visibility: visible");
-            this.dateOfReceiptInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.dateOfReceiptInput.classList.add("validationFocus");
-            this.dateOfReceiptInput.focus();
-        }
-        if (regexpDate.test(student.dateOfBirth) !== true) {
-            if (student.dateOfBirth === "") {
-                this.validationMessageDateOfBirth.innerHTML = "Поле обязательно к заполнению";
-            }
-            else {
-                this.validationMessageDateOfBirth.innerHTML = "Введены недопустимые символы";
-            }
-            this.validationMessageDateOfBirth.setAttribute("style", "visibility: visible");
-            this.dateOfBirthInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.dateOfBirthInput.classList.add("validationFocus");
-            this.dateOfBirthInput.focus();
-        }
-        if (regexpName.test(student.patronymic) !== true) {
-            if (student.patronymic === "") {
-                this.validationMessagePatronymic.innerHTML = "Поле обязательно к заполнению";
-            }
-            else {
-                this.validationMessagePatronymic.innerHTML = "Введены недопустимые символы";
-            }
-            this.validationMessagePatronymic.setAttribute("style", "visibility: visible");
-            this.patronymicInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.patronymicInput.classList.add("validationFocus");
-            this.patronymicInput.focus();
-        }
-        if (regexpName.test(student.name) !== true) {
-            if (student.name === "") {
-                this.validationMessageName.innerHTML = "Поле обязательно к заполнению";
-            }
-            else {
-                this.validationMessageName.innerHTML = "Введены недопустимые символы";
-            }
-            this.validationMessageName.setAttribute("style", "visibility: visible");
-            this.nameInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.nameInput.classList.add("validationFocus");
-            this.nameInput.focus();
-        }
-        if (regexpName.test(student.surname) !== true) {
-            if (student.surname === "") {
-                this.validationMessageSurname.innerHTML = "Поле обязательно к заполнению";
-            }
-            else {
-                this.validationMessageSurname.innerHTML = "Введены недопустимые символы";
-            }
-            this.validationMessageSurname.setAttribute("style", "visibility: visible");
-            this.surnameInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.surnameInput.classList.add("validationFocus");
-            this.surnameInput.focus();
-        }
-    },
-    resetValidation: function () {
-        this.hideValidation(this.validationMessagePatronymic, this.patronymicInput);
-        this.hideValidation(this.validationMessageName, this.nameInput);
-        this.hideValidation(this.validationMessageSurname, this.surnameInput);
-        this.hideValidation(this.validationMessageDateOfBirth, this.dateOfBirthInput);
-        this.hideValidation(this.validationMessageDateOfReceipt, this.dateOfReceiptInput);
-    },
-    hideValidation: function (message, field) {
-        if (field.classList.contains("validationFocus")) {
-            field.classList.remove("validationFocus");
-            field.removeAttribute("style");
-            message.setAttribute("style", "visibility: hidden");
-        }
-    },
-    initalizeSubjects: function (subjects) {
+    initalizeSubjects: function(subjects) {
         this.__subjects = subjects;
         var columns = document.getElementsByClassName("subjectsColumn");
         var j = 0;
@@ -263,41 +124,118 @@
             span.appendChild(input);
             span.appendChild(label);
             columns[j].appendChild(span);
-            input.onchange = function (subjectId, self) {
-                return function () {
+            input.onchange = function(subjectId, self) {
+                return function() {
                     self.changeData(subjectId, this.checked);
-                    self.drawChartForStudent(self.studentPresences, self.studentSubjects);
+                    self.__drawChartForStudent(self.__studentPresences, self.__studentSubjects);
                 };
             }(id, this);
             j = j < 2 ? j + 1 : 0;
         }
     },
-    __initEventHandlers: function () {
+    __setSubjects: function(studentPresences) {
+        var checkboxes = document.getElementById("SubjectsContainer").getElementsByTagName("input");
+        for (var i = 0; i < checkboxes.length; i++)
+            checkboxes[i].checked = false;
+        for (var i = 0; i < studentPresences.length; i++) {
+            var checkbox = document.getElementById("subject" + studentPresences[i].subjectId);
+            checkbox.checked = studentPresences[i].studying;
+        }
+    },
+    __drawChartForStudent: function(studentPresences, studentSubjects) {
+        this.__chart.drawForStudent(studentPresences, studentSubjects);
+    },
+    __getCurrentStudentId: function() {
+        var id = this.__title.getAttribute("data-id");
+        if (id !== null)
+            id = parseInt(id, 10);
+        return id;
+    },
+    __serializeStudent: function() {
+        var student = {
+            id: this.__getCurrentStudentId(),
+            gender: this.__femailRadioButton.checked ? "F" : "M",
+            surname: this.__surnameInput.value,
+            name: this.__nameInput.value,
+            patronymic: this.__patronymicInput.value,
+            dateOfBirth: this.__dateOfBirthInput.value,
+            dateOfReceipt: this.__dateOfReceiptInput.value,
+            group: this.__groupPanel.innerHTML
+        };
+        return student;
+    },
+    __serializePresences: function() {
+        var presences = [];
+        var checkboxes = document.getElementById("SubjectsContainer").getElementsByTagName("input");
+        for (var i = 0; i < checkboxes.length; i++)
+            presences.push({ id: parseInt(checkboxes[i].getAttribute("data-id"), 10), studying: checkboxes[i].checked });
+        return presences;
+    },
+    __validate: function(regexp, input, message) {
+        var isValid = regexp.test(input.value);
+        if (!isValid) {
+            if (input.value === "")
+                message.innerHTML = "Поле обязательно к заполнению";
+            else
+                message.innerHTML = "Введено недопустимое значение";
+            message.setAttribute("style", "visibility: visible");
+            input.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
+            input.classList.add("validationFocus");
+            input.focus();
+        }
+        return isValid;
+    },
+    __hideValidation: function(message, fileId) {
+        if (fileId.classList.contains("validationFocus")) {
+            fileId.classList.remove("validationFocus");
+            fileId.removeAttribute("style");
+            message.setAttribute("style", "visibility: hidden");
+        }
+    },
+    __createDatepickers: function() {
+        var options = {
+            changeMonth: true,
+            changeYear: true,
+            showOn: "button",
+            dateFormat: "dd.mm.yy"
+        };
+        this.__createDatepicker("DateOfBirth", options);
+        this.__createDatepicker("DateOfReceipt", options);
+    },
+    __createDatepicker: function(id, options) {
+        $('#' + id).datepicker(options);
+        var button = document.getElementById(id).parentNode.getElementsByClassName("ui-datepicker-trigger");
+        button[0].innerHTML = "";
+        var div = document.createElement("div");
+        div.classList.add("icon");
+        button[0].appendChild(div);
+    },
+    __initEventHandlers: function() {
         var self = this;
-        this.patronymicInput.oninput = function () {
-            self.hideValidation(self.validationMessagePatronymic, self.patronymicInput);
+        this.__patronymicInput.oninput = function() {
+            self.__hideValidation(self.__validationMessagePatronymic, self.__patronymicInput);
         };
-        this.nameInput.oninput = function () {
-            self.hideValidation(self.validationMessageName, self.nameInput);
+        this.__nameInput.oninput = function() {
+            self.__hideValidation(self.__validationMessageName, self.__nameInput);
         };
-        this.surnameInput.oninput = function () {
-            self.hideValidation(self.validationMessageSurname, self.surnameInput);
+        this.__surnameInput.oninput = function() {
+            self.__hideValidation(self.__validationMessageSurname, self.__surnameInput);
         };
-        $(this.dateOfBirthInput).change(function () {
-            self.hideValidation(self.validationMessageDateOfBirth, self.dateOfBirthInput);
+        $(this.__dateOfBirthInput).change(function() {
+            self.__hideValidation(self.__validationMessageDateOfBirth, self.__dateOfBirthInput);
         });
-        this.dateOfBirthInput.oninput = function () {
-            self.hideValidation(self.validationMessageDateOfBirth, self.dateOfBirthInput);
+        this.__dateOfBirthInput.oninput = function() {
+            self.__hideValidation(self.__validationMessageDateOfBirth, self.__dateOfBirthInput);
         };
-        $(this.dateOfReceiptInput).change(function () {
-            self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceiptInput);
+        $(this.__dateOfReceiptInput).change(function() {
+            self.__hideValidation(self.__validationMessageDateOfReceipt, self.__dateOfReceiptInput);
         });
-        this.dateOfReceiptInput.oninput = function () {
-            self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceiptInput);
+        this.__dateOfReceiptInput.oninput = function() {
+            self.__hideValidation(self.__validationMessageDateOfReceipt, self.__dateOfReceiptInput);
         };
-        document.getElementById("TotalStatistics").onclick = function () {
-            self.chart.drawSubjectText();
-            self.chart.drawTotalDoughnutChart();
+        document.getElementById("TotalStatistics").onclick = function() {
+            self.__chart.drawSubjectText();
+            self.__chart.drawTotalDoughnutChart();
         };
     }
 });
