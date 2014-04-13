@@ -60,10 +60,10 @@
     },
     __initEventHandlers: function() {
         var self = this;
-        addEvent(this.groups.div1, "groupChanged", function(e) {
+        EventHelpers.addEvent(this.groups.div1, "groupChanged", function (e) {
             self.__setListForGroup(e.detail.group.innerText);
         });
-        addEvent(this.studentsList.list, "studentChanged", function(e) {
+        EventHelpers.addEvent(this.studentsList.list, "studentChanged", function (e) {
             self.__setStudent(e.detail.id);
         });
         document.getElementById("AddStudent").onclick = function() {

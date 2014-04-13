@@ -25,7 +25,7 @@
                 self.setActiveGroup(sender.currentTarget);
                 self.activeGroup = sender.currentTarget;
                 document.getElementById("HeadinGgroup").innerHTML = self.activeGroup.innerHTML;
-                triggerEvent(self.div1, "groupChanged", { group: self.activeGroup });
+                EventHelpers.triggerEvent(self.div1, "groupChanged", { group: self.activeGroup });
             });
             ul.appendChild(li, ul.firstChild);
         }
