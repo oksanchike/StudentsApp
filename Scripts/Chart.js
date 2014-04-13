@@ -48,8 +48,20 @@
         this.drawRectangleDivision(xThirdQuarter, y, 5);
         this.drawRectangleDivision(xLast, y, 13, totalHours);
     },
+    drawEmptiLine: function (x, y) {
+        var context = this.context;
+        context.save();
+        var height = 25;
+        var rectangleWidth = this.lineWidth;
+        context.beginPath();
+        context.rect(x, y, rectangleWidth, height);
+        context.fillStyle = "#E8E8E8";
+        context.fill();
+        context.restore();
+    },
     drawRectangles: function (totalLength, ratio, x, y) {
         var context = this.context;
+        this.drawEmptiLine(x, y);
         context.save();
         var height = 25;
         this.sudjectsFromLineChart = [];
@@ -233,7 +245,7 @@
         for (var i = 0; i < self.__dataStudentsPresence.length; i++) {
             if (self.__dataStudentsPresence[i].studying)
                 totalAbsenseTime += self.__dataStudentsPresence[i].totalAbsenseTime;
-            }
+        }
         return totalAbsenseTime;
     },
     getWithValidReasonTime: function () {
@@ -264,7 +276,7 @@
         this.toolTip.classList.add("toolTip");
         this.toolTip.width = width;
         this.toolTip.height = 20;
-        this.toolTip.setAttribute("style", "left:"+mouseX+"px; "+"top:"+mouseY+"px");
+        this.toolTip.setAttribute("style", "left:" + mouseX + "px; " + "top:" + mouseY + "px");
         this.tooltipContext.font = "normal 11pt PT Sans";
         this.tooltipContext.fillText(title, 5, 15);
         this.tooltipContext.closePath();
@@ -281,8 +293,10 @@
             var mouseY = e.offsetY;
             if (self.isMouseOnLine(mouseX, mouseY)) {
                 var subject = self.getSubjectByCoordinates(mouseX);
-                self.drawSubjectText(subject.total, subject.title);
-                self.drawDoughnutChart(subject.total, subject.elapsed, subject.totalAbsense, subject.withValidReason);
+                if (subject) {
+                    self.drawSubjectText(subject.total, subject.title);
+                    self.drawDoughnutChart(subject.total, subject.elapsed, subject.totalAbsense, subject.withValidReason);
+                }
             }
         }
         this.canvas.onmousemove = function (e) {
@@ -290,9 +304,11 @@
             var mouseY = e.offsetY;
             if (self.isMouseOnLine(mouseX, mouseY)) {
                 var subject = self.getSubjectByCoordinates(mouseX);
-                self.hideToolTip();
-                self.showToolTip(subject.title, mouseX, mouseY + 30);
-                self.canvas.setAttribute("style", "cursor: pointer");
+                if (subject) {
+                    self.hideToolTip();
+                    self.showToolTip(subject.title, mouseX, mouseY + 30);
+                    self.canvas.setAttribute("style", "cursor: pointer");
+                }
             }
             else {
                 self.hideToolTip();
