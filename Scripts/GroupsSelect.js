@@ -1,16 +1,22 @@
 ﻿var GroupsSelect = Base.extend({
     constructor: function (groups) {
-        this.active = false;
-        this.div2 = document.getElementById("Groups");
-        this.div = document.getElementById("ButtonGroups");
-        this.div1 = document.createElement("div");
-        this.div1.classList.add("groupList");
+        this.__active = false;
+        this.__groupsContainer = document.getElementById("Groups");
+        this.__buttonGroups = document.getElementById("GroupsButton");
+        this.groupsList = document.createElement("div");
+        this.groupsList.classList.add("groupList");
         this.activeGroup = groups[0];
-        this.addGroups(groups);
+        this.__addGroups(groups);
     },
-    addGroups: function (groups) {
+    clickGroups: function () {
+        if (!this.__active)
+            this.__open();
+        else
+            this.__close();
+    },
+    __addGroups: function (groups) {
         var ul = document.createElement("ul");
-        this.div1.appendChild(ul);
+        this.groupsList.appendChild(ul);
         for (var i = 0; i < groups.length; i++) {
             var self = this;
             var li = document.createElement("li");
@@ -22,15 +28,15 @@
                 document.getElementById("HeadingGroup").innerHTML = this.activeGroup.innerHTML;
             }
             li.addEventListener("click", function (sender) {
-                self.setActiveGroup(sender.currentTarget);
+                self.__setActiveGroup(sender.currentTarget);
                 self.activeGroup = sender.currentTarget;
                 document.getElementById("HeadingGroup").innerHTML = self.activeGroup.innerHTML;
-                EventHelpers.triggerEvent(self.div1, "groupChanged", { group: self.activeGroup });
+                EventHelpers.triggerEvent(self.groupsList, "groupChanged", { group: self.activeGroup });
             });
             ul.appendChild(li, ul.firstChild);
         }
     },
-    setActiveGroup: function (li) {
+    __setActiveGroup: function (li) {
         this.activeGroup.classList.remove("displayNone");
         this.activeGroup.classList.add("displayListItem");
         this.activeGroup = li;
@@ -38,22 +44,16 @@
             this.activeGroup.classList.remove("displayListItem");
         this.activeGroup.classList.add("displayNone");
     },
-    clickGroups: function () {
-        if (!this.active)
-            this.open();
-        else
-            this.close();
+    __open: function () {
+        this.__active = !this.__active;
+        this.__buttonGroups.appendChild(this.groupsList);
+        this.__groupsContainer.classList.add("groupsList-active");
     },
-    open: function () {
-        this.active = !this.active;
-        this.div.appendChild(this.div1);
-        this.div2.classList.add("groupsList-active");
-    },
-    close: function () {
-        if (this.active) {
-            this.active = !this.active;
-            this.div.removeChild(this.div.childNodes[3]);
-            this.div2.classList.remove("groupsList-active");
+    __close: function () {
+        if (this.__active) {
+            this.__active = !this.__active;
+            this.__buttonGroups.removeChild(this.__buttonGroups.childNodes[3]);
+            this.__groupsContainer.classList.remove("groupsList-active");
         }
     }
 });

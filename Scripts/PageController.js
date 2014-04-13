@@ -60,7 +60,7 @@
     },
     __initEventHandlers: function() {
         var self = this;
-        EventHelpers.addEvent(this.groups.div1, "groupChanged", function (e) {
+        EventHelpers.addEvent(this.groups.groupsList, "groupChanged", function (e) {
             self.__setListForGroup(e.detail.group.innerText);
         });
         EventHelpers.addEvent(this.__studentsList.list, "studentChanged", function (e) {
@@ -83,7 +83,7 @@
             self.groups.clickGroups();
         };
         document.onclick = function() {
-            self.groups.close();
+            self.groups.__close();
         };
 
     }
