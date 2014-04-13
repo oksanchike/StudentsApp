@@ -386,7 +386,7 @@ input[type="radio"] {
 }
 
 .icon {
-    background-image: url(~/Content/calendar.png);
+    background-image: url(../Content/calendar.png);
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;

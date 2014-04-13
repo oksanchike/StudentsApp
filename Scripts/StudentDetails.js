@@ -1,21 +1,21 @@
 ﻿var StudentDetails = Base.extend({
     constructor: function () {
-        this.chart = new Chart("Chart");
-        this.title = document.getElementById("Title-student");
-        this.surname = document.getElementById("SurnameStudent");
-        this.name = document.getElementById("NameStudent");
-        this.patronymic = document.getElementById("PatronymicStudent");
-        this.femail = document.getElementById("Female");
-        this.male = document.getElementById("Male");
-        this.dateOfBirth = document.getElementById("DateOfBirth");
-        this.dateOfReceipt = document.getElementById("DateOfReceipt");
-        this.validationMessagePatronymic = document.getElementById("validationMessagePatronymic");
-        this.validationMessageName = document.getElementById("validationMessageName");
-        this.validationMessageSurname = document.getElementById("validationMessageSurname");
-        this.validationMessageDateOfBirth = document.getElementById("validationMessageDateOfBirth");
-        this.validationMessageDateOfReceipt = document.getElementById("validationMessageDateOfReceipt");
-        this.gender = document.getElementById("Gender");
-        this.group = document.getElementById("HeadinGgroup");
+        this.chart = new Chart(document.getElementById("Chart"));
+        this.title = document.getElementById("Title");
+        this.surnameInput = document.getElementById("SurnameStudent");
+        this.nameInput = document.getElementById("NameStudent");
+        this.patronymicInput = document.getElementById("PatronymicStudent");
+        this.femailRadioButton = document.getElementById("Female");
+        this.maleRadioButton = document.getElementById("Male");
+        this.dateOfBirthInput = document.getElementById("DateOfBirth");
+        this.dateOfReceiptInput = document.getElementById("DateOfReceipt");
+        this.validationMessagePatronymic = document.getElementById("ValidationMessagePatronymic");
+        this.validationMessageName = document.getElementById("ValidationMessageName");
+        this.validationMessageSurname = document.getElementById("ValidationMessageSurname");
+        this.validationMessageDateOfBirth = document.getElementById("ValidationMessageDateOfBirth");
+        this.validationMessageDateOfReceipt = document.getElementById("ValidationMessageDateOfReceipt");
+        this.genderPanel = document.getElementById("Gender");
+        this.groupPanel = document.getElementById("HeadingGroup");
         this.createDatepickers();
     },
     createDatepickers: function () {
@@ -45,20 +45,20 @@
         this.studentPresences = studentPresences;
         this.studentSubjects = subjects;
         this.title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
-        this.surname.value = student.surname;
-        this.name.value = student.name;
-        this.patronymic.value = student.patronymic;
+        this.surnameInput.value = student.surname;
+        this.nameInput.value = student.name;
+        this.patronymicInput.value = student.patronymic;
         if (student.gender === "F") {
-            this.gender.innerHTML = "Женский";
-            this.femail.checked = true;
+            this.genderPanel.innerHTML = "Женский";
+            this.femailRadioButton.checked = true;
         }
         else {
-            this.gender.innerHTML = "Мужской";
-            this.femail.checked = false;
-            this.male.checked = true;
+            this.genderPanel.innerHTML = "Мужской";
+            this.femailRadioButton.checked = false;
+            this.maleRadioButton.checked = true;
         }
-        this.dateOfBirth.value = student.dateOfBirth;
-        this.dateOfReceipt.value = student.dateOfReceipt;
+        this.dateOfBirthInput.value = student.dateOfBirth;
+        this.dateOfReceiptInput.value = student.dateOfReceipt;
         this.title.setAttribute("data-id", student.id);
         this.__initEventHandlers();
         this.setSubjects(this.studentPresences);
@@ -114,13 +114,13 @@
     resetStudent: function () {
         this.title.innerHTML = "Новый студент";
         this.title.removeAttribute("data-id");
-        this.surname.value = "";
-        this.name.value = "";
-        this.gender.innerHTML = "Женский";
-        this.patronymic.value = "";
-        this.femail.checked = true;
-        this.dateOfBirth.value = "";
-        this.dateOfReceipt.value = "01.09.2009";
+        this.surnameInput.value = "";
+        this.nameInput.value = "";
+        this.genderPanel.innerHTML = "Женский";
+        this.patronymicInput.value = "";
+        this.femailRadioButton.checked = true;
+        this.dateOfBirthInput.value = "";
+        this.dateOfReceiptInput.value = "01.09.2009";
     },
     serialize: function () {
         return { student: this.serializeStudent(), presences: this.serializePresences() };
@@ -133,19 +133,19 @@
     },
     serializeStudent: function () {
         var gender;
-        if (this.femail.checked)
+        if (this.femailRadioButton.checked)
             gender = "F";
         else
             gender = "M";
         var student = {
             id: this.getCurrentStudentId(),
             gender: gender,
-            surname: this.surname.value,
-            name: this.name.value,
-            patronymic: this.patronymic.value,
-            dateOfBirth: this.dateOfBirth.value,
-            dateOfReceipt: this.dateOfReceipt.value,
-            group: this.group.innerHTML
+            surname: this.surnameInput.value,
+            name: this.nameInput.value,
+            patronymic: this.patronymicInput.value,
+            dateOfBirth: this.dateOfBirthInput.value,
+            dateOfReceipt: this.dateOfReceiptInput.value,
+            group: this.groupPanel.innerHTML
         };
         return student;
     },
@@ -180,9 +180,9 @@
                 this.validationMessageDateOfReceipt.innerHTML = "Введены недопустимые символы";
             }
             this.validationMessageDateOfReceipt.setAttribute("style", "visibility: visible");
-            this.dateOfReceipt.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.dateOfReceipt.classList.add("validationFocus");
-            this.dateOfReceipt.focus();
+            this.dateOfReceiptInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
+            this.dateOfReceiptInput.classList.add("validationFocus");
+            this.dateOfReceiptInput.focus();
         }
         if (regexpDate.test(student.dateOfBirth) !== true) {
             if (student.dateOfBirth === "") {
@@ -192,9 +192,9 @@
                 this.validationMessageDateOfBirth.innerHTML = "Введены недопустимые символы";
             }
             this.validationMessageDateOfBirth.setAttribute("style", "visibility: visible");
-            this.dateOfBirth.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.dateOfBirth.classList.add("validationFocus");
-            this.dateOfBirth.focus();
+            this.dateOfBirthInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
+            this.dateOfBirthInput.classList.add("validationFocus");
+            this.dateOfBirthInput.focus();
         }
         if (regexpName.test(student.patronymic) !== true) {
             if (student.patronymic === "") {
@@ -204,9 +204,9 @@
                 this.validationMessagePatronymic.innerHTML = "Введены недопустимые символы";
             }
             this.validationMessagePatronymic.setAttribute("style", "visibility: visible");
-            this.patronymic.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.patronymic.classList.add("validationFocus");
-            this.patronymic.focus();
+            this.patronymicInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
+            this.patronymicInput.classList.add("validationFocus");
+            this.patronymicInput.focus();
         }
         if (regexpName.test(student.name) !== true) {
             if (student.name === "") {
@@ -216,9 +216,9 @@
                 this.validationMessageName.innerHTML = "Введены недопустимые символы";
             }
             this.validationMessageName.setAttribute("style", "visibility: visible");
-            this.name.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.name.classList.add("validationFocus");
-            this.name.focus();
+            this.nameInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
+            this.nameInput.classList.add("validationFocus");
+            this.nameInput.focus();
         }
         if (regexpName.test(student.surname) !== true) {
             if (student.surname === "") {
@@ -228,17 +228,17 @@
                 this.validationMessageSurname.innerHTML = "Введены недопустимые символы";
             }
             this.validationMessageSurname.setAttribute("style", "visibility: visible");
-            this.surname.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
-            this.surname.classList.add("validationFocus");
-            this.surname.focus();
+            this.surnameInput.setAttribute("style", "background: rgba(255, 204, 204, 0.2)");
+            this.surnameInput.classList.add("validationFocus");
+            this.surnameInput.focus();
         }
     },
     resetValidation: function () {
-        this.hideValidation(this.validationMessagePatronymic, this.patronymic);
-        this.hideValidation(this.validationMessageName, this.name);
-        this.hideValidation(this.validationMessageSurname, this.surname);
-        this.hideValidation(this.validationMessageDateOfBirth, this.dateOfBirth);
-        this.hideValidation(this.validationMessageDateOfReceipt, this.dateOfReceipt);
+        this.hideValidation(this.validationMessagePatronymic, this.patronymicInput);
+        this.hideValidation(this.validationMessageName, this.nameInput);
+        this.hideValidation(this.validationMessageSurname, this.surnameInput);
+        this.hideValidation(this.validationMessageDateOfBirth, this.dateOfBirthInput);
+        this.hideValidation(this.validationMessageDateOfReceipt, this.dateOfReceiptInput);
     },
     hideValidation: function (message, field) {
         if (field.classList.contains("validationFocus")) {
@@ -275,26 +275,26 @@
     },
     __initEventHandlers: function () {
         var self = this;
-        this.patronymic.oninput = function () {
-            self.hideValidation(self.validationMessagePatronymic, self.patronymic);
+        this.patronymicInput.oninput = function () {
+            self.hideValidation(self.validationMessagePatronymic, self.patronymicInput);
         };
-        this.name.oninput = function () {
-            self.hideValidation(self.validationMessageName, self.name);
+        this.nameInput.oninput = function () {
+            self.hideValidation(self.validationMessageName, self.nameInput);
         };
-        this.surname.oninput = function () {
-            self.hideValidation(self.validationMessageSurname, self.surname);
+        this.surnameInput.oninput = function () {
+            self.hideValidation(self.validationMessageSurname, self.surnameInput);
         };
-        $(this.dateOfBirth).change(function () {
-            self.hideValidation(self.validationMessageDateOfBirth, self.dateOfBirth);
+        $(this.dateOfBirthInput).change(function () {
+            self.hideValidation(self.validationMessageDateOfBirth, self.dateOfBirthInput);
         });
-        this.dateOfBirth.oninput = function () {
-            self.hideValidation(self.validationMessageDateOfBirth, self.dateOfBirth);
+        this.dateOfBirthInput.oninput = function () {
+            self.hideValidation(self.validationMessageDateOfBirth, self.dateOfBirthInput);
         };
-        $(this.dateOfReceipt).change(function () {
-            self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceipt);
+        $(this.dateOfReceiptInput).change(function () {
+            self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceiptInput);
         });
-        this.dateOfReceipt.oninput = function () {
-            self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceipt);
+        this.dateOfReceiptInput.oninput = function () {
+            self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceiptInput);
         };
         document.getElementById("TotalStatistics").onclick = function () {
             self.chart.drawSubjectText();

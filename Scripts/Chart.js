@@ -1,6 +1,6 @@
 ﻿var Chart = Base.extend({
-    constructor: function (canvasId) {
-        this.canvas = document.getElementById(canvasId);
+    constructor: function (canvas) {
+        this.canvas = canvas;
         this.context = this.canvas.getContext("2d");
         this.toolTip = document.createElement("canvas");
         this.tooltipContext = this.toolTip.getContext("2d");
