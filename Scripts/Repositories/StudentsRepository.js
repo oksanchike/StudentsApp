@@ -73,9 +73,9 @@
             return null;
     },
     getAll: function () {
-        return this.students().order("surname asec").get();
+        return this.students().order("surname asec").get().slice(0);
     },
     getByGroup: function (group) {
-        return this.students({ group: group } ).order("surname asec").get();
+        return this.students({ group: group }).order("surname asec").get().slice(0);
     }
 });

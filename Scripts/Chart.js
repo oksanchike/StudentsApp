@@ -17,6 +17,7 @@
         this.__dataSubjects = dataSubjects;
         var totalHours = this.getTotalHours();
         this.drawLineChart(totalHours);
+        this.drawSubjectsTotalText();
         this.drawTotalDoughnutChart();
     },
     drawTotalDoughnutChart: function () {
@@ -99,12 +100,16 @@
         }
         context.restore();
     },
-    drawSubjectsText: function (total, titel) {
+    drawSubjectText: function (total, title) {
         var subjectTitle = document.getElementById("SelectedSubjectTitle");
         if (total)
-            subjectTitle.innerHTML = titel + " ( " + total + " часов )";
+            subjectTitle.innerHTML = title + " ( " + total + " часов )";
         else
-            subjectTitle.innerHTML = "";
+            this.drawSubjectsTotalText();
+    },
+    drawSubjectsTotalText: function () {
+        var subjectTitle = document.getElementById("SelectedSubjectTitle");
+        subjectTitle.innerHTML = "Все предметы" + " ( " + this.getTotalHours() + " часов )";
     },
     drawEmptyDoughnut: function () {
         var context = this.context;
@@ -276,7 +281,7 @@
             var mouseY = e.offsetY;
             if (self.isMouseOnLine(mouseX, mouseY)) {
                 var subject = self.getSubjectByCoordinates(mouseX);
-                self.drawSubjectsText(subject.total, subject.title);
+                self.drawSubjectText(subject.total, subject.title);
                 self.drawDoughnutChart(subject.total, subject.elapsed, subject.totalAbsense, subject.withValidReason);
             }
         }

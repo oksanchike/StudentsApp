@@ -18,6 +18,8 @@
         this.group = document.getElementById("HeadinGgroup");
     },
     setStudent: function (student, studentPresences, subjects) {
+        this.studentPresences = studentPresences;
+        this.studentSubjects = subjects;
         this.title.innerHTML = student.surname + "&nbsp;" + student.name + "&nbsp;" + student.patronymic;
         this.surname.value = student.surname;
         this.name.value = student.name;
@@ -35,20 +37,55 @@
         this.dateOfReceipt.value = student.dateOfReceipt;
         this.title.setAttribute("data-id", student.id);
         this.__initEventHandlers();
-        this.setSubjects(studentPresences);
-        this.drawChartForStudent(studentPresences, subjects);
+        this.setSubjects(this.studentPresences);
+        this.drawChartForStudent(this.studentPresences, this.studentSubjects);
     },
     setSubjects: function (studentPresences) {
         var checkboxes = document.getElementById("subjectsPanel").getElementsByTagName("input");
         for (var i = 0; i < checkboxes.length; i++)
             checkboxes[i].checked = false;
         for (var i = 0; i < studentPresences.length; i++) {
+            var self = this;
             var checkbox = document.getElementById("subject" + studentPresences[i].subjectId);
             checkbox.checked = studentPresences[i].studying;
         }
     },
-    drawChartForStudent: function (studentPresences, subjects) {
-        this.chart.drawForStudent(studentPresences, subjects);
+    changeData: function (subjectId, checked) {
+        if (checked) {
+            for (var i = 0; i < this.subjects.length; i++)
+                if (this.subjects[i].id == subjectId) {
+                    this.studentSubjects.push(this.subjects[i]);
+                    break;
+                }
+        }
+        else {
+            for (var i = 0; i < this.studentSubjects.length; i++)
+                if (this.studentSubjects[i].id == subjectId) {
+                    this.studentSubjects.splice(i, 1);
+                    break;
+                }
+        }
+        var found = false;
+        for (var i = 0; i < this.studentPresences.length; i++) {
+            if (this.studentPresences[i].subjectId == subjectId) {
+                this.studentPresences[i].studying = checked;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            var newStudentPresences = {
+                studentId: this.getCurrentStudentId(),
+                subjectId: subjectId,
+                totalAbsenseTime: 0,
+                withValidReasonTime: 0,
+                studying: true
+            };
+            this.studentPresences.push(newStudentPresences);
+        }
+    },
+    drawChartForStudent: function (studentPresences, studentSubjects) {
+        this.chart.drawForStudent(studentPresences, studentSubjects);
     },
     resetStudent: function () {
         this.title.innerHTML = "Новый студент";
@@ -64,17 +101,20 @@
     serialize: function () {
         return { student: this.serializeStudent(), presences: this.serializePresences() };
     },
-    serializeStudent: function () {
-        var gender;
+    getCurrentStudentId: function () {
         var id = this.title.getAttribute("data-id");
         if (id !== null)
             id = parseInt(id, 10);
+        return id;
+    },
+    serializeStudent: function () {
+        var gender;
         if (this.femail.checked)
             gender = "F";
         else
             gender = "M";
         var student = {
-            id: id,
+            id: this.getCurrentStudentId(),
             gender: gender,
             surname: this.surname.value,
             name: this.name.value,
@@ -184,20 +224,28 @@
         }
     },
     initalizeSubjects: function (subjects) {
+        this.subjects = subjects;
         var columns = document.getElementsByClassName("subjectsColumn");
         var j = 0;
         for (var i = 0; i < subjects.length; i++) {
+            var id = subjects[i].id;
             var span = document.createElement("span");
             var input = document.createElement("input");
             var label = document.createElement("label");
             label.innerHTML = subjects[i].title;
             label.setAttribute("for", "subject" + (i + 1));
             input.type = "checkbox";
-            input.setAttribute("id", "subject" + subjects[i].id);
-            input.setAttribute("data-id", subjects[i].id);
+            input.setAttribute("id", "subject" + id);
+            input.setAttribute("data-id", id);
             span.appendChild(input);
             span.appendChild(label);
             columns[j].appendChild(span);
+            input.onchange = function (subjectId, self) {
+                return function () {
+                    self.changeData(subjectId, this.checked);
+                    self.drawChartForStudent(self.studentPresences, self.studentSubjects);
+                }
+            }(id, this);
             j = j < 2 ? j + 1 : 0;
         }
     },
@@ -219,7 +267,7 @@
             self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceipt);
         };
         document.getElementById("TotalStatistics").onclick = function () {
-            self.chart.drawSubjectsText();
+            self.chart.drawSubjectText();
             self.chart.drawTotalDoughnutChart();
         };
     }

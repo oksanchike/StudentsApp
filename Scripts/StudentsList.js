@@ -13,7 +13,7 @@
     getActiveId: function () {
         var id = this.active.getAttribute("data-id");
         if (id !== null)
-            id = parseInt(id);
+            id = parseInt(id, 10);
         return id;
     },
     addStudent: function () {

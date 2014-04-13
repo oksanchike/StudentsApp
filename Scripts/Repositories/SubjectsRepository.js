@@ -15,6 +15,6 @@
         return this.subjects({ id: id }).first();
     },
     getAll: function () {
-        return this.subjects().get();
+        return this.subjects().get().slice(0);
     }
 });

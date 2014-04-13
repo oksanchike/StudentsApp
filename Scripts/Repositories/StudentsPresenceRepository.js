@@ -69,9 +69,9 @@
         }
     },
     getByStudentId: function (id) {
-        return this.studentsPresence({ studentId: id }).get();
+        return this.studentsPresence({ studentId: id }).get().slice(0);
     },
     getAll: function () {
-        return this.studentsPresence().get();
+        return this.studentsPresence().get().slice(0);
     }
 });
