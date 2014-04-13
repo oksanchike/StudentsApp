@@ -1,6 +1,6 @@
 ﻿var StudentDetails = Base.extend({
     constructor: function () {
-        this.chart = new Chart("draw");
+        this.chart = new Chart("Chart");
         this.title = document.getElementById("Title-student");
         this.surname = document.getElementById("SurnameStudent");
         this.name = document.getElementById("NameStudent");

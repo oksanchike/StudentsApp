@@ -3,71 +3,57 @@
     padding: 0;
 }
 
-    body > section {
-        width: 793px;
-        margin: 0 auto;
-        font-family: "PT Sans", sans-serif;
-    }
-
-.sizeMain {
-    font-size: 0.879em;
+body > section {
+    font-family: "PT Sans", sans-serif;
+    margin: 0 auto;
+    width: 793px;
 }
 
-.floatRight {
-    float: right;
-}
+.sizeMain { font-size: 0.879em; }
 
-.floatLeft {
-    float: left;
-}
+.floatRight { float: right; }
+
+.floatLeft { float: left; }
 
 section header {
-    width: 793px;
     color: #6f6a6a;
     padding: 10px 20px;
+    width: 793px;
 }
 
-header span {
-    display: none;
-}
+header span { display: none; }
 
-.header {
-    display: none;
-}
+.header { display: none; }
 
 .clearfix:after {
+    clear: both;
     content: "";
     display: table;
-    clear: both;
 }
 
 .content {
     border-top: 10px solid #2d89d5;
+    margin-bottom: 50px;
     min-height: 300px;
     padding: 15px;
-    padding-top: 0;
     padding-right: 25px;
-    margin-bottom: 50px;
+    padding-top: 0;
 }
 
-    .content .link {
-        display: none;
-    }
+.content .link { display: none; }
 
 h3 {
-    padding: 0;
-    margin: 0;
-    margin-top: 5px;
-    margin-left: -15px;
-    font-family: "PT Sans",sans-serif;
-    font-size: 1.3em;
     color: #000;
+    font-family: "PT Sans", sans-serif;
+    font-size: 1.3em;
+    margin: 0;
+    margin-left: -15px;
+    margin-top: 5px;
+    padding: 0;
     text-align: center;
 }
 
-aside {
-    display: none;
-}
+aside { display: none; }
 
 .content section {
     padding: 20px;
@@ -75,111 +61,93 @@ aside {
 }
 
 h4 {
-    padding: 0;
-    margin: 0;
     color: #000;
-    font-weight: normal;
     font-size: 1.1em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
 }
 
 .personalData, .checkboxesSubject {
-    margin-top: 20px;
     display: inline-block;
+    margin-top: 20px;
 }
 
-form {
-    padding-top: 20px;
-}
+form { padding-top: 20px; }
 
 .personalData input[type="text"], input[type="date"] {
-    min-height: 20px;
-    width: 230px;
-    border: 1px solid white;
-    padding: 1px 5px;
     background: white;
+    border: 1px solid white;
+    min-height: 20px;
+    padding: 1px 5px;
+    width: 230px;
 }
 
-.personalData .validation {
-    visibility: hidden;
-}
+.personalData .validation { visibility: hidden; }
 
-.gender {
-    min-height: 22px;
-}
+.gender { min-height: 22px; }
 
 .genderLabel {
     display: inline;
-    visibility: hidden;
     margin-left: 16px;
+    visibility: hidden;
 }
 
 .genderForPrint {
     display: inline;
-    position: absolute;
-    top: 190px;
     left: 154px;
     padding: 0;
+    position: absolute;
+    top: 190px;
 }
 
 
 input[type="radio"] {
-    vertical-align: middle;
-    padding: 0;
     margin: 0;
     margin-right: 3px;
+    padding: 0;
+    vertical-align: middle;
 }
 
 input[type="text"].hasDatepicker {
+    border: 1px solid white;
     margin-right: 66px;
+    min-height: 20px;
     padding: 3px 0 0 0;
     width: 90px;
-    min-height: 20px;
-    border: 1px solid white;
 }
 
-.ui-datepicker-trigger {
-    display:none;
-}
+.ui-datepicker-trigger { display: none; }
 
 .field {
     clear: both;
-    text-align: right;
     margin-bottom: 13.5px;
+    text-align: right;
     vertical-align: middle;
 }
 
-hr {
-    display: none;
-}
+hr { display: none; }
 
 .personalData {
     margin-top: 0;
     width: 575px;
 }
 
-    .personalData:nth-child(2) {
-        width: 496px;
-    }
+.personalData:nth-child(2) { width: 496px; }
 
-    .personalData label {
-        float: left;
-        margin-top: 5px;
-        font-size: 87.9%;
-    }
-
-.subjects {
-    margin-top: 20px;
+.personalData label {
+    float: left;
+    font-size: 87.9%;
+    margin-top: 5px;
 }
 
-.subjectsColumn {
-    width: 200px;
-}
+.subjects { margin-top: 20px; }
+
+.subjectsColumn { width: 200px; }
 
 .subjects span {
     display: block;
     margin-bottom: 10px;
 }
 
-.canvasDraw {
-    margin-left: 30px;
-}
+.canvasDraw { margin-left: 30px; }

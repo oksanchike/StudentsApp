@@ -1,136 +1,138 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Список студентов</title>
-    <link href="http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic" rel="stylesheet" type="text/css" />
-    <link media="print" rel="stylesheet" href="../Styles/PrintStyles.css" />
-    <link media="screen" rel="stylesheet" href="../Styles/CommonStyles.css" />
-    <link rel="stylesheet" href="../Styles/custom-theme/jquery-ui-1.10.4.custom.css">
-    <script src="../Scripts/libs/Base.js"></script>
-    <script src="../Scripts/libs/taffy.js"></script>
-    <script src="../Scripts/EventHelpers.js"></script>
-    <script src="../Scripts/Repositories/StudentsRepository.js"></script>
-    <script src="../Scripts/PageController.js"></script>
-    <script src="../Scripts/StudentsList.js"></script>
-    <script src="../Scripts/StudentDetails.js"></script>
-    <script src="../Scripts/Repositories/SubjectsRepository.js"></script>
-    <script src="../Scripts/Repositories/StudentsPresenceRepository.js"></script>
-    <script src="../Scripts/GroupsSelect.js"></script>
-    <script src="../Scripts/Chart.js"></script>
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="../Scripts/libs/query.ui.datepicker-ru.js"></script>
-    <script type ="text/javascript">
-        window.onload = function () {
-            var pageController = new PageController();
-        };
-    </script>
-</head>
-<body>
-    <section>
-        <header class="header">
-            <div class="clearfix">
-                <div class="layout-column-1 floatLeft">
-                    <h2 class ="pageTitle">Cписок студентов</h2>
-                </div>
-                <div class="layout-column-2 sizeMain floatLeft" id="ButtonGroups">
-                    <div class="groups" id="Groups">
-                        <span class="group"><span id ="HeadinGgroup"></span>
-                            <img src="../Content/pointer.png" style="margin-left: 10px"></span>
+    <head>
+        <title>Список студентов</title>
+        <link href="http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic" rel="stylesheet" type="text/css" />
+        <link media="print" rel="stylesheet" href="../Styles/PrintStyles.css" />
+        <link media="screen" rel="stylesheet" href="../Styles/CommonStyles.css" />
+        <link rel="stylesheet" href="../Styles/custom-theme/jquery-ui-1.10.4.custom.css">
+        <script src="../Scripts/libs/Base.js"></script>
+        <script src="../Scripts/libs/taffy.js"></script>
+        <script src="../Scripts/EventHelpers.js"></script>
+        <script src="../Scripts/Repositories/StudentsRepository.js"></script>
+        <script src="../Scripts/PageController.js"></script>
+        <script src="../Scripts/StudentsList.js"></script>
+        <script src="../Scripts/StudentDetails.js"></script>
+        <script src="../Scripts/Repositories/SubjectsRepository.js"></script>
+        <script src="../Scripts/Repositories/StudentsPresenceRepository.js"></script>
+        <script src="../Scripts/GroupsSelect.js"></script>
+        <script src="../Scripts/Chart.js"></script>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script src="../Scripts/libs/query.ui.datepicker-ru.js"></script>
+        <script type ="text/javascript">
+            window.onload = function() {
+                var pageController = new PageController();
+            };
+        </script>
+    </head>
+    <body>
+        <section>
+            <header class="header">
+                <div class="clearfix">
+                    <div class="layout-column-1 floatLeft">
+                        <h2 class ="pageTitle">Cписок студентов</h2>
+                    </div>
+                    <div class="layout-column-2 sizeMain floatLeft" id="ButtonGroups">
+                        <div class="groups" id="Groups">
+                            <span class="group"><span id ="HeadinGgroup"></span>
+                                <img src="../Content/pointer.png" style="margin-left: 10px"></span>
+                        </div>
+                    </div>
+                    <div class="floatRight sizeMain">
+                        <span class="buttons button-print" id="Print">
+                            <img src="../Content/printer.png" style="vertical-align: middle" alt="*">Распечатать</span>
                     </div>
                 </div>
-                <div class="layout-column-3 floatRight sizeMain">
-                    <span class="buttons button-print" id="Print">
-                        <img src="../Content/printer.png" style="vertical-align: middle">Распечатать</span>
-                </div>
-            </div>
-        </header>
-        <div class="content">
-            <header>
-                <span>&larr;</span><span class="link sizeMain" style="margin-left: 5px">Вернуться к списку групп</span>
-                <h3 class="sizeH3" id="Title-student"></h3>
             </header>
-            <div class="clearfix">
-                <aside class="floatLeft">
-                    <span id="AddStudent" class="buttons button-addStudent sizeMain">
-                        <img src="../Content/plus.png" style="vertical-align: top; margin: 3px">
-                        Добавить студента</span>
-                    <span id="SaveСhanges" class="buttons button-saveСhanges sizeMain">
-                        <img src="../Content/tick.png" style="vertical-align: top; margin: 3px">Сохранить изменения</span>
-                    <ul class="studentsList main-menu sizeMain" id="MainMenu"></ul>
-                </aside>
-                <section class="floatRight">
-                    <div class="topgallant clearfix">
-                        <div class="topgallantHeader clearfix sizeH4 floatLeft">
-                            <h4>Стандартные личные данные</h4>
-                        </div>
-                        <div class="topgallantOperation clearfix floatRight">
-                            <span class="link sizeMain" id="DeleteStudent">Удалить</span>
-                        </div>
-                    </div>
-                    <form>
-                        <div class="personalData clearfix sizeMain">
-                            <div class="surname field">
-                                <label for ="SurnameStudent">Фамилия</label>
-                                <input id="SurnameStudent" type="text" spellcheck="false"/>
-                                <span class="validation" id="validationMessageSurname">Поле обязательно к заполнению</span>
+            <div class="content">
+                <header>
+                    <span>&larr;</span><span class="link sizeMain" style="margin-left: 5px">Вернуться к списку групп</span>
+                    <h3 id="Title-student"></h3>
+                </header>
+                <div class="clearfix">
+                    <aside class="floatLeft">
+                        <span id="AddStudent" class="buttons button-addStudent sizeMain">
+                            <img src="../Content/plus.png" style="margin: 3px; vertical-align: top;" alt="+">
+                            Добавить студента</span>
+                        <span id="SaveСhanges" class="buttons button-saveСhanges sizeMain">
+                            <img src="../Content/tick.png" style="margin: 3px; vertical-align: top;" alt="v">
+                            Сохранить изменения
+                        </span>
+                        <ul class="studentsList main-menu sizeMain" id="MainMenu"></ul>
+                    </aside>
+                    <section class="floatRight">
+                        <div class="clearfix">
+                            <div class="clearfix floatLeft">
+                                <h4>Стандартные личные данные</h4>
                             </div>
-                            <div class="name field">
-                                <label for ="NameStudent">Имя</label>
-                                <input id="NameStudent" type="text"  spellcheck="false"/>
-                                <span class="validation" id="validationMessageName">Поле обязательно к заполнению</span>
-                            </div>
-                            <div class="patronymic field">
-                                <label for ="PatronymicStudent">Отчество</label>
-                                <input id="PatronymicStudent" type="text"  spellcheck="false"/>
-                                <span class="validation" id="validationMessagePatronymic">Поле обязательно к заполнению</span>
+                            <div class="clearfix floatRight">
+                                <span class="link sizeMain" id="DeleteStudent">Удалить</span>
                             </div>
                         </div>
-                        <div class="personalData clearfix sizeMain">
-                            <div class="gender field">
-                                <label>Пол</label>
-                                <span class="genderRadio floatRight">
-                                    <label class="genderLabel" for ="Female">
-                                        <input name="gender" id="Female" type="radio"  spellcheck="false"/>Женский</label>
-                                    <span class ="genderForPrint" id="Gender"></span>
-                                    <label class="genderLabel" for ="Male">
-                                        <input name="gender" id="Male" type="radio" checked />Мужской</label>
-                                </span>
+                        <form>
+                            <div class="personalData clearfix sizeMain">
+                                <div class="field">
+                                    <label for ="SurnameStudent">Фамилия</label>
+                                    <input id="SurnameStudent" type="text" spellcheck="false"/>
+                                    <span class="validation" id="validationMessageSurname">Поле обязательно к заполнению</span>
+                                </div>
+                                <div class="field">
+                                    <label for ="NameStudent">Имя</label>
+                                    <input id="NameStudent" type="text"  spellcheck="false"/>
+                                    <span class="validation" id="validationMessageName">Поле обязательно к заполнению</span>
+                                </div>
+                                <div class="field">
+                                    <label for ="PatronymicStudent">Отчество</label>
+                                    <input id="PatronymicStudent" type="text"  spellcheck="false"/>
+                                    <span class="validation" id="validationMessagePatronymic">Поле обязательно к заполнению</span>
+                                </div>
                             </div>
-                            <div class="dateOfBirth field">
-                                <label for ="DateOfBirth" >Дата рождения</label>
-                                <input id="DateOfBirth" type="text"/>
-                                <span class="validation" id="validationMessageDateOfBirth">Поле обязательно к заполнению</span>
+                            <div class="personalData clearfix sizeMain">
+                                <div class="gender field">
+                                    <label>Пол</label>
+                                    <span class="genderRadio floatRight">
+                                        <label class="genderLabel" for ="Female">
+                                            <input name="gender" id="Female" type="radio"  spellcheck="false"/>Женский</label>
+                                        <span class ="genderForPrint" id="Gender"></span>
+                                        <label class="genderLabel" for ="Male">
+                                            <input name="gender" id="Male" type="radio" checked />Мужской</label>
+                                    </span>
+                                </div>
+                                <div class="field">
+                                    <label for ="DateOfBirth" >Дата рождения</label>
+                                    <input id="DateOfBirth" type="text"/>
+                                    <span class="validation" id="validationMessageDateOfBirth">Поле обязательно к заполнению</span>
+                                </div>
+                                <div class="field">
+                                    <label for ="DateOfReceipt">Дата поступления</label>
+                                    <input id="DateOfReceipt" type="text"/>
+                                    <span class="validation" id="validationMessageDateOfReceipt">Поле обязательно к заполнению</span>
+                                </div>
                             </div>
-                            <div class="dateOfReceipt field">
-                                <label for ="DateOfReceipt">Дата поступления</label>
-                                <input id="DateOfReceipt" type="text"/>
-                                <span class="validation" id="validationMessageDateOfReceipt">Поле обязательно к заполнению</span>
+                            <hr>
+                            <div style="margin-top: 15px" class="clearfix">
+                                <div class="clearfix floatLeft">
+                                    <h4>Список посещаемых предметов</h4>
+                                </div>
+                                <div class="clearfix floatRight">
+                                    <span class="link sizeMain">Добавить предмет</span>
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div style="margin-top: 15px" class="topgallant clearfix">
-                            <div class="topgallantHeader clearfix sizeH4 floatLeft">
-                                <h4>Список посещаемых предметов</h4>
+                            <div id="subjectsPanel" class="subjects clearfix sizeMain">
+                                <div class="subjectsColumn clearfix floatLeft"></div>
+                                <div class="subjectsColumn clearfix floatLeft"></div>
+                                <div class="subjectsColumn clearfix floatLeft"></div>
                             </div>
-                            <div class="topgallantOperation clearfix floatRight">
-                                <span class="link sizeMain">Добавить предмет</span>
+                            <div class="canvasDraw clearfix" id="CanvasContainer">
+                                <span class="link sizeMain totalChartLink" id="TotalStatistics">Общая статистика</span>
+                                <span class="subjectTitle sizeMain" id="SelectedSubjectTitle"></span>
+                                <canvas id="Chart" width="685" height="400"></canvas>
                             </div>
-                        </div>
-                        <div id="subjectsPanel" class="subjects clearfix sizeMain">
-                            <div class="subjectsColumn clearfix floatLeft"></div>
-                            <div class="subjectsColumn clearfix floatLeft"></div>
-                            <div class="subjectsColumn clearfix floatLeft"></div>
-                        </div>
-                        <div class="canvasDraw clearfix" id="Canvas">
-                            <span class="link sizeMain totalChartLink" id="TotalStatistics">Общая статистика</span>
-                            <span class="subjectTitle sizeMain" id="SelectedSubjectTitle"></span>
-                            <canvas id="draw" width="685" height="400"></canvas>
-                        </div>
-                    </form>
-                </section>
+                        </form>
+                    </section>
+                </div>
             </div>
-        </div>
-    </section>
-</body>
+        </section>
+    </body>
 </html>

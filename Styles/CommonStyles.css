@@ -1,65 +1,49 @@
 ﻿body {
     background-image: url("../Content/fond.png");
+    font-family: "PT Sans", sans-serif;
     margin: 0;
     padding: 0;
-    font-family: "PT Sans",sans-serif;
 }
 
-    body > section {
-        width: 900px;
-        margin: 0 auto;
-    }
-
-::-ms-clear {
-    display: none;
+body > section {
+    margin: 0 auto;
+    width: 900px;
 }
 
-#ui-datepicker-div {
-    font-size: 12px;
-}
+::-ms-clear { display: none; }
 
-.sizeMain {
-    font-size: 0.879em;
-}
+#ui-datepicker-div { font-size: 12px; }
 
-.displayNone {
-    display: none;
-}
+.sizeMain { font-size: 0.879em; }
 
-.displayListItem {
-    display: list-item;
-}
+.displayNone { display: none; }
 
-.floatRight {
-    float: right;
-}
+.displayListItem { display: list-item; }
 
-.floatLeft {
-    float: left;
-}
+.floatRight { float: right; }
+
+.floatLeft { float: left; }
 
 section header {
-    width: 900px;
     color: #6f6a6a;
     padding: 10px 20px;
+    width: 900px;
 }
 
 .clearfix:after {
+    clear: both;
     content: "";
     display: table;
-    clear: both;
 }
 
 .field {
     clear: both;
-    text-align: right;
     margin-bottom: 13.5px;
+    text-align: right;
     vertical-align: middle;
 }
 
-.personalData:nth-child(2) {
-    width: 467px;
-}
+.personalData:nth-child(2) { width: 467px; }
 
 .personalData label {
     float: left;
@@ -67,21 +51,19 @@ section header {
 }
 
 .personalData .validation {
+    color: rgba(204, 0, 0, 0.8);
     display: inline-block;
     margin-left: 20px;
     min-width: 202px;
-    color: rgba(204, 0, 0, 0.8);
-    visibility: hidden;
     vertical-align: text-bottom;
+    visibility: hidden;
 }
 
-.layout-column-1 {
-    margin-right: 25px;
-}
+.layout-column-1 { margin-right: 25px; }
 
 .pageTitle {
-    font-size: 1.5em;
     display: inline;
+    font-size: 1.5em;
     font-weight: normal;
     vertical-align: middle;
 }
@@ -91,31 +73,29 @@ section header {
     padding: 5px 10px 5px 10px;
 }
 
-    .layout-column-2 .groups:hover {
-        background: rgba(111, 106, 106, 0.1);
-        border-radius: 3px;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
+.layout-column-2 .groups:hover {
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    background: rgba(111, 106, 106, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+}
 
 .groupsList-active {
     background: rgba(111, 106, 106, 0.1);
     border-radius: 3px;
 }
 
-.layout-column-2 .group {
-    display: inline;
-}
+.layout-column-2 .group { display: inline; }
 
 .layout-column-2 .groupList {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 2px 2px #bdbdbd;
+    padding: 0;
     position: absolute;
     z-index: 100;
-    padding: 0;
-    background: rgb(255,255,255);
-    box-shadow: 0 2px 2px #bdbdbd;
 }
 
 .groupList ul {
@@ -128,351 +108,333 @@ section header {
     padding: 3px 25px 3px 20px;
 }
 
-    .groupList .styleLi:hover {
-        cursor: pointer;
-        background: rgba(45, 137, 213, 0.6);
-    }
+.groupList .styleLi:hover {
+    background: rgba(45, 137, 213, 0.6);
+    cursor: pointer;
+}
 
 .button-print {
-    display: inline-block;
     background: #dfdfdf; /* for non-css3 browsers */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fdfdfd", endColorstr="#dfdfdf"); /* для IE6-9 */
     background: -webkit-linear-gradient(top, #fdfdfd, #dfdfdf); /* для webkit-браузеров */
     background: -moz-linear-gradient(top, #fdfdfd, #dfdfdf); /* для firefox 3.6+ */
     background: -o-linear-gradient(top, #fdfdfd, #dfdfdf); /* для Opera 11.10+ */
     background: -ms-linear-gradient(top, #fdfdfd, #dfdfdf); /* для IE10+ */
     border: none;
     border-radius: 3px;
-    padding: 2px 15px 0 0;
     box-shadow: 0 1px 1px #bdbdbd;
-    text-shadow: 0 1px rgba(255,255,255,0.8);
+    display: inline-block;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fdfdfd", endColorstr="#dfdfdf"); /* для IE6-9 */
+    padding: 2px 15px 0 0;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.8);
 }
 
-    .button-print:hover {
-        background: #dfdfdf; /* for non-css3 browsers */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
-        background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
-        background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
-        background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
-        background: -ms-linear-gradient(top, #f2f2f2, #c8c8c8); /* для IE10+ */
-    }
+.button-print:hover {
+    background: #dfdfdf; /* for non-css3 browsers */
+    background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
+    background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
+    background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f2f2f2, #c8c8c8); /* для IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
+}
 
-    .button-print:active {
-        border: none;
-        background: #d9d9d9;
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-    }
+.button-print:active {
+    background: #d9d9d9;
+    border: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
 
 .buttons {
-    display: block;
-    cursor: pointer;
-    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    display: block;
     user-select: none;
 }
 
 .content {
-    width: 900px;
-    min-height: 300px;
     background: #f1f1f1; /* for non-css3 browsers */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff 0%, #fff 7%, #f1f1f1 20%", endColorstr="#f1f1f1 80%, #fff 93%, #fff 100%"); /* для IE6-9 */
-    background: -webkit-linear-gradient(top, #fff 0%, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для webkit-браузеров */
-    background: -moz-linear-gradient(top, #fff 0%, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для firefox 3.6+ */
-    background: -o-linear-gradient(top, #fff 0%, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для Opera 11.10+ */
-    background: -ms-linear-gradient(top, #fff 0%, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для IE10+ */
+    background: -webkit-linear-gradient(top, #fff 0, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для webkit-браузеров */
+    background: -moz-linear-gradient(top, #fff 0, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для firefox 3.6+ */
+    background: -o-linear-gradient(top, #fff 0, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fff 0, #fff 7%, #f1f1f1 20%, #f1f1f1 80%, #fff 93%, #fff 100%); /* для IE10+ */
     border-top: 10px solid #2d89d5;
     box-shadow: 0 0 5px #d4d0d0;
-    padding: 15px;
-    padding-top: 0;
-    padding-right: 25px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff 0%, #fff 7%, #f1f1f1 20%", endColorstr="#f1f1f1 80%, #fff 93%, #fff 100%"); /* для IE6-9 */
     margin-bottom: 50px;
+    min-height: 300px;
+    padding: 15px;
+    padding-right: 25px;
+    padding-top: 0;
+    width: 900px;
 }
 
-    .content .link {
-        text-decoration: underline;
-        margin-left: 0;
-        color: #2d89d5;
-    }
+.content .link {
+    color: #2d89d5;
+    margin-left: 0;
+    text-decoration: underline;
+}
 
-        .content .link:hover {
-            cursor: pointer;
-        }
+.content .link:hover { cursor: pointer; }
 
 header > span {
-    padding: 0;
-    margin-top: 0;
-    margin-left: -15px;
     color: #2d89d5;
+    margin-left: -15px;
+    margin-top: 0;
+    padding: 0;
 }
 
 h3 {
-    font-size: 1.2em;
-    padding: 0;
-    margin: 0;
-    margin-top: 5px;
-    margin-left: -15px;
     color: #000;
+    font-size: 1.2em;
     font-weight: 600;
+    margin: 0;
+    margin-left: -15px;
+    margin-top: 5px;
+    padding: 0;
 }
 
 aside {
-    width: 160px;
     margin-top: 20px;
+    width: 160px;
     z-index: 0;
 }
 
-    aside .buttons {
-        border-radius: 3px;
-        padding: 6px 5px;
-        box-shadow: 0 1px 5px #bdbdbd;
-        text-align: left;
-        min-width: 155px;
-    }
+aside .buttons {
+    border-radius: 3px;
+    box-shadow: 0 1px 5px #bdbdbd;
+    min-width: 155px;
+    padding: 6px 5px;
+    text-align: left;
+}
 
 .personalData input[type="text"]:focus {
-    outline: 2px solid #66b3f3;
     box-shadow: 0 0 3px #66b3f3;
+    outline: 2px solid #66b3f3;
 }
 
 .personalData input[type="text"].validationFocus:focus {
-    outline: 2px solid rgba(204, 0, 0, 0.8);
     box-shadow: 0 0 1px rgba(204, 0, 0, 0.8);
+    outline: 2px solid rgba(204, 0, 0, 0.8);
 }
 
 .button-addStudent {
     background: #dfdfdf; /* for non-css3 browsers */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fdfdfd", endColorstr="#dfdfdf"); /* для IE6-9 */
     background: -webkit-linear-gradient(top, #fdfdfd, #dfdfdf); /* для webkit-браузеров */
     background: -moz-linear-gradient(top, #fdfdfd, #dfdfdf); /* для firefox 3.6+ */
     background: -o-linear-gradient(top, #fdfdfd, #dfdfdf); /* для Opera 11.10+ */
     background: -ms-linear-gradient(top, #fdfdfd, #dfdfdf); /* для IE10+ */
-    text-shadow: 0 1px rgba(255,255,255,0.8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fdfdfd", endColorstr="#dfdfdf"); /* для IE6-9 */
+    text-shadow: 0 1px rgba(255, 255, 255, 0.8);
 }
 
-    .button-addStudent:hover {
-        background: #dfdfdf; /* for non-css3 browsers */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
-        background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
-        background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
-        background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
-        background: -ms-linear-gradient(top, #f2f2f2, #c8c8c8); /* для IE10+ */
-    }
+.button-addStudent:hover {
+    background: #dfdfdf; /* for non-css3 browsers */
+    background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
+    background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
+    background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f2f2f2, #c8c8c8); /* для IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
+}
 
-    .button-addStudent:active {
-        border: none;
-        background: #d9d9d9;
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-    }
+.button-addStudent:active {
+    background: #d9d9d9;
+    border: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
 
 .button-saveСhanges {
     background: #dfdfdf; /* for non-css3 browsers */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2d89d5", endColorstr="#2571b1"); /* для IE6-9 */
     background: -webkit-linear-gradient(top, #2d89d5, #2571b1); /* для webkit-браузеров */
     background: -moz-linear-gradient(top, #2d89d5, #2571b1); /* для firefox 3.6+ */
     background: -o-linear-gradient(top, #2d89d5, #2571b1); /* для Opera 11.10+ */
     background: -ms-linear-gradient(top, #2d89d5, #2571b1); /* для IE10+ */
-    text-shadow: 0 1px rgba(0,0,0,0.2);
     color: #fff;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2d89d5", endColorstr="#2571b1"); /* для IE6-9 */
     margin-top: 10px;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
 }
 
-    .button-saveСhanges:hover {
-        background: #dfdfdf; /* for non-css3 browsers */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2d89d5 0%", endColorstr="#2272b5 35%"); /* для IE6-9 */
-        background: -webkit-linear-gradient(top, #2d89d5 0%, #2272b5 35%); /* для webkit-браузеров */
-        background: -moz-linear-gradient(top, #2d89d5 0%, #2272b5 35%); /* для firefox 3.6+ */
-        background: -o-linear-gradient(top, #2d89d5 0%, #2272b5 35%); /* для Opera 11.10+ */
-        background: -ms-linear-gradient(top, #2d89d5 0%, #2272b5 35%); /* для IE10+ */
-    }
+.button-saveСhanges:hover {
+    background: #dfdfdf; /* for non-css3 browsers */
+    background: -webkit-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для webkit-браузеров */
+    background: -moz-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для firefox 3.6+ */
+    background: -o-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для Opera 11.10+ */
+    background: -ms-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2d89d5 0%", endColorstr="#2272b5 35%"); /* для IE6-9 */
+}
 
-    .button-saveСhanges:active {
-        border: none;
-        background: #2d89d5;
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-    }
+.button-saveСhanges:active {
+    background: #2d89d5;
+    border: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
 
 .main-menu span:first-child {
-    padding: 0;
+    -webkit-mask-image: -webkit-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для webkit-браузеров */
+    -webkit-mask-image: -moz-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для firefox 3.6+ */
+    -webkit-mask-image: -o-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для Opera 11.10+ */
+    -webkit-mask-image: -ms-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для IE10+ */
     display: inline-block;
-    margin-left: 0;
-    margin-bottom: 0;
-    width: 170px;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%", endColorstr="rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%"); /* для IE6-9 */
-    -webkit-mask-image: -webkit-linear-gradient(left, rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%, rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%); /* для webkit-браузеров */
-    -webkit-mask-image: -moz-linear-gradient(left, rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%, rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%); /* для firefox 3.6+ */
-    -webkit-mask-image: -o-linear-gradient(left, rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%, rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%); /* для Opera 11.10+ */
-    -webkit-mask-image: -ms-linear-gradient(left, rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%, rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%); /* для IE10+ */
+    margin-bottom: 0;
+    margin-left: 0;
+    padding: 0;
+    width: 170px;
 }
 
 .content section {
-    min-height: 550px;
-    width: 685px;
-    background: rgb(255,255,255);
+    background: rgb(255, 255, 255);
     box-shadow: 0 0 5px #d4d0d0;
+    min-height: 550px;
     padding: 20px;
     position: relative;
+    width: 685px;
     z-index: 2;
 }
 
 h4 {
-    font-size: 1.1em;
-    padding: 0;
-    margin: 0;
     color: #000;
+    font-size: 1.1em;
     font-weight: normal;
+    margin: 0;
+    padding: 0;
 }
 
 .personalData, .checkboxesSubject {
-    margin-top: 20px;
     display: inline-block;
+    margin-top: 20px;
 }
 
 .personalData {
-    width: 606px;
     margin-top: 0;
+    width: 606px;
 }
 
-form {
-    padding-top: 20px;
-}
+form { padding-top: 20px; }
 
 input[type="text"] {
-    min-height: 20px;
-    width: 230px;
-    border: 1px solid #ccc;
-    padding: 1px 5px;
     background: white;
+    border: 1px solid #ccc;
     border-radius: 3px;
+    min-height: 20px;
+    padding: 1px 5px;
+    width: 230px;
 }
 
-.gender {
-    min-height: 22px;
-}
+.gender { min-height: 22px; }
 
 .genderLabel {
-    display: inline;
     background: white;
+    display: inline;
     margin-left: 16px;
 }
 
-.genderForPrint {
-    display: none;
-}
+.genderForPrint { display: none; }
 
 input[type="radio"] {
-    vertical-align: middle;
-    padding: 0;
     margin: 0;
     margin-right: 3px;
+    padding: 0;
+    vertical-align: middle;
 }
 
-.genderRadio {
-    margin-right: 172px;
-}
+.genderRadio { margin-right: 172px; }
 
 .personalData input[type="text"].hasDatepicker {
-    width: 90px;
-    min-height: 20px;
-    border: 1px solid #ccc;
-    padding: 1px 5px;
     background: white;
+    border: 1px solid #ccc;
     border-radius: 3px;
-    outline: none;
     box-shadow: none;
+    min-height: 20px;
+    outline: none;
+    padding: 1px 5px;
+    width: 90px;
 }
 
-    .personalData input[type="text"].hasDatepicker:hover, .personalData input[type="text"].validationFocus:focus {
-        outline: none;
-        box-shadow: none;
-    }
+.personalData input[type="text"].hasDatepicker:hover, .personalData input[type="text"].validationFocus:focus {
+    box-shadow: none;
+    outline: none;
+}
 
 .ui-datepicker-trigger {
-    outline: none;
-    margin-left: -20px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    width: 21px;
-    height: 23px;
-    padding: 3px;
-    cursor: pointer;
-    border: solid 1px #d9d9d9;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
     background: transparent;
-    background-image: -moz-linear-gradient(top,#fdfdfd,#dfdfdf);
-    background-image: -o-linear-gradient(top,#fdfdfd,#dfdfdf);
-    background-image: -webkit-linear-gradient(top,#fdfdfd,#dfdfdf);
-    background-image: -ms-linear-gradient(top,#fdfdfd,#dfdfdf);
-    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
-    -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
-    box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    background-image: -moz-linear-gradient(top, #fdfdfd, #dfdfdf);
+    background-image: -o-linear-gradient(top, #fdfdfd, #dfdfdf);
+    background-image: -webkit-linear-gradient(top, #fdfdfd, #dfdfdf);
+    background-image: -ms-linear-gradient(top, #fdfdfd, #dfdfdf);
+    border: solid 1px #d9d9d9;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    height: 23px;
+    margin-left: -20px;
+    outline: none;
+    padding: 3px;
+    width: 21px;
 }
 
-    .ui-datepicker-trigger:hover {
-        background: transparent;
-        background-image: -moz-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
-        background-image: -o-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
-        background-image: -webkit-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
-        background-image: -ms-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
-    }
+.ui-datepicker-trigger:hover {
+    background: transparent;
+    background-image: -moz-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
+    background-image: -o-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
+    background-image: -webkit-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
+    background-image: -ms-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
+}
 
 .icon {
-    margin-left: 0;
-    display: inline;
-    background-image: url(/studentsapp/content/calendar.png);
-    background-repeat: no-repeat;
+    background-image: url(~/Content/calendar.png);
     background-position: center;
-    padding: 6px;
+    background-repeat: no-repeat;
     cursor: pointer;
+    display: inline;
+    margin-left: 0;
+    padding: 6px;
 }
 
-input[type="checkbox"] {
-    vertical-align: bottom;
-}
+input[type="checkbox"] { vertical-align: bottom; }
 
 hr {
-    margin-top: 20px;
     background-color: #f2f2f2;
-    color: #f2f2f2;
     border: none;
+    color: #f2f2f2;
     height: 1px;
-}
-
-.studentsList {
     margin-top: 20px;
 }
 
-    .studentsList li {
-        position: relative;
-        width: 155px;
-        padding: 5px;
-        margin: -40px;
-        padding-left: 15px;
-        margin-bottom: 5px;
-        display: inline-block;
-        border-radius: 3px;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
+.studentsList { margin-top: 20px; }
+
+.studentsList li {
+    border-bottom-right-radius: 0;
+    border-radius: 3px;
+    border-top-right-radius: 0;
+    display: inline-block;
+    margin: -40px;
+    margin-bottom: 5px;
+    padding: 5px;
+    padding-left: 15px;
+    position: relative;
+    width: 155px;
+}
 
 .studentsList .studentsList-active {
-    background: rgb(255,255,255); 
+    background: rgb(255, 255, 255);
     border: 1px solid #dfdfdf;
     border-right: none;
     z-index: 1000;
 }
 
-    .studentsList-active span:last-child {
-        text-decoration: none;
-        color: rgb(0, 0, 0);
-    }
-
-.subjects {
-    margin-top: 20px;
+.studentsList-active span:last-child {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
 }
 
-.subjectsColumn {
-    width: 215px;
-}
+.subjects { margin-top: 20px; }
+
+.subjectsColumn { width: 215px; }
 
 .subjects span {
     display: block;
@@ -480,8 +442,8 @@ hr {
 }
 
 .canvasDraw {
-    position: relative;
     margin-top: 15px;
+    position: relative;
 }
 
 .totalChartLink {
@@ -491,21 +453,21 @@ hr {
 }
 
 .subjectTitle {
-    position: absolute;
-    left: 20px;
-    top: 70px;
     font-size: 1.2em;
+    left: 20px;
+    position: absolute;
+    top: 70px;
 }
 
 .toolTip {
-    position: absolute;
-    color: #bdbdbd;
     background: transparent;
-    background-image: -moz-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
-    background-image: -o-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
-    background-image: -webkit-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
-    background-image: -ms-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
+    background-image: -moz-linear-gradient(top, #fdfdfd, #fdfdfd, #dfdfdf);
+    background-image: -o-linear-gradient(top, #fdfdfd, #fdfdfd, #dfdfdf);
+    background-image: -webkit-linear-gradient(top, #fdfdfd, #fdfdfd, #dfdfdf);
+    background-image: -ms-linear-gradient(top, #fdfdfd, #fdfdfd, #dfdfdf);
     border: 1px solid #bdbdbd;
     border-radius: 3px;
     box-shadow: 2px 2px 2px #d4d0d0;
+    color: #bdbdbd;
+    position: absolute;
 }

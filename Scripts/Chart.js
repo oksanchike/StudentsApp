@@ -268,7 +268,7 @@
         return mouseX >= this.lineX && mouseX <= this.lineWidth + this.lineX && mouseY >= this.lineY && mouseY <= this.lineHeight + this.lineY;
     },
     showToolTip: function (title, mouseX, mouseY) {
-        var div = document.getElementById("Canvas");
+        var div = document.getElementById("CanvasContainer");
         this.tooltipContext.fillStyle = "#bdbdbd";
         this.tooltipContext.beginPath();
         this.tooltipContext.font = "normal 11pt PT Sans";
