@@ -1,69 +1,69 @@
 ﻿var PageController = Base.extend({
     constructor: function() {
-        this.studentDetails = new StudentDetails();
-        this.students = new StudentsRepository();
-        this.subjects = new SubjectsRepository();
-        this.studentsPresences = new StudentsPresenceRepository();
-        this.studentsList = new StudentsList(document.getElementById("MainMenu"));
-        var groups = this.students.getGroups();
+        this.__studentDetails = new StudentDetails();
+        this.__students = new StudentsRepository();
+        this.__subjects = new SubjectsRepository();
+        this.__studentsPresences = new StudentsPresenceRepository();
+        this.__studentsList = new StudentsList(document.getElementById("MainMenu"));
+        var groups = this.__students.getGroups();
         this.groups = new GroupsSelect(groups);
-        var subjects = this.subjects.getAll();
-        this.studentDetails.initalizeSubjects(subjects);
+        var subjects = this.__subjects.getAll();
+        this.__studentDetails.initalizeSubjects(subjects);
         this.__setListForGroup(this.groups.activeGroup.innerText);
         this.__initEventHandlers();
     },
     __setListForGroup: function(group) {
-        this.studentsList.deleteAllStudents();
+        this.__studentsList.deleteAllStudents();
         var self = this;
-        var students = this.students.getByGroup(group);
+        var students = this.__students.getByGroup(group);
         students.forEach(function(student) {
-            self.studentsList.addNewStudent();
-            self.studentsList.save(student);
+            self.__studentsList.addNewStudent();
+            self.__studentsList.save(student);
         });
-        this.studentsList.setActive(this.studentsList.list.firstChild);
+        this.__studentsList.setActive(this.__studentsList.list.firstChild);
         this.__setStudent(students[0].id);
     },
     __addNewStudent: function() {
-        this.studentsList.addNewStudent();
-        this.studentDetails.resetStudent();
+        this.__studentsList.addNewStudent();
+        this.__studentDetails.resetStudent();
     },
     __saveStudent: function() {
-        var details = this.studentDetails.serialize();
+        var details = this.__studentDetails.serialize();
         var student = details.student;
         var presences = details.presences;
-        var isValid = this.studentDetails.validate(student);
+        var isValid = this.__studentDetails.validate(student);
         if (isValid) {
-            this.students.save(student);
-            this.studentsPresences.save(presences, student.id);
-            this.studentsList.save(student);
+            this.__students.save(student);
+            this.__studentsPresences.save(presences, student.id);
+            this.__studentsList.save(student);
         }
     },
     __deleteStudent: function() {
-        var studentId = this.studentsList.getActiveId();
-        this.students.deleteStudentById(studentId);
-        this.studentsList.deleteStudent();
+        var studentId = this.__studentsList.getActiveId();
+        this.__students.deleteStudentById(studentId);
+        this.__studentsList.deleteStudent();
     },
     __setStudent: function(id) {
-        var student = this.students.getById(id);
-        this.studentDetails.resetValidation();
+        var student = this.__students.getById(id);
+        this.__studentDetails.resetValidation();
         if (student !== null) {
-            var studentPresences = this.studentsPresences.getByStudentId(id);
+            var studentPresences = this.__studentsPresences.getByStudentId(id);
             var subjects = [];
             for (var i = 0; i < studentPresences.length; i++) {
                 var subjectId = studentPresences[i].subjectId;
-                var subject = this.subjects.getById(subjectId);
+                var subject = this.__subjects.getById(subjectId);
                 subjects.push(subject);
             }
-            this.studentDetails.setStudent(student, studentPresences, subjects);
+            this.__studentDetails.setStudent(student, studentPresences, subjects);
         } else
-            this.studentDetails.resetStudent();
+            this.__studentDetails.resetStudent();
     },
     __initEventHandlers: function() {
         var self = this;
         EventHelpers.addEvent(this.groups.div1, "groupChanged", function (e) {
             self.__setListForGroup(e.detail.group.innerText);
         });
-        EventHelpers.addEvent(this.studentsList.list, "studentChanged", function (e) {
+        EventHelpers.addEvent(this.__studentsList.list, "studentChanged", function (e) {
             self.__setStudent(e.detail.id);
         });
         document.getElementById("AddStudent").onclick = function() {

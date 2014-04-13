@@ -1,6 +1,6 @@
 ﻿var StudentsRepository = Base.extend({
     constructor: function () {
-        this.students = TAFFY([
+        this.__students = TAFFY([
             { id: 1, gender: "M", surname: "Мостовой", name: "Вячеслав", patronymic: "Игоревич", dateOfBirth: "07.10.1992", dateOfReceipt: "01.09.2009", group: "МТ-102" },
             { id: 2, gender: "F", surname: "Запорожец", name: "Оксана", patronymic: "Викторовна", dateOfBirth: "29.11.1991", dateOfReceipt: "01.09.2009", group: "МТ-102" },
             { id: 3, gender: "F", surname: "Глухова", name: "Анастасия", patronymic: "Андреевна", dateOfBirth: "03.01.1992", dateOfReceipt: "01.09.2009", group: "МТ-102" },
@@ -22,24 +22,24 @@
             { id: 19, gender: "М", surname: "Столбов", name: "Николай", patronymic: "Ильич", dateOfBirth: "25.11.1992", dateOfReceipt: "01.09.2009", group: "МТ-402" },
             { id: 20, gender: "М", surname: "Макаренко", name: "Петр", patronymic: "Максимович", dateOfBirth: "24.09.1991", dateOfReceipt: "01.09.2009", group: "МТ-502" }
         ]);
-        this.lastId = this.students().get().length;
+        this.lastId = this.__students().get().length;
     },
     save: function (student) {
         if (student.id !== null) {
-            this.students({ id: student.id }).update(student);
+            this.__students({ id: student.id }).update(student);
         }
         else {
             student.id = this.lastId + 1;
-            this.students.insert(student);
+            this.__students.insert(student);
             this.lastId++;
         }
     },
     deleteStudentById: function (id) {
-        this.students({ id: id }).remove();
+        this.__students({ id: id }).remove();
     },
     getGroups: function () {
         var groups = [];
-        var students = this.students().get();
+        var students = this.__students().get();
         for (var i = 0; i < students.length; i++) {
             var group = students[i].group;
             var found = false;
@@ -63,16 +63,16 @@
     },
     getById: function (id) {
         if (id !== null) {
-            var student = this.students({ id: id }).first();
+            var student = this.__students({ id: id }).first();
             return student ? student : null;
         }
         else
             return null;
     },
     getAll: function () {
-        return this.students().order("surname asec").get().slice(0);
+        return this.__students().order("surname asec").get().slice(0);
     },
     getByGroup: function (group) {
-        return this.students({ group: group }).order("surname asec").get().slice(0);
+        return this.__students({ group: group }).order("surname asec").get().slice(0);
     }
 });

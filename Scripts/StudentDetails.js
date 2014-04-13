@@ -69,16 +69,15 @@
         for (var i = 0; i < checkboxes.length; i++)
             checkboxes[i].checked = false;
         for (var i = 0; i < studentPresences.length; i++) {
-            var self = this;
             var checkbox = document.getElementById("subject" + studentPresences[i].subjectId);
             checkbox.checked = studentPresences[i].studying;
         }
     },
     changeData: function (subjectId, checked) {
         if (checked) {
-            for (var i = 0; i < this.subjects.length; i++)
-                if (this.subjects[i].id === subjectId) {
-                    this.studentSubjects.push(this.subjects[i]);
+            for (var i = 0; i < this.__subjects.length; i++)
+                if (this.__subjects[i].id === subjectId) {
+                    this.studentSubjects.push(this.__subjects[i]);
                     break;
                 }
         }
@@ -248,7 +247,7 @@
         }
     },
     initalizeSubjects: function (subjects) {
-        this.subjects = subjects;
+        this.__subjects = subjects;
         var columns = document.getElementsByClassName("subjectsColumn");
         var j = 0;
         for (var i = 0; i < subjects.length; i++) {
