@@ -16,6 +16,30 @@
         this.validationMessageDateOfReceipt = document.getElementById("validationMessageDateOfReceipt");
         this.gender = document.getElementById("Gender");
         this.group = document.getElementById("HeadinGgroup");
+        this.createDatepickers();
+    },
+    createDatepickers: function () {
+        $("#DateOfBirth").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showOn: "button",
+            dateFormat: "dd.mm.yy"
+        });
+        $("#DateOfReceipt").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showOn: "button",
+            dateFormat: "dd.mm.yy"
+        });
+        var buttons = document.getElementsByClassName("ui-datepicker-trigger");
+        buttons[0].innerHTML = "";
+        buttons[1].innerHTML = "";
+        var div = document.createElement("div");
+        var div1 = document.createElement("div1");
+        div.classList.add("icon");
+        div1.classList.add("icon");
+        buttons[0].appendChild(div);
+        buttons[1].appendChild(div1);
     },
     setStudent: function (student, studentPresences, subjects) {
         this.studentPresences = studentPresences;
@@ -133,7 +157,7 @@
         }
         return presences;
     },
-    save: function (student) {
+    validate: function (student) {
         var regexpName = /^[а-яА-ЯёЁ][а-яА-ЯёЁ_\.]{1,20}$/;
         var regexpDate = /(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d/;
         if (regexpName.test(student.surname) && regexpName.test(student.name) && regexpName.test(student.patronymic) && regexpDate.test(student.dateOfBirth) && regexpDate.test(student.dateOfReceipt)) {

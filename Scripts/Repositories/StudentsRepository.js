@@ -34,8 +34,8 @@
             this.lastId++;
         }
     },
-    deleteStudent: function (student) {
-        this.students({ id: student.id }).remove(student);
+    deleteStudentById: function (id) {
+        this.students({ id: id }).remove();
     },
     getGroups: function () {
         var groups = [];

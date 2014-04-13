@@ -15,7 +15,7 @@
             id = parseInt(id, 10);
         return id;
     },
-    addStudent: function () {
+    addNewStudent: function () {
         var li = document.createElement("li");
         var span = document.createElement("span");
         var spanLink = document.createElement("span");

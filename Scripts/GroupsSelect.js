@@ -1,4 +1,4 @@
-﻿var Groups = Base.extend({
+﻿var GroupsSelect = Base.extend({
     constructor: function (groups) {
         this.active = false;
         this.div2 = document.getElementById("Groups");
