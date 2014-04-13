@@ -25,11 +25,11 @@
         this.name.value = student.name;
         this.patronymic.value = student.patronymic;
         if (student.gender === "F") {
-            this.gender.innerHTML = "Женский"
+            this.gender.innerHTML = "Женский";
             this.femail.checked = true;
         }
         else {
-            this.gender.innerHTML = "Мужской"
+            this.gender.innerHTML = "Мужской";
             this.femail.checked = false;
             this.male.checked = true;
         }
@@ -53,21 +53,21 @@
     changeData: function (subjectId, checked) {
         if (checked) {
             for (var i = 0; i < this.subjects.length; i++)
-                if (this.subjects[i].id == subjectId) {
+                if (this.subjects[i].id === subjectId) {
                     this.studentSubjects.push(this.subjects[i]);
                     break;
                 }
         }
         else {
             for (var i = 0; i < this.studentSubjects.length; i++)
-                if (this.studentSubjects[i].id == subjectId) {
+                if (this.studentSubjects[i].id === subjectId) {
                     this.studentSubjects.splice(i, 1);
                     break;
                 }
         }
         var found = false;
         for (var i = 0; i < this.studentPresences.length; i++) {
-            if (this.studentPresences[i].subjectId == subjectId) {
+            if (this.studentPresences[i].subjectId === subjectId) {
                 this.studentPresences[i].studying = checked;
                 found = true;
                 break;
@@ -92,7 +92,7 @@
         this.title.removeAttribute("data-id");
         this.surname.value = "";
         this.name.value = "";
-        this.gender.innerHTML = "Женский"
+        this.gender.innerHTML = "Женский";
         this.patronymic.value = "";
         this.femail.checked = true;
         this.dateOfBirth.value = "";
@@ -148,7 +148,7 @@
         }
     },
     showValidation: function (student, regexpName, regexpDate) {
-        if (regexpDate.test(student.dateOfReceipt) != true) {
+        if (regexpDate.test(student.dateOfReceipt) !== true) {
             if (student.dateOfReceipt === "") {
                 this.validationMessageDateOfReceipt.innerHTML = "Поле обязательно к заполнению";
             }
@@ -160,7 +160,7 @@
             this.dateOfReceipt.classList.add("validationFocus");
             this.dateOfReceipt.focus();
         }
-        if (regexpDate.test(student.dateOfBirth) != true) {
+        if (regexpDate.test(student.dateOfBirth) !== true) {
             if (student.dateOfBirth === "") {
                 this.validationMessageDateOfBirth.innerHTML = "Поле обязательно к заполнению";
             }
@@ -172,7 +172,7 @@
             this.dateOfBirth.classList.add("validationFocus");
             this.dateOfBirth.focus();
         }
-        if (regexpName.test(student.patronymic) != true) {
+        if (regexpName.test(student.patronymic) !== true) {
             if (student.patronymic === "") {
                 this.validationMessagePatronymic.innerHTML = "Поле обязательно к заполнению";
             }
@@ -184,7 +184,7 @@
             this.patronymic.classList.add("validationFocus");
             this.patronymic.focus();
         }
-        if (regexpName.test(student.name) != true) {
+        if (regexpName.test(student.name) !== true) {
             if (student.name === "") {
                 this.validationMessageName.innerHTML = "Поле обязательно к заполнению";
             }
@@ -196,7 +196,7 @@
             this.name.classList.add("validationFocus");
             this.name.focus();
         }
-        if (regexpName.test(student.surname) != true) {
+        if (regexpName.test(student.surname) !== true) {
             if (student.surname === "") {
                 this.validationMessageSurname.innerHTML = "Поле обязательно к заполнению";
             }
@@ -244,7 +244,7 @@
                 return function () {
                     self.changeData(subjectId, this.checked);
                     self.drawChartForStudent(self.studentPresences, self.studentSubjects);
-                }
+                };
             }(id, this);
             j = j < 2 ? j + 1 : 0;
         }

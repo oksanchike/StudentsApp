@@ -87,11 +87,6 @@ h4 {
     display: inline-block;
 }
 
-
-.personalData {
-    margin-top: 0;
-}
-
 form {
     padding-top: 20px;
 }
@@ -123,7 +118,6 @@ form {
     position: absolute;
     top: 190px;
     left: 154px;
-    margin: 0;
     padding: 0;
 }
 
@@ -159,6 +153,7 @@ hr {
 }
 
 .personalData {
+    margin-top: 0;
     width: 575px;
 }
 

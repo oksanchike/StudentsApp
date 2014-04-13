@@ -16,7 +16,7 @@
             var li = document.createElement("li");
             li.innerHTML = groups[i];
             li.classList.add("styleLi");
-            if (groups[i] == self.activeGroup) {
+            if (groups[i] === self.activeGroup) {
                 li.classList.add("displayNone");
                 this.activeGroup = li;
                 document.getElementById("HeadinGgroup").innerHTML = this.activeGroup.innerHTML;
@@ -56,4 +56,4 @@
             this.div2.classList.remove("groupsList-active");
         }
     }
-})
+});

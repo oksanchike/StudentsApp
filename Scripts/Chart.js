@@ -68,7 +68,7 @@
         var colors = ["#44456F", "#DA9C65", "#A24112", "#D58202", "3C301F", "#3FAE85", "#3BC3E1", "#374548", "#B87371", "#E13B7B"];
         for (var i = 0; i < this.__dataSubjects.length; i++) {
             for (var j = 0; j < this.__dataStudentsPresence.length; j++) {
-                if (this.__dataStudentsPresence[j].subjectId == this.__dataSubjects[i].id) {
+                if (this.__dataStudentsPresence[j].subjectId === this.__dataSubjects[i].id) {
                     if (this.__dataStudentsPresence[j].studying) {
                         var rectangleWidth = this.__dataSubjects[i].totalTime / ratio;
                         context.beginPath();
@@ -219,7 +219,7 @@
         var self = this;
         for (var i = 0; i < dataSubjects.length; i++) {
             for (var j = 0; j < self.__dataStudentsPresence.length; j++) {
-                if (self.__dataStudentsPresence[j].subjectId == self.__dataSubjects[i].id)
+                if (self.__dataStudentsPresence[j].subjectId === self.__dataSubjects[i].id)
                     if (self.__dataStudentsPresence[j].studying)
                         total += dataSubjects[i].totalTime;
             }
@@ -232,7 +232,7 @@
         var self = this;
         for (var i = 0; i < dataSubjects.length; i++) {
             for (var j = 0; j < self.__dataStudentsPresence.length; j++) {
-                if (self.__dataStudentsPresence[j].subjectId == self.__dataSubjects[i].id)
+                if (self.__dataStudentsPresence[j].subjectId === self.__dataSubjects[i].id)
                     if (self.__dataStudentsPresence[j].studying)
                         elapsed += dataSubjects[i].elapsedTime;
             }
@@ -298,7 +298,7 @@
                     self.drawDoughnutChart(subject.total, subject.elapsed, subject.totalAbsense, subject.withValidReason);
                 }
             }
-        }
+        };
         this.canvas.onmousemove = function (e) {
             var mouseX = e.offsetX;
             var mouseY = e.offsetY;
@@ -314,9 +314,9 @@
                 self.hideToolTip();
                 self.canvas.setAttribute("style", "cursor: default");
             }
-        }
+        };
         this.canvas.onmouseleave = function () {
             self.hideToolTip();
-        }
+        };
     }
-})
+});

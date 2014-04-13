@@ -50,7 +50,7 @@
         this.list.removeChild(active);
         var begin = 0;
         var end = this.list.childElementCount - 1;
-        if (this.list.childElementCount == 0) {
+        if (this.list.childElementCount === 0) {
             this.list.appendChild(active);
         }
         else if (active.firstChild.firstChild.innerHTML <= this.list.children[begin].firstChild.firstChild.innerHTML) {
@@ -60,7 +60,7 @@
             this.list.appendChild(active);
         }
         else {
-            while (end - begin != 1) {
+            while (end - begin !== 1) {
                 var middle = Math.floor(end - (end - begin) / 2);
                 if (this.list.children[middle].firstChild.firstChild.innerHTML > active.firstChild.firstChild.innerHTML) {
                     end = middle;

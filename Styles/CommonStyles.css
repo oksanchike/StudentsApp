@@ -10,10 +10,9 @@
         margin: 0 auto;
     }
 
-::-ms-clear
-        {
-             display: none;
-        }
+::-ms-clear {
+    display: none;
+}
 
 #ui-datepicker-div {
     font-size: 12px;
@@ -80,12 +79,12 @@ section header {
     margin-right: 25px;
 }
 
-    .layout-column-1 h2 {
-        font-size: 1.5em;
-        display: inline;
-        font-weight: normal;
-        vertical-align: middle;
-    }
+.pageTitle {
+    font-size: 1.5em;
+    display: inline;
+    font-weight: normal;
+    vertical-align: middle;
+}
 
 .layout-column-2 .groups {
     margin-top: 5px;
@@ -98,6 +97,7 @@ section header {
         cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
+        -ms-user-select: none;
         user-select: none;
     }
 
@@ -168,6 +168,7 @@ section header {
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
@@ -389,7 +390,6 @@ input[type="radio"] {
 .ui-datepicker-trigger {
     outline: none;
     margin-left: -20px;
-    border: none;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     width: 21px;
@@ -397,12 +397,13 @@ input[type="radio"] {
     padding: 3px;
     cursor: pointer;
     border: solid 1px #d9d9d9;
-    /*border-bottom: solid 1px #ababab;*/
     background: transparent;
     background-image: -moz-linear-gradient(top,#fdfdfd,#dfdfdf);
     background-image: -o-linear-gradient(top,#fdfdfd,#dfdfdf);
     background-image: -webkit-linear-gradient(top,#fdfdfd,#dfdfdf);
+    background-image: -ms-linear-gradient(top,#fdfdfd,#dfdfdf);
     -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
     box-shadow: 0 1px 0 rgba(0,0,0,0.05);
 }
 
@@ -411,10 +412,11 @@ input[type="radio"] {
         background-image: -moz-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
         background-image: -o-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
         background-image: -webkit-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
+        background-image: -ms-linear-gradient(top,#dfdfdf 50%,#bdbdbd);
     }
 
 .icon {
-    margin-left: 0px;
+    margin-left: 0;
     display: inline;
     background-image: url(/studentsapp/content/calendar.png);
     background-repeat: no-repeat;
@@ -452,16 +454,16 @@ hr {
         border-bottom-right-radius: 0;
     }
 
-.studentsList-active {
-    background: rgb(255,255,255) !important;
-    border: 1px solid #dfdfdf !important;
-    border-right: none !important;
-    z-index: 1000 !important;
+.studentsList .studentsList-active {
+    background: rgb(255,255,255); 
+    border: 1px solid #dfdfdf;
+    border-right: none;
+    z-index: 1000;
 }
 
     .studentsList-active span:last-child {
-        text-decoration: none !important;
-        color: rgb(0, 0, 0) !important;
+        text-decoration: none;
+        color: rgb(0, 0, 0);
     }
 
 .subjects {
@@ -487,6 +489,7 @@ hr {
     right: 0;
     top: 70px;
 }
+
 .subjectTitle {
     position: absolute;
     left: 20px;
@@ -501,6 +504,7 @@ hr {
     background-image: -moz-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
     background-image: -o-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
     background-image: -webkit-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
+    background-image: -ms-linear-gradient(top,#fdfdfd,#fdfdfd,#dfdfdf);
     border: 1px solid #bdbdbd;
     border-radius: 3px;
     box-shadow: 2px 2px 2px #d4d0d0;
