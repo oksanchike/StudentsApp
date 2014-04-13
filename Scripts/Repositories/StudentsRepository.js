@@ -1,10 +1,10 @@
 ﻿var StudentsRepository = Base.extend({
     constructor: function () {
         this.students = TAFFY([
-            { id: 1, gender: "M", surname: "Мостовой", name: "Вячеслав", patronymic: "Игоревич", dateOfBirth: "07.10.1992", dateOfReceipt: "01.09.2009", group: "МТ-202" },
-            { id: 2, gender: "F", surname: "Запорожец", name: "Оксана", patronymic: "Викторовна", dateOfBirth: "29.11.1991", dateOfReceipt: "01.09.2009", group: "МТ-202" },
-            { id: 3, gender: "F", surname: "Глухова", name: "Анастасия", patronymic: "Андреевна", dateOfBirth: "03.01.1992", dateOfReceipt: "01.09.2009", group: "МТ-202" },
-            { id: 4, gender: "F", surname: "Хабибулина", name: "Татьяна", patronymic: "Васильевна", dateOfBirth: "01.11.1989", dateOfReceipt: "01.09.2009", group: "МТ-202" },
+            { id: 1, gender: "M", surname: "Мостовой", name: "Вячеслав", patronymic: "Игоревич", dateOfBirth: "07.10.1992", dateOfReceipt: "01.09.2009", group: "МТ-102" },
+            { id: 2, gender: "F", surname: "Запорожец", name: "Оксана", patronymic: "Викторовна", dateOfBirth: "29.11.1991", dateOfReceipt: "01.09.2009", group: "МТ-102" },
+            { id: 3, gender: "F", surname: "Глухова", name: "Анастасия", patronymic: "Андреевна", dateOfBirth: "03.01.1992", dateOfReceipt: "01.09.2009", group: "МТ-102" },
+            { id: 4, gender: "F", surname: "Хабибулина", name: "Татьяна", patronymic: "Васильевна", dateOfBirth: "01.11.1989", dateOfReceipt: "01.09.2009", group: "МТ-102" },
             { id: 5, gender: "М", surname: "Баранов", name: "Валентин", patronymic: "Владимирович", dateOfBirth: "22.04.1990", dateOfReceipt: "01.09.2009", group: "МТ-502" },
             { id: 6, gender: "M", surname: "Бондаренко", name: "Роман", patronymic: "Игоревич", dateOfBirth: "07.10.1992", dateOfReceipt: "01.09.2009", group: "МТ-502" },
             { id: 7, gender: "M", surname: "Брагин", name: "Владислав", patronymic: "Викторовна", dateOfBirth: "25.05.1993", dateOfReceipt: "01.09.2009", group: "МТ-502" },
@@ -22,7 +22,7 @@
             { id: 19, gender: "М", surname: "Столбов", name: "Николай", patronymic: "Ильич", dateOfBirth: "25.11.1992", dateOfReceipt: "01.09.2009", group: "МТ-402" },
             { id: 20, gender: "М", surname: "Макаренко", name: "Петр", patronymic: "Максимович", dateOfBirth: "24.09.1991", dateOfReceipt: "01.09.2009", group: "МТ-502" }
         ]);
-        this.lastId = 20;
+        this.lastId = this.students().get().length;
     },
     save: function (student) {
         if (student.id !== null) {
@@ -64,10 +64,7 @@
     getById: function (id) {
         if (id !== null) {
             var student = this.students({ id: id }).first();
-            if (student)
-                return student;
-            else
-                return null;
+            return student ? student : null;
         }
         else
             return null;
