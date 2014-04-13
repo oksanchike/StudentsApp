@@ -260,9 +260,15 @@
         this.surname.oninput = function () {
             self.hideValidation(self.validationMessageSurname, self.surname);
         };
+        $(this.dateOfBirth).change(function () {
+            self.hideValidation(self.validationMessageDateOfBirth, self.dateOfBirth);
+        });
         this.dateOfBirth.oninput = function () {
             self.hideValidation(self.validationMessageDateOfBirth, self.dateOfBirth);
         };
+        $(this.dateOfReceipt).change(function () {
+            self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceipt);
+        });
         this.dateOfReceipt.oninput = function () {
             self.hideValidation(self.validationMessageDateOfReceipt, self.dateOfReceipt);
         };

@@ -7,8 +7,7 @@
             this.active.classList.remove("studentsList-active");
         this.active = item;
         this.active.classList.add("studentsList-active");
-        this.studentChanged = new CustomEvent("studentChanged", { detail: { id: this.getActiveId() } });
-        this.list.dispatchEvent(this.studentChanged);
+        triggerEvent(this.list, "studentChanged", { id: this.getActiveId() });
     },
     getActiveId: function () {
         var id = this.active.getAttribute("data-id");

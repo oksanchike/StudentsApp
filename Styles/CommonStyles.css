@@ -10,6 +10,11 @@
         margin: 0 auto;
     }
 
+::-ms-clear
+        {
+             display: none;
+        }
+
 #ui-datepicker-div {
     font-size: 12px;
 }

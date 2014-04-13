@@ -90,10 +90,10 @@ var PageController = Base.extend({
     },
     __initEventHandlers: function () {
         var self = this;
-        this.groups.div1.addEventListener("groupChanged", function (e) {
+        addEvent(this.groups.div1, "groupChanged", function (e) {
             self.setList(e.detail.group.innerText);
         });
-        this.studentsList.list.addEventListener("studentChanged", function (e) {
+        addEvent(this.studentsList.list, "studentChanged", function (e) {
             self.setStudent(e.detail.id);
         });
         document.getElementById("AddStudent").onclick = function () {

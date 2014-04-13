@@ -13,35 +13,21 @@
         this.div1.appendChild(ul);
         for (var i = 0; i < groups.length; i++) {
             var self = this;
-            if (groups[i] != self.activeGroup) {
-                var li = document.createElement("li");
-                li.innerHTML = groups[i];
-                li.classList.add("styleLi");
-                li.addEventListener("click", function (sender) {
-                    self.setActiveGroup(sender.currentTarget);
-                    self.activeGroup = sender.currentTarget;
-                    document.getElementById("HeadinGgroup").innerHTML = self.activeGroup.innerHTML;
-                    self.groupChanged = new CustomEvent("groupChanged", { detail: { group: self.activeGroup } });
-                    self.div1.dispatchEvent(self.groupChanged);
-                });
-                ul.appendChild(li, ul.firstChild);
-            }
-            else {
-                var li = document.createElement("li");
-                li.innerHTML = groups[i];
-                li.classList.add("styleLi");
+            var li = document.createElement("li");
+            li.innerHTML = groups[i];
+            li.classList.add("styleLi");
+            if (groups[i] == self.activeGroup) {
                 li.classList.add("displayNone");
                 this.activeGroup = li;
                 document.getElementById("HeadinGgroup").innerHTML = this.activeGroup.innerHTML;
-                li.addEventListener("click", function (sender) {
-                    self.setActiveGroup(sender.currentTarget);
-                    self.activeGroup = sender.currentTarget;
-                    document.getElementById("HeadinGgroup").innerHTML = self.activeGroup.innerHTML;
-                    self.groupChanged = new CustomEvent("groupChanged", { detail: { group: self.activeGroup } });
-                    self.div1.dispatchEvent(self.groupChanged);                   
-                });
-                ul.appendChild(li, ul.firstChild);
             }
+            li.addEventListener("click", function (sender) {
+                self.setActiveGroup(sender.currentTarget);
+                self.activeGroup = sender.currentTarget;
+                document.getElementById("HeadinGgroup").innerHTML = self.activeGroup.innerHTML;
+                triggerEvent(self.div1, "groupChanged", { group: self.activeGroup });
+            });
+            ul.appendChild(li, ul.firstChild);
         }
     },
     setActiveGroup: function (li) {

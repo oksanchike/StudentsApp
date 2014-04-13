@@ -2,6 +2,8 @@
     constructor: function (canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.context = this.canvas.getContext("2d");
+        this.toolTip = document.createElement("canvas");
+        this.tooltipContext = this.toolTip.getContext("2d");
         this.pieX = (this.canvas.width) / 2;
         this.pieY = (this.canvas.height) / 2 + 50;
         this.pieRadius = Math.min(this.canvas.width, this.canvas.height) / 2 - 60;
@@ -254,25 +256,23 @@
         return mouseX >= this.lineX && mouseX <= this.lineWidth + this.lineX && mouseY >= this.lineY && mouseY <= this.lineHeight + this.lineY;
     },
     showToolTip: function (title, mouseX, mouseY) {
-        this.toolTip = document.createElement("canvas");
-        var context = this.toolTip.getContext("2d");
         var div = document.getElementById("Canvas");
-        context.fillStyle = "#bdbdbd";
-        context.beginPath();
-        context.font = "normal 11pt PT Sans";
-        var width = context.measureText(title).width + 10;
+        this.tooltipContext.fillStyle = "#bdbdbd";
+        this.tooltipContext.beginPath();
+        this.tooltipContext.font = "normal 11pt PT Sans";
+        var width = this.tooltipContext.measureText(title).width + 10;
         this.toolTip.classList.add("toolTip");
         this.toolTip.width = width;
         this.toolTip.height = 20;
         this.toolTip.setAttribute("style", "left:"+mouseX+"px; "+"top:"+mouseY+"px");
-        context.font = "normal 11pt PT Sans";
-        context.fillText(title, 5, 15);
-        context.closePath();
+        this.tooltipContext.font = "normal 11pt PT Sans";
+        this.tooltipContext.fillText(title, 5, 15);
+        this.tooltipContext.closePath();
         div.appendChild(this.toolTip);
     },
     hideToolTip: function () {
-        if (this.toolTip != undefined)
-            this.toolTip.remove();
+        if (this.toolTip && this.toolTip.parentNode)
+            this.toolTip.parentNode.removeChild(this.toolTip);
     },
     __initEventHandlers: function () {
         var self = this;
