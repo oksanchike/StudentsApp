@@ -233,9 +233,5 @@
         this.__dateOfReceiptInput.oninput = function() {
             self.__hideValidation(self.__validationMessageDateOfReceipt, self.__dateOfReceiptInput);
         };
-        document.getElementById("TotalStatistics").onclick = function() {
-            self.__chart.drawSubjectText();
-            self.__chart.drawTotalDoughnutChart();
-        };
     }
 });

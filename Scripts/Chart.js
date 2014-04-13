@@ -19,15 +19,84 @@
         this.__dataSubjects = dataSubjects;
         var totalHours = this.__getTotalHours();
         this.__drawLineChart(totalHours);
-        this.drawSubjectsTotalText();
-        this.drawTotalDoughnutChart();
+        this.__drawSubjectsTotalText();
+        this.__drawTotalDoughnutChart();
     },
-    drawTotalDoughnutChart: function() {
+    __drawSubjectsTotalText: function () {
+        var subjectTitle = document.getElementById("SelectedSubjectTitle");
+        subjectTitle.innerHTML = "Все предметы" + " ( " + this.__getTotalHours() + " часов )";
+    },
+    __drawEmptyDoughnut: function () {
+        var context = this.context;
+        context.save();
+        context.shadowBlur = 15;
+        context.shadowColor = "#999";
+        context.shadowOffsetX = 0;
+        context.shadowOffsetY = 3;
+        context.beginPath();
+        context.arc(this.pieX, this.pieY, this.pieRadius - 30, 0, 2 * Math.PI, false);
+        context.lineWidth = 30;
+        context.strokeStyle = "#E8E8E8";
+        context.stroke();
+        context.closePath();
+        context.restore();
+    },
+    __drawDoughnutChart: function (total, elapsed, totalAbsense, withValidReason) {
+        var context = this.context;
+        var y = this.pieY - this.pieRadius - 20;
+        var height = this.pieRadius * 2 + 40;
+        this.context.clearRect(0, y, this.canvas.width, height);
+        this.__drawEmptyDoughnut();
+        var startAngle = 1.5 * Math.PI;
+        var sliceAngle = 2 * Math.PI * withValidReason / total;
+        var endAngle = startAngle + sliceAngle;
+        this.__drawArc(startAngle, endAngle, "#0099CC");
+        startAngle = endAngle;
+        sliceAngle = 2 * Math.PI * (totalAbsense - withValidReason) / total;
+        endAngle = startAngle + sliceAngle;
+        this.__drawArc(startAngle, endAngle, "#990000");
+        startAngle = endAngle;
+        sliceAngle = 2 * Math.PI * (elapsed - totalAbsense) / total;
+        endAngle = startAngle + sliceAngle;
+        this.__drawArc(startAngle, endAngle, "#FFCC00");
+        this.__drawDoughnutDivision(total);
+        context.save();
+        this.__drawTextAboutPresence(this.pieY - 50, "Всего пройдено", "normal 11pt PT Sans");
+        this.__drawNumberAboutPresence(this.pieY - 30, elapsed, "#FFCC00");
+        this.__drawTextAboutPresence(this.pieY - 10, "Всего прогуляно", "normal 10pt PT Sans");
+        this.__drawNumberAboutPresence(this.pieY + 10, totalAbsense, "rgb(153, 0, 0)");
+        this.__drawTextAboutPresence(this.pieY + 30, "Из них", "normal 9pt PT Sans");
+        this.__drawTextAboutPresence(this.pieY + 45, "по уважительной причине", "normal 9pt PT Sans");
+        this.__drawNumberAboutPresence(this.pieY + 65, withValidReason, "#0099CC");
+        context.restore();
+    },
+    __drawRectangleDivision: function (x, y, l, text) {
+        var context = this.context;
+
+        context.save();
+        context.beginPath();
+        context.moveTo(x, y);
+        context.lineTo(x, y - l);
+        context.strokeStyle = "#000";
+        context.lineWidth = 0.5;
+        context.stroke();
+        context.closePath();
+        if (text !== undefined) {
+            var dx = x - this.context.measureText(text).width / 2;
+            var dy = y - l - 4;
+
+            context.fillStyle = "#999";
+            context.font = "normal 10pt PT Sans";
+            context.fillText(text, dx, dy);
+        }
+        context.restore();
+    },
+    __drawTotalDoughnutChart: function() {
         var total = this.__getTotalHours();
         var elapsed = this.__getElapsedHours();
         var totalAbsenseTime = this.__getTotalAbsenseTime();
         var withValidReasonTime = this.__getWithValidReasonTime();
-        this.drawDoughnutChart(total, elapsed, totalAbsenseTime, withValidReasonTime);
+        this.__drawDoughnutChart(total, elapsed, totalAbsenseTime, withValidReasonTime);
     },
     __drawLineChart: function(totalHours) {
         var lineChartWidth = this.canvas.width - 40;
@@ -42,11 +111,11 @@
         var xLast = quarter * 4 + x;
 
         this.__drawRectangles(totalHours, ratio, x + 1, y);
-        this.drawRectangleDivision(x + 2, y, 13, 0);
-        this.drawRectangleDivision(xFirstQuarter, y, 5);
-        this.drawRectangleDivision(xMiddle, y, 13, totalHours / 2);
-        this.drawRectangleDivision(xThirdQuarter, y, 5);
-        this.drawRectangleDivision(xLast, y, 13, totalHours);
+        this.__drawRectangleDivision(x + 2, y, 13, 0);
+        this.__drawRectangleDivision(xFirstQuarter, y, 5);
+        this.__drawRectangleDivision(xMiddle, y, 13, totalHours / 2);
+        this.__drawRectangleDivision(xThirdQuarter, y, 5);
+        this.__drawRectangleDivision(xLast, y, 13, totalHours);
     },
     __drawEmptyLine: function(x, y) {
         var context = this.context;
@@ -92,81 +161,12 @@
         }
         context.restore();
     },
-    drawRectangleDivision: function(x, y, l, text) {
-        var context = this.context;
-
-        context.save();
-        context.beginPath();
-        context.moveTo(x, y);
-        context.lineTo(x, y - l);
-        context.strokeStyle = "#000";
-        context.lineWidth = 0.5;
-        context.stroke();
-        context.closePath();
-        if (text !== undefined) {
-            var dx = x - this.context.measureText(text).width / 2;
-            var dy = y - l - 4;
-
-            context.fillStyle = "#999";
-            context.font = "normal 10pt PT Sans";
-            context.fillText(text, dx, dy);
-        }
-        context.restore();
-    },
-    drawSubjectText: function(total, title) {
+    __drawSubjectText: function(total, title) {
         var subjectTitle = document.getElementById("SelectedSubjectTitle");
         if (total)
             subjectTitle.innerHTML = title + " ( " + total + " часов )";
         else
-            this.drawSubjectsTotalText();
-    },
-    drawSubjectsTotalText: function() {
-        var subjectTitle = document.getElementById("SelectedSubjectTitle");
-        subjectTitle.innerHTML = "Все предметы" + " ( " + this.__getTotalHours() + " часов )";
-    },
-    drawEmptyDoughnut: function() {
-        var context = this.context;
-        context.save();
-        context.shadowBlur = 15;
-        context.shadowColor = "#999";
-        context.shadowOffsetX = 0;
-        context.shadowOffsetY = 3;
-        context.beginPath();
-        context.arc(this.pieX, this.pieY, this.pieRadius - 30, 0, 2 * Math.PI, false);
-        context.lineWidth = 30;
-        context.strokeStyle = "#E8E8E8";
-        context.stroke();
-        context.closePath();
-        context.restore();
-    },
-    drawDoughnutChart: function(total, elapsed, totalAbsense, withValidReason) {
-        var context = this.context;
-        var y = this.pieY - this.pieRadius - 20;
-        var height = this.pieRadius * 2 + 40;
-        this.context.clearRect(0, y, this.canvas.width, height);
-        this.drawEmptyDoughnut();
-        var startAngle = 1.5 * Math.PI;
-        var sliceAngle = 2 * Math.PI * withValidReason / total;
-        var endAngle = startAngle + sliceAngle;
-        this.__drawArc(startAngle, endAngle, "#0099CC");
-        startAngle = endAngle;
-        sliceAngle = 2 * Math.PI * (totalAbsense - withValidReason) / total;
-        endAngle = startAngle + sliceAngle;
-        this.__drawArc(startAngle, endAngle, "#990000");
-        startAngle = endAngle;
-        sliceAngle = 2 * Math.PI * (elapsed - totalAbsense) / total;
-        endAngle = startAngle + sliceAngle;
-        this.__drawArc(startAngle, endAngle, "#FFCC00");
-        this.__drawDoughnutDivision(total);
-        context.save();
-        this.__drawTextAboutPresence(this.pieY - 50, "Всего пройдено", "normal 11pt PT Sans");
-        this.__drawNumberAboutPresence(this.pieY - 30, elapsed, "#FFCC00");
-        this.__drawTextAboutPresence(this.pieY - 10, "Всего прогуляно", "normal 10pt PT Sans");
-        this.__drawNumberAboutPresence(this.pieY + 10, totalAbsense, "rgb(153, 0, 0)");
-        this.__drawTextAboutPresence(this.pieY + 30, "Из них", "normal 9pt PT Sans");
-        this.__drawTextAboutPresence(this.pieY + 45, "по уважительной причине", "normal 9pt PT Sans");
-        this.__drawNumberAboutPresence(this.pieY + 65, withValidReason, "#0099CC");
-        context.restore();
+            this.__drawSubjectsTotalText();
     },
     __drawDoughnutDivision: function(total) {
         var context = this.context;
@@ -293,8 +293,8 @@
             if (self.__isMouseOnLine(mouseX, mouseY)) {
                 var subject = self.__getSubjectByCoordinates(mouseX);
                 if (subject) {
-                    self.drawSubjectText(subject.total, subject.title);
-                    self.drawDoughnutChart(subject.total, subject.elapsed, subject.totalAbsense, subject.withValidReason);
+                    self.__drawSubjectText(subject.total, subject.title);
+                    self.__drawDoughnutChart(subject.total, subject.elapsed, subject.totalAbsense, subject.withValidReason);
                 }
             }
         };
@@ -315,6 +315,10 @@
         };
         this.canvas.onmouseleave = function() {
             self.__hideToolTip();
+        };
+        document.getElementById("TotalStatistics").onclick = function () {
+            self.__drawSubjectText();
+            self.__drawTotalDoughnutChart();
         };
     }
 });
