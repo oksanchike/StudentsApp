@@ -3,9 +3,12 @@
         this.list = list;
     },
     setActive: function(item) {
-        if (this.__active)
+        if (this.__active) {
             this.__active.classList.remove("studentsList-active");
+            this.__active.classList.add("studentsList-disactive");
+        }
         this.__active = item;
+        this.__active.classList.remove("studentsList-disactive");
         this.__active.classList.add("studentsList-active");
         EventHelpers.triggerEvent(this.list, "studentChanged", { id: this.getActiveId() });
     },

@@ -1,0 +1,244 @@
+﻿.groupsListDisactive {
+    -moz-animation: groupsListDisactive 0.5s ease-out;
+    -o-animation: groupsListDisactive 0.5s ease-out;
+    -webkit-animation: groupsListDisactive 0.5s ease-out;
+    animation: groupsListDisactive 0.5s ease-out;
+    background: rgba(111, 106, 106, 0);
+    border-radius: 3px;
+}
+
+@-webkit-keyframes groupsListDisactive {
+    0% { background: rgba(111, 106, 106, 0.1); }
+
+    10% { background: rgba(111, 106, 106, 0.1); }
+
+    100% { background: rgba(111, 106, 106, 0); }
+}
+
+@-moz-keyframes groupsListDisactive {
+    0% { background: rgba(111, 106, 106, 0.1); }
+
+    10% { background: rgba(111, 106, 106, 0.1); }
+
+    100% { background: rgba(111, 106, 106, 0); }
+}
+
+@keyframes groupsListDisactive {
+    0% { background: rgba(111, 106, 106, 0.1); }
+
+    10% { background: rgba(111, 106, 106, 0.1); }
+
+    100% { background: rgba(111, 106, 106, 0); }
+}
+
+.layout-column-2 .groupList {
+    -moz-animation: groupList 0.5s ease-out;
+    -o-animation: groupList 0.5s ease-out;
+    -webkit-animation: groupList 0.5s ease-out;
+    animation: groupList 0.5s ease-out;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 2px 2px #bdbdbd;
+    padding: 0;
+    position: absolute;
+    z-index: 100;
+}
+
+@-webkit-keyframes groupList {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+
+    50% {
+        height: 120px;
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes groupList {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+
+    50% {
+        height: 120px;
+        opacity: 1;
+    }
+}
+
+@keyframes groupList {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+
+    50% {
+        height: 120px;
+        opacity: 1;
+    }
+}
+
+.layout-column-2 .groupsListClose {
+    -moz-animation: groupListClose 0.5s ease-out;
+    -o-animation: groupListClose 0.5s ease-out;
+    -webkit-animation: groupListClose 0.5s ease-out;
+    animation: groupListClose 0.5s ease-out;
+    height: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+}
+
+@-webkit-keyframes groupListClose {
+    0% {
+        height: 120px;
+        opacity: 1;
+    }
+
+    10% {
+        height: 120px;
+        opacity: 1;
+    }
+
+    100% {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes groupListClose {
+    0% {
+        height: 120px;
+        opacity: 1;
+    }
+
+    10% {
+        height: 120px;
+        opacity: 1;
+    }
+
+    100% {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes groupListClose {
+    0% {
+        height: 120px;
+        opacity: 1;
+    }
+
+    10% {
+        height: 120px;
+        opacity: 1;
+    }
+
+    100% {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+.groupList .groupListUl {
+    -moz-animation: groupListUl 0.5s ease-out;
+    -o-animation: groupListUl 0.5s ease-out;
+    -webkit-animation: groupListUl 0.5s ease-out;
+    animation: groupListUl 0.5s ease-out;
+    margin: 0;
+    padding: 0;
+}
+
+@-webkit-keyframes groupListUl {
+    0% { opacity: 0; }
+
+    50% { opacity: 0; }
+
+    100% { opacity: 1; }
+}
+
+@-moz-keyframes groupListUl {
+    0% { opacity: 0; }
+
+    50% { opacity: 0; }
+
+    100% { opacity: 1; }
+}
+
+@keyframes groupListUl {
+    0% { opacity: 0; }
+
+    50% { opacity: 0; }
+
+    100% { opacity: 1; }
+}
+
+.groupList .groupListUlClose {
+    -moz-animation: groupListUlClose 0.5s ease-out;
+    -o-animation: groupListUlClose 0.5s ease-out;
+    -webkit-animation: groupListUlClose 0.5s ease-out;
+    animation: groupListUlClose 0.5s ease-out;
+    margin: 0;
+    padding: 0;
+}
+
+@-webkit-keyframes groupListUlClose {
+    0% { opacity: 1; }
+
+    50% { opacity: 0; }
+
+    100% { opacity: 0; }
+}
+
+@-moz-keyframes groupListUlClose {
+    0% { opacity: 1; }
+
+    50% { opacity: 0; }
+
+    100% { opacity: 0; }
+}
+
+@keyframes groupListUlClose {
+    0% { opacity: 1; }
+
+    50% { opacity: 0; }
+
+    100% { opacity: 0; }
+}
+
+.studentsList .studentsList-active {
+    background: linear-gradient(to right, transparent 50%, white 50%);
+    -moz-background-size: 200% 100%;
+    background-size: 200% 100%;
+    background-position: right bottom;
+    border: 1px solid #dfdfdf;
+    -moz-transition: background-position 0.5s ease, border 0.5s linear 0.2s;
+    -o-transition: background-position 0.5s ease, border 0.5s linear 0.2s;
+    -webkit-transition: background-position 0.5s ease, border 0.5s linear 0.2s;
+    transition: background-position 0.5s ease, border 0.5s linear 0.2s;
+    border-right: none;
+    border-left: none;
+    z-index: 1000;
+}
+
+.studentsList .studentsList-disactive {
+    background: linear-gradient(to right, transparent 50%, white 50%);
+    -moz-background-size: 200% 100%;
+    background-size: 200% 100%;
+    background-position:left bottom;
+    border: 1px solid transparent;
+    -moz-transition: background-position 0.5s ease, border 0.2s linear;
+    -o-transition: background-position 0.5s ease, border 0.2s linear;
+    -webkit-transition: background-position 0.5s ease, border 0.2s linear;
+    transition: background-position 0.5s ease, border 0.2s linear;
+    border-right: none;
+    border-left: none;
+    z-index: 1000;
+}
+
+@-webkit-keyframes studentsList-active {
+    0% { background: rgba(255, 255, 255, 0); }
+
+    100% { background: rgb(255, 255, 255); }
+}

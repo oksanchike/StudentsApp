@@ -47,13 +47,24 @@
     __open: function () {
         this.__active = !this.__active;
         this.__buttonGroups.appendChild(this.groupsList);
-        this.__groupsContainer.classList.add("groupsList-active");
+        this.__groupsContainer.classList.remove("groupsListDisactive");
+        this.__groupsContainer.classList.add("groupsListActive");
+        this.groupsList.classList.remove("groupsListClose");
+        this.groupsList.classList.add("groupsList");
+        this.groupsList.firstChild.classList.remove("groupListUlClose");
+        this.groupsList.firstChild.classList.add("groupListUl");
     },
     __close: function () {
         if (this.__active) {
             this.__active = !this.__active;
-            this.__buttonGroups.removeChild(this.__buttonGroups.childNodes[3]);
-            this.__groupsContainer.classList.remove("groupsList-active");
+            this.__groupsContainer.classList.remove("groupsListActive");
+            this.__groupsContainer.classList.add("groupsListDisactive");
+            this.groupsList.classList.remove("groupsList");
+            this.groupsList.classList.add("groupsListClose");
+            this.groupsList.firstChild.classList.remove("groupListUl");
+            this.groupsList.firstChild.classList.add("groupListUlClose");
+            var self = this;
+            setTimeout(function () { self.__buttonGroups.removeChild(self.__buttonGroups.childNodes[3]); }, 500);
         }
     }
 });
