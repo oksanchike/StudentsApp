@@ -5,24 +5,38 @@
     padding: 0;
 }
 
-body > section {
-    margin: 0 auto;
-    width: 900px;
+    body > section {
+        margin: 0 auto;
+        width: 900px;
+    }
+
+::-ms-clear {
+    display: none;
 }
 
-::-ms-clear { display: none; }
+#ui-datepicker-div {
+    font-size: 12px;
+}
 
-#ui-datepicker-div { font-size: 12px; }
+.sizeMain {
+    font-size: 0.879em;
+}
 
-.sizeMain { font-size: 0.879em; }
+.displayNone {
+    display: none;
+}
 
-.displayNone { display: none; }
+.displayListItem {
+    display: list-item;
+}
 
-.displayListItem { display: list-item; }
+.floatRight {
+    float: right;
+}
 
-.floatRight { float: right; }
-
-.floatLeft { float: left; }
+.floatLeft {
+    float: left;
+}
 
 section header {
     color: #6f6a6a;
@@ -43,7 +57,9 @@ section header {
     vertical-align: middle;
 }
 
-.personalData:nth-child(2) { width: 467px; }
+.personalData:nth-child(2) {
+    width: 467px;
+}
 
 .personalData label {
     float: left;
@@ -59,7 +75,9 @@ section header {
     visibility: hidden;
 }
 
-.layout-column-1 { margin-right: 25px; }
+.layout-column-1 {
+    margin-right: 25px;
+}
 
 .pageTitle {
     display: inline;
@@ -73,22 +91,24 @@ section header {
     padding: 5px 10px 5px 10px;
 }
 
-.layout-column-2 .groups:hover {
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-user-select: none;
-    background: rgba(111, 106, 106, 0.1);
-    border-radius: 3px;
-    cursor: pointer;
-    user-select: none;
-}
+    .layout-column-2 .groups:hover {
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        background: rgba(111, 106, 106, 0.1);
+        border-radius: 3px;
+        cursor: pointer;
+        user-select: none;
+    }
 
 .groupsList-active {
     background: rgba(111, 106, 106, 0.1);
     border-radius: 3px;
 }
 
-.layout-column-2 .group { display: inline; }
+.layout-column-2 .group {
+    display: inline;
+}
 
 .layout-column-2 .groupList {
     background: rgb(255, 255, 255);
@@ -96,11 +116,97 @@ section header {
     padding: 0;
     position: absolute;
     z-index: 100;
+    -webkit-animation: groupList 0.5s ease-out;
+    -moz-animation: groupList 0.5s ease-out;
+    -o-animation: groupList 0.5s ease-out;
+    animation: groupList 0.5s ease-out;
+}
+
+@-webkit-keyframes groupList {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+
+    50% {
+        height: 120px;
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes groupList {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+
+    50% {
+        height: 120px;
+        opacity: 1;
+    }
+}
+
+@keyframes groupList {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+
+    50% {
+        height: 120px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes groupListUl {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes groupListUl {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes groupListUl {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .groupList ul {
     margin: 0;
     padding: 0;
+    -webkit-animation: groupListUl 0.5s ease-out;
+    -moz-animation: groupListUl 0.5s ease-out;
+    -o-animation: groupListUl 0.5s ease-out;
+    animation: groupListUl 0.5s ease-out;
 }
 
 .groupList .styleLi {
@@ -108,10 +214,10 @@ section header {
     padding: 3px 25px 3px 20px;
 }
 
-.groupList .styleLi:hover {
-    background: rgba(45, 137, 213, 0.6);
-    cursor: pointer;
-}
+    .groupList .styleLi:hover {
+        background: rgba(45, 137, 213, 0.6);
+        cursor: pointer;
+    }
 
 .button-print {
     background: #dfdfdf; /* for non-css3 browsers */
@@ -128,20 +234,20 @@ section header {
     text-shadow: 0 1px rgba(255, 255, 255, 0.8);
 }
 
-.button-print:hover {
-    background: #dfdfdf; /* for non-css3 browsers */
-    background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
-    background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
-    background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
-    background: -ms-linear-gradient(top, #f2f2f2, #c8c8c8); /* для IE10+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
-}
+    .button-print:hover {
+        background: #dfdfdf; /* for non-css3 browsers */
+        background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
+        background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
+        background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
+        background: -ms-linear-gradient(top, #f2f2f2, #c8c8c8); /* для IE10+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
+    }
 
-.button-print:active {
-    background: #d9d9d9;
-    border: none;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-}
+    .button-print:active {
+        background: #d9d9d9;
+        border: none;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
 
 .buttons {
     -moz-user-select: none;
@@ -169,13 +275,15 @@ section header {
     width: 900px;
 }
 
-.content .link {
-    color: #2d89d5;
-    margin-left: 0;
-    text-decoration: underline;
-}
+    .content .link {
+        color: #2d89d5;
+        margin-left: 0;
+        text-decoration: underline;
+    }
 
-.content .link:hover { cursor: pointer; }
+        .content .link:hover {
+            cursor: pointer;
+        }
 
 header > span {
     color: #2d89d5;
@@ -200,13 +308,13 @@ aside {
     z-index: 0;
 }
 
-aside .buttons {
-    border-radius: 3px;
-    box-shadow: 0 1px 5px #bdbdbd;
-    min-width: 155px;
-    padding: 6px 5px;
-    text-align: left;
-}
+    aside .buttons {
+        border-radius: 3px;
+        box-shadow: 0 1px 5px #bdbdbd;
+        min-width: 155px;
+        padding: 6px 5px;
+        text-align: left;
+    }
 
 .personalData input[type="text"]:focus {
     box-shadow: 0 0 3px #66b3f3;
@@ -228,20 +336,20 @@ aside .buttons {
     text-shadow: 0 1px rgba(255, 255, 255, 0.8);
 }
 
-.button-addStudent:hover {
-    background: #dfdfdf; /* for non-css3 browsers */
-    background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
-    background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
-    background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
-    background: -ms-linear-gradient(top, #f2f2f2, #c8c8c8); /* для IE10+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
-}
+    .button-addStudent:hover {
+        background: #dfdfdf; /* for non-css3 browsers */
+        background: -webkit-linear-gradient(top, #f2f2f2, #c8c8c8); /* для webkit-браузеров */
+        background: -moz-linear-gradient(top, #f2f2f2, #c8c8c8); /* для firefox 3.6+ */
+        background: -o-linear-gradient(top, #f2f2f2, #c8c8c8); /* для Opera 11.10+ */
+        background: -ms-linear-gradient(top, #f2f2f2, #c8c8c8); /* для IE10+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f2f2", endColorstr="#c8c8c8"); /* для IE6-9 */
+    }
 
-.button-addStudent:active {
-    background: #d9d9d9;
-    border: none;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-}
+    .button-addStudent:active {
+        background: #d9d9d9;
+        border: none;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
 
 .button-saveСhanges {
     background: #dfdfdf; /* for non-css3 browsers */
@@ -255,20 +363,20 @@ aside .buttons {
     text-shadow: 0 1px rgba(0, 0, 0, 0.2);
 }
 
-.button-saveСhanges:hover {
-    background: #dfdfdf; /* for non-css3 browsers */
-    background: -webkit-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для webkit-браузеров */
-    background: -moz-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для firefox 3.6+ */
-    background: -o-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для Opera 11.10+ */
-    background: -ms-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для IE10+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2d89d5 0%", endColorstr="#2272b5 35%"); /* для IE6-9 */
-}
+    .button-saveСhanges:hover {
+        background: #dfdfdf; /* for non-css3 browsers */
+        background: -webkit-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для webkit-браузеров */
+        background: -moz-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для firefox 3.6+ */
+        background: -o-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для Opera 11.10+ */
+        background: -ms-linear-gradient(top, #2d89d5 0, #2272b5 35%); /* для IE10+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2d89d5 0%", endColorstr="#2272b5 35%"); /* для IE6-9 */
+    }
 
-.button-saveСhanges:active {
-    background: #2d89d5;
-    border: none;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-}
+    .button-saveСhanges:active {
+        background: #2d89d5;
+        border: none;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
 
 .main-menu span:first-child {
     -webkit-mask-image: -webkit-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для webkit-браузеров */
@@ -311,7 +419,9 @@ h4 {
     width: 606px;
 }
 
-form { padding-top: 20px; }
+form {
+    padding-top: 20px;
+}
 
 input[type="text"] {
     background: white;
@@ -322,7 +432,9 @@ input[type="text"] {
     width: 230px;
 }
 
-.gender { min-height: 22px; }
+.gender {
+    min-height: 22px;
+}
 
 .genderLabel {
     background: white;
@@ -330,7 +442,9 @@ input[type="text"] {
     margin-left: 16px;
 }
 
-.genderForPrint { display: none; }
+.genderForPrint {
+    display: none;
+}
 
 input[type="radio"] {
     margin: 0;
@@ -339,7 +453,9 @@ input[type="radio"] {
     vertical-align: middle;
 }
 
-.genderRadio { margin-right: 172px; }
+.genderRadio {
+    margin-right: 172px;
+}
 
 .personalData input[type="text"].hasDatepicker {
     background: white;
@@ -352,10 +468,10 @@ input[type="radio"] {
     width: 90px;
 }
 
-.personalData input[type="text"].hasDatepicker:hover, .personalData input[type="text"].validationFocus:focus {
-    box-shadow: none;
-    outline: none;
-}
+    .personalData input[type="text"].hasDatepicker:hover, .personalData input[type="text"].validationFocus:focus {
+        box-shadow: none;
+        outline: none;
+    }
 
 .ui-datepicker-trigger {
     -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
@@ -377,13 +493,13 @@ input[type="radio"] {
     width: 21px;
 }
 
-.ui-datepicker-trigger:hover {
-    background: transparent;
-    background-image: -moz-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
-    background-image: -o-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
-    background-image: -webkit-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
-    background-image: -ms-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
-}
+    .ui-datepicker-trigger:hover {
+        background: transparent;
+        background-image: -moz-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
+        background-image: -o-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
+        background-image: -webkit-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
+        background-image: -ms-linear-gradient(top, #dfdfdf 50%, #bdbdbd);
+    }
 
 .icon {
     background-image: url(../Content/calendar.png);
@@ -395,7 +511,9 @@ input[type="radio"] {
     padding: 6px;
 }
 
-input[type="checkbox"] { vertical-align: bottom; }
+input[type="checkbox"] {
+    vertical-align: bottom;
+}
 
 hr {
     background-color: #f2f2f2;
@@ -405,26 +523,41 @@ hr {
     margin-top: 20px;
 }
 
-.studentsList { margin-top: 20px; }
-
-.studentsList li {
-    border-bottom-right-radius: 0;
-    border-radius: 3px;
-    border-top-right-radius: 0;
-    display: inline-block;
-    margin: -40px;
-    margin-bottom: 5px;
-    padding: 5px;
-    padding-left: 15px;
-    position: relative;
-    width: 155px;
+.studentsList {
+    margin-top: 20px;
 }
 
-.studentsList .studentsList-active {
-    background: rgb(255, 255, 255);
-    border: 1px solid #dfdfdf;
-    border-right: none;
-    z-index: 1000;
+    .studentsList li {
+        border-bottom-right-radius: 0;
+        border-radius: 3px;
+        border-top-right-radius: 0;
+        display: inline-block;
+        margin: -40px;
+        margin-bottom: 5px;
+        padding: 5px;
+        padding-left: 15px;
+        position: relative;
+        width: 155px;
+    }
+
+    .studentsList .studentsList-active {
+        background: rgb(255, 255, 255);
+        border: 1px solid #dfdfdf;
+        border-right: none;
+        z-index: 1000;
+        -webkit-animation: studentsList-active 0.3s linear;
+        -moz-animation: studentsList-active 0.3s linear;
+        -o-animation: studentsList-active 0.3s linear;
+        animation: studentsList-active 0.3s linear;
+    }
+
+@-webkit-keyframes studentsList-active {
+    0% {
+       background: rgba(255, 255, 255, 0);
+    }
+    100% {
+       background: rgb(255, 255, 255);
+    }
 }
 
 .studentsList-active span:last-child {
@@ -432,9 +565,13 @@ hr {
     text-decoration: none;
 }
 
-.subjects { margin-top: 20px; }
+.subjects {
+    margin-top: 20px;
+}
 
-.subjectsColumn { width: 215px; }
+.subjectsColumn {
+    width: 215px;
+}
 
 .subjects span {
     display: block;
@@ -450,6 +587,10 @@ hr {
     position: absolute;
     right: 0;
     top: 70px;
+}
+
+.groupForPrint {
+    display: none;
 }
 
 .subjectTitle {

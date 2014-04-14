@@ -15,6 +15,7 @@
         this.__validationMessageDateOfBirth = document.getElementById("ValidationMessageDateOfBirth");
         this.__validationMessageDateOfReceipt = document.getElementById("ValidationMessageDateOfReceipt");
         this.__genderForPrint = document.getElementById("GenderForPrint");
+        this.__groupForPrint = document.getElementById("GroupForPrint");
         this.__groupPanel = document.getElementById("HeadingGroup");
         this.__createDatepickers();
         this.__initEventHandlers();
@@ -34,6 +35,7 @@
             this.__femailRadioButton.checked = false;
             this.__maleRadioButton.checked = true;
         }
+        this.__groupForPrint.value = student.group;
         this.__dateOfBirthInput.value = student.dateOfBirth;
         this.__dateOfReceiptInput.value = student.dateOfReceipt;
         this.__title.setAttribute("data-id", student.id);
@@ -92,6 +94,7 @@
         this.__surnameInput.value = "";
         this.__nameInput.value = "";
         this.__genderForPrint.innerHTML = "Женский";
+        this.__groupForPrint.value = this.__groupPanel.innerHTML;
         this.__patronymicInput.value = "";
         this.__femailRadioButton.checked = true;
         this.__dateOfBirthInput.value = "";

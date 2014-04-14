@@ -21,6 +21,22 @@ section header {
     width: 793px;
 }
 
+.canvasDraw {
+    margin-top: 15px;
+    position: relative;
+}
+
+.groupForPrint {
+    display: block;
+}
+
+.subjectTitle {
+    font-size: 1.2em;
+    left: 20px;
+    position: absolute;
+    top: 70px;
+}
+
 header span { display: none; }
 
 .header { display: none; }
@@ -98,7 +114,7 @@ form { padding-top: 20px; }
     left: 154px;
     padding: 0;
     position: absolute;
-    top: 190px;
+    top: 231px;
 }
 
 

@@ -134,7 +134,7 @@
         context.save();
         var height = 25;
         this.sudjectsFromLineChart = [];
-        var colors = ["#44456F", "#DA9C65", "#A24112", "#D58202", "3C301F", "#3FAE85", "#3BC3E1", "#374548", "#B87371", "#E13B7B"];
+        var colors = ["#09CC8A", "#FFE6F1", "#96E400", "#FA3A8D", "#F7A4C2", "#5A5192", "#FF8600", "#FFBE00", "#F68D5C", "#32728C"];
         for (var i = 0; i < this.__dataSubjects.length; i++) {
             for (var j = 0; j < this.__dataStudentsPresence.length; j++) {
                 if (this.__dataStudentsPresence[j].subjectId === this.__dataSubjects[i].id
