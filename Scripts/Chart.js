@@ -12,6 +12,9 @@
         this.lineHeight = 25;
         this.lineWidth = this.canvas.width - 40;
         this.__initEventHandlers();
+        this.__oldElapsed = 0;
+        this.__oldTotalAbsense = 0;
+        this.__oldWithValidReason = 0;
     },
     drawForStudent: function(dataStudentsPresence, dataSubjects) {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -26,13 +29,15 @@
         var subjectTitle = document.getElementById("SelectedSubjectTitle");
         subjectTitle.innerHTML = "Все предметы" + " ( " + this.__getTotalHours() + " часов )";
     },
-    __drawEmptyDoughnut: function () {
+    __drawEmptyDoughnut: function (withShadow) {
         var context = this.context;
         context.save();
-        context.shadowBlur = 15;
-        context.shadowColor = "#999";
-        context.shadowOffsetX = 0;
-        context.shadowOffsetY = 3;
+        if (withShadow) {
+            context.shadowBlur = 15;
+            context.shadowColor = "#999";
+            context.shadowOffsetX = 0;
+            context.shadowOffsetY = 3;
+        }
         context.beginPath();
         context.arc(this.pieX, this.pieY, this.pieRadius - 30, 0, 2 * Math.PI, false);
         context.lineWidth = 30;
@@ -43,22 +48,29 @@
     },
     __drawDoughnutChart: function (total, elapsed, totalAbsense, withValidReason) {
         var context = this.context;
-        var y = this.pieY - this.pieRadius - 20;
+        if (this.__intervalId)
+            clearInterval(this.__intervalId);
         var height = this.pieRadius * 2 + 40;
+        var y = this.pieY - this.pieRadius - 20;
         this.context.clearRect(0, y, this.canvas.width, height);
-        this.__drawEmptyDoughnut();
-        var startAngle = 1.5 * Math.PI;
-        var sliceAngle = 2 * Math.PI * withValidReason / total;
-        var endAngle = startAngle + sliceAngle;
-        this.__drawArc(startAngle, endAngle, "#0099CC");
-        startAngle = endAngle;
-        sliceAngle = 2 * Math.PI * (totalAbsense - withValidReason) / total;
-        endAngle = startAngle + sliceAngle;
-        this.__drawArc(startAngle, endAngle, "#990000");
-        startAngle = endAngle;
-        sliceAngle = 2 * Math.PI * (elapsed - totalAbsense) / total;
-        endAngle = startAngle + sliceAngle;
-        this.__drawArc(startAngle, endAngle, "#FFCC00");
+        this.__drawEmptyDoughnut(true);
+
+        var dElapsed = (elapsed / total - this.__oldElapsed) / 50;
+        var dTotalAbsense = (totalAbsense / total - this.__oldTotalAbsense) / 50;
+        var dWithValidReason = (withValidReason / total - this.__oldWithValidReason) / 50;
+        var self = this;
+        var iteration = 1;
+        this.__intervalId = setInterval(function () {
+            self.__drawEmptyDoughnut(false);
+            self.__oldElapsed += dElapsed;
+            self.__oldTotalAbsense += dTotalAbsense;
+            self.__oldWithValidReason += dWithValidReason;
+            self.__drawSlices(self.__oldElapsed, self.__oldTotalAbsense, self.__oldWithValidReason);
+
+            if (++iteration > 50)
+                clearInterval(self.__intervalId);
+        }, 10);
+
         this.__drawDoughnutDivision(total);
         context.save();
         this.__drawTextAboutPresence(this.pieY - 50, "Всего пройдено", "normal 11pt PT Sans");
@@ -69,6 +81,22 @@
         this.__drawTextAboutPresence(this.pieY + 45, "по уважительной причине", "normal 9pt PT Sans");
         this.__drawNumberAboutPresence(this.pieY + 65, withValidReason, "#0099CC");
         context.restore();
+    },
+    __drawSlices: function (elapsed, totalAbsense, withValidReason) {
+        var startAngle = 1.5 * Math.PI;
+        var sliceAngle = 2 * Math.PI * withValidReason;
+        var endAngle = startAngle + sliceAngle;
+        this.__drawArc(startAngle, endAngle, "#0099CC");
+
+        startAngle = endAngle;
+        sliceAngle = 2 * Math.PI * (totalAbsense - withValidReason);
+        endAngle = startAngle + sliceAngle;
+        this.__drawArc(startAngle, endAngle, "#990000");
+
+        startAngle = endAngle;
+        sliceAngle = 2 * Math.PI * (elapsed - totalAbsense);
+        endAngle = startAngle + sliceAngle;
+        this.__drawArc(startAngle, endAngle, "#FFCC00");
     },
     __drawRectangleDivision: function (x, y, l, text) {
         var context = this.context;
