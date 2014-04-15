@@ -285,10 +285,10 @@
     },
     __getSubjectByCoordinates: function(mouseX) {
         for (var i = 0; i < this.sudjectsFromLineChart.length; i++) {
-            var subject = this.sudjectsFromLineChart[i];
-            if (mouseX >= subject.x && mouseX <= subject.x + subject.width)
-                return subject;
-        }
+                var subject = this.sudjectsFromLineChart[i];
+                if (mouseX >= subject.x && mouseX <= subject.x + subject.width)
+                    return subject;
+            }
     },
     __isMouseOnLine: function(mouseX, mouseY) {
         return mouseX >= this.lineX && mouseX <= this.lineWidth + this.lineX && mouseY >= this.lineY && mouseY <= this.lineHeight + this.lineY;

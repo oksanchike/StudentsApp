@@ -339,7 +339,7 @@ input[type="radio"] {
     width: 90px;
 }
 
-.personalData input[type="text"].hasDatepicker:hover, .personalData input[type="text"].validationFocus:focus {
+.personalData input[type="text"].hasDatepicker:hover, .personalData input[type="text"].hasDatepicker:focus {
     box-shadow: none;
     outline: none;
 }

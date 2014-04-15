@@ -78,6 +78,9 @@
         document.getElementById("Print").onclick = function() {
             window.print();
         };
+        document.getElementById("AddSubject").onclick = function () {
+            alert("Данная функция находиться в разработке");
+        };
         document.getElementById("Groups").onclick = function(event) {
             event.stopPropagation();
             self.groups.clickGroups();
