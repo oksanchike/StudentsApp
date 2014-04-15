@@ -52,8 +52,6 @@
             clearInterval(this.__intervalId);
         var height = this.pieRadius * 2 + 40;
         var y = this.pieY - this.pieRadius - 20;
-        this.context.clearRect(0, y, this.canvas.width, height);
-        this.__drawEmptyDoughnut(true);
 
         var dElapsed = (elapsed / total - this.__oldElapsed) / 50;
         var dTotalAbsense = (totalAbsense / total - this.__oldTotalAbsense) / 50;
@@ -61,26 +59,27 @@
         var self = this;
         var iteration = 1;
         this.__intervalId = setInterval(function () {
-            self.__drawEmptyDoughnut(false);
+            self.context.clearRect(0, y, self.canvas.width, height);
+            self.__drawEmptyDoughnut(true);
             self.__oldElapsed += dElapsed;
             self.__oldTotalAbsense += dTotalAbsense;
             self.__oldWithValidReason += dWithValidReason;
             self.__drawSlices(self.__oldElapsed, self.__oldTotalAbsense, self.__oldWithValidReason);
 
+            self.__drawDoughnutDivision(total);
+            context.save();
+            self.__drawTextAboutPresence(self.pieY - 50, "Всего пройдено", "normal 11pt PT Sans");
+            self.__drawNumberAboutPresence(self.pieY - 30, elapsed, "#FFCC00");
+            self.__drawTextAboutPresence(self.pieY - 10, "Всего прогуляно", "normal 10pt PT Sans");
+            self.__drawNumberAboutPresence(self.pieY + 10, totalAbsense, "rgb(153, 0, 0)");
+            self.__drawTextAboutPresence(self.pieY + 30, "Из них", "normal 9pt PT Sans");
+            self.__drawTextAboutPresence(self.pieY + 45, "по уважительной причине", "normal 9pt PT Sans");
+            self.__drawNumberAboutPresence(self.pieY + 65, withValidReason, "#0099CC");
+            context.restore();
+
             if (++iteration > 50)
                 clearInterval(self.__intervalId);
         }, 10);
-
-        this.__drawDoughnutDivision(total);
-        context.save();
-        this.__drawTextAboutPresence(this.pieY - 50, "Всего пройдено", "normal 11pt PT Sans");
-        this.__drawNumberAboutPresence(this.pieY - 30, elapsed, "#FFCC00");
-        this.__drawTextAboutPresence(this.pieY - 10, "Всего прогуляно", "normal 10pt PT Sans");
-        this.__drawNumberAboutPresence(this.pieY + 10, totalAbsense, "rgb(153, 0, 0)");
-        this.__drawTextAboutPresence(this.pieY + 30, "Из них", "normal 9pt PT Sans");
-        this.__drawTextAboutPresence(this.pieY + 45, "по уважительной причине", "normal 9pt PT Sans");
-        this.__drawNumberAboutPresence(this.pieY + 65, withValidReason, "#0099CC");
-        context.restore();
     },
     __drawSlices: function (elapsed, totalAbsense, withValidReason) {
         var startAngle = 1.5 * Math.PI;
