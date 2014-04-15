@@ -289,6 +289,7 @@
             if (mouseX >= subject.x && mouseX <= subject.x + subject.width)
                 return subject;
         }
+        throw Error("Нет предмета!");
     },
     __isMouseOnLine: function (mouseX, mouseY) {
         return mouseX >= this.lineX && mouseX <= this.lineWidth + this.lineX && mouseY >= this.lineY && mouseY <= this.lineHeight + this.lineY;

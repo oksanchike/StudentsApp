@@ -79,7 +79,7 @@
             window.print();
         };
         document.getElementById("AddSubject").onclick = function () {
-            alert("Данная функция находиться в разработке");
+            alert("Данная функция не реализована");
         };
         document.getElementById("Groups").onclick = function(event) {
             event.stopPropagation();

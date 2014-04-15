@@ -263,9 +263,9 @@ aside .buttons {
 
 .main-menu span:first-child {
     -webkit-mask-image: -webkit-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для webkit-браузеров */
-    -webkit-mask-image: -moz-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для firefox 3.6+ */
-    -webkit-mask-image: -o-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для Opera 11.10+ */
-    -webkit-mask-image: -ms-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для IE10+ */
+    -moz-mask-image: -moz-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для firefox 3.6+ */
+    -o-mask-image: -o-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для Opera 11.10+ */
+    -ms-mask-image: -ms-linear-gradient(left, rgba(45, 137, 213, 1) 0, rgba(45, 137, 213, 1) 65%, rgba(45, 137, 213, 0.3) 75%, rgba(45, 137, 213, 0) 85%); /* для IE10+ */
     display: inline-block;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="rgba(45,137,213,1) 0%, rgba(45,137,213,1) 65%", endColorstr="rgba(45,137,213,0.3) 75%, rgba(45,137,213,0) 85%"); /* для IE6-9 */
     margin-bottom: 0;

@@ -7,7 +7,7 @@
             }
             return out;
         }
-        if (typeof obj === 'object') {
+        else if (typeof obj === 'object') {
             var out = {}, i;
             for (i in obj) {
                 out[i] = arguments.callee(obj[i]);

@@ -149,7 +149,7 @@ __setSubjects: function(studentPresences) {
         checkbox.checked = studentPresences[i].studying;
     }
 },
-__resetSudjects: function(parameters) {
+__resetSudjects: function() {
     var checkboxes = document.getElementById("SubjectsContainer").getElementsByTagName("input");
     for (var i = 0; i < checkboxes.length; i++)
         checkboxes[i].checked = false;
