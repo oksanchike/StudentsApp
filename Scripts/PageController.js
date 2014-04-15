@@ -9,7 +9,7 @@
         this.groups = new GroupsSelect(groups);
         var subjects = this.__subjects.getAll();
         this.__studentDetails.initalizeSubjects(subjects);
-        this.__setListForGroup(this.groups.activeGroup.innerText);
+        this.__setListForGroup(this.groups.activeGroup.innerHTML);
         this.__initEventHandlers();
     },
     __setListForGroup: function(group) {
@@ -61,7 +61,7 @@
     __initEventHandlers: function() {
         var self = this;
         EventHelpers.addEvent(this.groups.groupsList, "groupChanged", function (e) {
-            self.__setListForGroup(e.detail.group.innerText);
+            self.__setListForGroup(e.detail.group.innerHTML);
         });
         EventHelpers.addEvent(this.__studentsList.list, "studentChanged", function (e) {
             self.__setStudent(e.detail.id);

@@ -315,8 +315,8 @@
     __initEventHandlers: function () {
         var self = this;
         this.canvas.onclick = function (e) {
-            var mouseX = e.offsetX;
-            var mouseY = e.offsetY;
+            var mouseX = e.layerX;
+            var mouseY = e.layerY;
             if (self.__isMouseOnLine(mouseX, mouseY)) {
                 var subject = self.__getSubjectByCoordinates(mouseX);
                 if (subject) {
@@ -326,8 +326,8 @@
             }
         };
         this.canvas.onmousemove = function (e) {
-            var mouseX = e.offsetX;
-            var mouseY = e.offsetY;
+            var mouseX = e.layerX;
+            var mouseY = e.layerY;
             if (self.__isMouseOnLine(mouseX, mouseY)) {
                 var subject = self.__getSubjectByCoordinates(mouseX);
                 if (subject) {

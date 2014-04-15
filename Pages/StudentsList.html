@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
         <title>Список студентов</title>
         <link href="http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic" rel="stylesheet" />
         <link href="../Styles/PrintStyles.css" media="print" rel="stylesheet" />
@@ -79,17 +80,17 @@
                                 </div>
                                 <div class="field">
                                     <label for ="SurnameStudent">Фамилия</label>
-                                    <input id="SurnameStudent" type="text" spellcheck="false"/>
+                                    <input id="SurnameStudent" tabindex="1" type="text" spellcheck="false"/>
                                     <span class="validation" id="ValidationMessageSurname">Поле обязательно к заполнению</span>
                                 </div>
                                 <div class="field">
                                     <label for ="NameStudent">Имя</label>
-                                    <input id="NameStudent" type="text"  spellcheck="false"/>
+                                    <input id="NameStudent" tabindex="2" type="text"  spellcheck="false"/>
                                     <span class="validation" id="ValidationMessageName">Поле обязательно к заполнению</span>
                                 </div>
                                 <div class="field">
                                     <label for ="PatronymicStudent">Отчество</label>
-                                    <input id="PatronymicStudent" type="text"  spellcheck="false"/>
+                                    <input id="PatronymicStudent" tabindex="3" type="text"  spellcheck="false"/>
                                     <span class="validation" id="ValidationMessagePatronymic">Поле обязательно к заполнению</span>
                                 </div>
                             </div>
@@ -98,20 +99,20 @@
                                     <label>Пол</label>
                                     <span class="genderRadio floatRight">
                                         <label class="genderLabel" for ="Female">
-                                            <input name="gender" id="Female" type="radio"  spellcheck="false"/>Женский</label>
+                                            <input name="gender" id="Female" type="radio" tabindex="4" spellcheck="false"/>Женский</label>
                                         <label class="genderLabel" for ="Male">
-                                            <input name="gender" id="Male" type="radio" checked />Мужской</label>
+                                            <input name="gender" id="Male" type="radio" tabindex="4" checked />Мужской</label>
                                         <span class ="genderForPrint" id="GenderForPrint"></span>
                                     </span>
                                 </div>
                                 <div class="field">
                                     <label for ="DateOfBirth" >Дата рождения</label>
-                                    <input id="DateOfBirth" type="text"/>
+                                    <input id="DateOfBirth" tabindex="5" type="text"/>
                                     <span class="validation" id="ValidationMessageDateOfBirth">Поле обязательно к заполнению</span>
                                 </div>
                                 <div class="field">
                                     <label for ="DateOfReceipt">Дата поступления</label>
-                                    <input id="DateOfReceipt" type="text"/>
+                                    <input id="DateOfReceipt" tabindex="6" type="text"/>
                                     <span class="validation" id="ValidationMessageDateOfReceipt">Поле обязательно к заполнению</span>
                                 </div>
                             </div>

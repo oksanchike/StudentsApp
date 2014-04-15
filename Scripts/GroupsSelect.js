@@ -2,7 +2,7 @@
     constructor: function (groups) {
         this.__active = false;
         this.__groupsContainer = document.getElementById("Groups");
-        this.__buttonGroups = document.getElementById("GroupsButton");
+        this.__groupsButton = document.getElementById("GroupsButton");
         this.groupsList = document.createElement("div");
         this.groupsList.classList.add("groupList");
         this.activeGroup = groups[0];
@@ -46,7 +46,7 @@
     },
     __open: function () {
         this.__active = !this.__active;
-        this.__buttonGroups.appendChild(this.groupsList);
+        this.__groupsButton.appendChild(this.groupsList);
         this.__groupsContainer.classList.remove("groupsListDisactive");
         this.__groupsContainer.classList.add("groupsListActive");
         this.groupsList.classList.remove("groupsListClose");
@@ -63,8 +63,6 @@
             this.groupsList.classList.add("groupsListClose");
             this.groupsList.firstChild.classList.remove("groupListUl");
             this.groupsList.firstChild.classList.add("groupListUlClose");
-            var self = this;
-            setTimeout(function () { self.__buttonGroups.removeChild(self.__buttonGroups.childNodes[3]); }, 500);
         }
     }
 });
