@@ -1,5 +1,5 @@
 ﻿var Chart = Base.extend({
-    constructor: function(canvas) {
+    constructor: function (canvas) {
         this.canvas = canvas;
         this.context = this.canvas.getContext("2d");
         this.toolTip = document.createElement("canvas");
@@ -16,7 +16,7 @@
         this.__oldTotalAbsense = 0;
         this.__oldWithValidReason = 0;
     },
-    drawForStudent: function(dataStudentsPresence, dataSubjects) {
+    drawForStudent: function (dataStudentsPresence, dataSubjects) {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.__dataStudentsPresence = dataStudentsPresence;
         this.__dataSubjects = dataSubjects;
@@ -52,10 +52,10 @@
             clearInterval(this.__intervalId);
         var height = this.pieRadius * 2 + 40;
         var y = this.pieY - this.pieRadius - 20;
-
-        var dElapsed = (elapsed / total - this.__oldElapsed) / 50;
-        var dTotalAbsense = (totalAbsense / total - this.__oldTotalAbsense) / 50;
-        var dWithValidReason = (withValidReason / total - this.__oldWithValidReason) / 50;
+        
+        var dElapsed = ((total == 0 ? 0 : (elapsed / total)) - this.__oldElapsed) / 50;
+        var dTotalAbsense = ((total == 0 ? 0 : (totalAbsense / total)) - this.__oldTotalAbsense) / 50;
+        var dWithValidReason = ((total == 0 ? 0 : (withValidReason / total)) - this.__oldWithValidReason) / 50;
         var self = this;
         var iteration = 1;
         this.__intervalId = setInterval(function () {
@@ -118,14 +118,14 @@
         }
         context.restore();
     },
-    __drawTotalDoughnutChart: function() {
+    __drawTotalDoughnutChart: function () {
         var total = this.__getTotalHours();
         var elapsed = this.__getElapsedHours();
         var totalAbsenseTime = this.__getTotalAbsenseTime();
         var withValidReasonTime = this.__getWithValidReasonTime();
         this.__drawDoughnutChart(total, elapsed, totalAbsenseTime, withValidReasonTime);
     },
-    __drawLineChart: function(totalHours) {
+    __drawLineChart: function (totalHours) {
         var lineChartWidth = this.canvas.width - 40;
         var ratio = totalHours / lineChartWidth;
         var quarter = lineChartWidth / 4;
@@ -144,7 +144,7 @@
         this.__drawRectangleDivision(xThirdQuarter, y, 5);
         this.__drawRectangleDivision(xLast, y, 13, totalHours);
     },
-    __drawEmptyLine: function(x, y) {
+    __drawEmptyLine: function (x, y) {
         var context = this.context;
         context.save();
         var height = 25;
@@ -155,7 +155,7 @@
         context.fill();
         context.restore();
     },
-    __drawRectangles: function(totalLength, ratio, x, y) {
+    __drawRectangles: function (totalLength, ratio, x, y) {
         var context = this.context;
         this.__drawEmptyLine(x, y);
         context.save();
@@ -188,14 +188,14 @@
         }
         context.restore();
     },
-    __drawSubjectText: function(total, title) {
+    __drawSubjectText: function (total, title) {
         var subjectTitle = document.getElementById("SelectedSubjectTitle");
         if (total)
             subjectTitle.innerHTML = title + " ( " + total + " часов )";
         else
             this.__drawSubjectsTotalText();
     },
-    __drawDoughnutDivision: function(total) {
+    __drawDoughnutDivision: function (total) {
         var context = this.context;
         context.save();
         context.fillStyle = "black";
@@ -212,7 +212,7 @@
         context.closePath();
         context.restore();
     },
-    __drawTextAboutPresence: function(yText, text, font) {
+    __drawTextAboutPresence: function (yText, text, font) {
         var context = this.context;
         context.fillStyle = "black";
         context.font = font;
@@ -220,7 +220,7 @@
         context.fillText(text, this.pieX - dx, yText);
         context.closePath();
     },
-    __drawNumberAboutPresence: function(yNumber, number, color) {
+    __drawNumberAboutPresence: function (yNumber, number, color) {
         var context = this.context;
         context.font = "bold 11pt PT Sans";
         context.fillStyle = color;
@@ -228,7 +228,7 @@
         context.fillText(number, this.pieX - dx, yNumber);
         context.closePath();
     },
-    __drawArc: function(startAngle, endAngle, color) {
+    __drawArc: function (startAngle, endAngle, color) {
         var context = this.context;
         context.save();
         context.beginPath();
@@ -239,7 +239,7 @@
         context.closePath();
         context.restore();
     },
-    __getTotalHours: function() {
+    __getTotalHours: function () {
         var dataSubjects = this.__dataSubjects;
         var total = 0;
         var self = this;
@@ -252,7 +252,7 @@
         }
         return total;
     },
-    __getElapsedHours: function() {
+    __getElapsedHours: function () {
         var dataSubjects = this.__dataSubjects;
         var elapsed = 0;
         var self = this;
@@ -265,7 +265,7 @@
         }
         return elapsed;
     },
-    __getTotalAbsenseTime: function() {
+    __getTotalAbsenseTime: function () {
         var totalAbsenseTime = 0;
         var self = this;
         for (var i = 0; i < self.__dataStudentsPresence.length; i++) {
@@ -274,7 +274,7 @@
         }
         return totalAbsenseTime;
     },
-    __getWithValidReasonTime: function() {
+    __getWithValidReasonTime: function () {
         var withValidReasonTime = 0;
         var self = this;
         for (var i = 0; i < self.__dataStudentsPresence.length; i++) {
@@ -283,17 +283,17 @@
         }
         return withValidReasonTime;
     },
-    __getSubjectByCoordinates: function(mouseX) {
+    __getSubjectByCoordinates: function (mouseX) {
         for (var i = 0; i < this.sudjectsFromLineChart.length; i++) {
-                var subject = this.sudjectsFromLineChart[i];
-                if (mouseX >= subject.x && mouseX <= subject.x + subject.width)
-                    return subject;
-            }
+            var subject = this.sudjectsFromLineChart[i];
+            if (mouseX >= subject.x && mouseX <= subject.x + subject.width)
+                return subject;
+        }
     },
-    __isMouseOnLine: function(mouseX, mouseY) {
+    __isMouseOnLine: function (mouseX, mouseY) {
         return mouseX >= this.lineX && mouseX <= this.lineWidth + this.lineX && mouseY >= this.lineY && mouseY <= this.lineHeight + this.lineY;
     },
-    __showToolTip: function(title, mouseX, mouseY) {
+    __showToolTip: function (title, mouseX, mouseY) {
         var div = document.getElementById("CanvasContainer");
         this.tooltipContext.fillStyle = "#bdbdbd";
         this.tooltipContext.beginPath();
@@ -308,13 +308,13 @@
         this.tooltipContext.closePath();
         div.appendChild(this.toolTip);
     },
-    __hideToolTip: function() {
+    __hideToolTip: function () {
         if (this.toolTip && this.toolTip.parentNode)
             this.toolTip.parentNode.removeChild(this.toolTip);
     },
-    __initEventHandlers: function() {
+    __initEventHandlers: function () {
         var self = this;
-        this.canvas.onclick = function(e) {
+        this.canvas.onclick = function (e) {
             var mouseX = e.offsetX;
             var mouseY = e.offsetY;
             if (self.__isMouseOnLine(mouseX, mouseY)) {
@@ -325,7 +325,7 @@
                 }
             }
         };
-        this.canvas.onmousemove = function(e) {
+        this.canvas.onmousemove = function (e) {
             var mouseX = e.offsetX;
             var mouseY = e.offsetY;
             if (self.__isMouseOnLine(mouseX, mouseY)) {
@@ -340,7 +340,7 @@
                 self.canvas.setAttribute("style", "cursor: default");
             }
         };
-        this.canvas.onmouseleave = function() {
+        this.canvas.onmouseleave = function () {
             self.__hideToolTip();
         };
         document.getElementById("TotalStatistics").onclick = function () {

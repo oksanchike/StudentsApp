@@ -209,7 +209,8 @@ __createDatepickers: function() {
         changeMonth: true,
         changeYear: true,
         showOn: "button",
-        dateFormat: "dd.mm.yy"
+        dateFormat: "dd.mm.yy",
+        yearRange: "1989:+0"
     };
     this.__createDatepicker("DateOfBirth", options);
     this.__createDatepicker("DateOfReceipt", options);

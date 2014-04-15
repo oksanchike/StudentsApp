@@ -217,9 +217,9 @@
         }
     },
     getByStudentId: function (id) {
-        return this.studentsPresence({ studentId: id }).get().slice(0);
+        return Helpers.deepCopy(this.studentsPresence({ studentId: id }).get());
     },
     getAll: function () {
-        return this.studentsPresence().get().slice(0);
+        return Helpers.deepCopy(this.studentsPresence().get());
     }
 });

@@ -91,9 +91,9 @@
             return null;
     },
     getAll: function () {
-        return this.__students().order("surname asec").get().slice(0);
+        return Helpers.deepCopy(this.__students().order("surname asec").get());
     },
     getByGroup: function (group) {
-        return this.__students({ group: group }).order("surname asec").get().slice(0);
+        return Helpers.deepCopy(this.__students({ group: group }).order("surname asec").get());
     }
 });

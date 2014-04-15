@@ -15,6 +15,6 @@
         return this.__subjects({ id: id }).first();
     },
     getAll: function () {
-        return this.__subjects().get().slice(0);
+        return Helpers.deepCopy(this.__subjects().get());
     }
 });
